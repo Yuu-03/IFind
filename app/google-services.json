@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "313992696953",
+    "firebase_url": "https://cnsc-ifind-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "cnsc-ifind",
+    "storage_bucket": "cnsc-ifind.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313992696953:android:c68628fd6b4b87e0a730a8",
+        "android_client_info": {
+          "package_name": "com.example.ifind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313992696953-fimlr245q6v30vhfo09h2g7p0q57q0q5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ifind",
+            "certificate_hash": "e72d3fc8082193a536a764847aeca9c17559ccbd"
+          }
+        },
+        {
+          "client_id": "313992696953-jdmilll3i6pam1cf6aohribq83srmu08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfE0lB16EOF9GkjEen5iNWJJV49IHrfaQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313992696953-jdmilll3i6pam1cf6aohribq83srmu08.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

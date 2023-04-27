@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home_icon"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/nav_lost"
+            android:icon="@drawable/lost_icon"
+            android:title="@string/lost_items" />
+        <item
+            android:id="@+id/nav_found"
+            android:icon="@drawable/found_icon"
+            android:title="@string/found_items" />
+
+        <item
+            android:id="@+id/nav_appre"
+            android:icon="@drawable/appre_icon"
+            android:title="@string/appreciation" />
+
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/contact_icon"
+            android:title="@string/contact" />
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/about_icon"
+            android:title="@string/about" />
+    </group>
+
+</menu>
