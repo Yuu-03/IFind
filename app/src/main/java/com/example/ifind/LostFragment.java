@@ -1,5 +1,6 @@
 package com.example.ifind;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ public class LostFragment extends Fragment {
     List<ItemHelperClass> dataList;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class LostFragment extends Fragment {
 
         AdapterClass adapter = new AdapterClass(getContext(), dataList);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         databaseReference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
@@ -68,7 +70,6 @@ public class LostFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
-
             }
         });
     }

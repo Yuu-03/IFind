@@ -66,8 +66,6 @@ public class ItemHelperClass {
         this.imageURL = imageURL;
     }
 
-
-
     public ItemHelperClass(){
 
     }

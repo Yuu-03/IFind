@@ -2,15 +2,18 @@ package com.example.ifind;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 public class LostItemDetails extends AppCompatActivity {
      TextView item_name, item_desc, item_loc, item_date, item_time;
      ImageView image_full;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +33,8 @@ public class LostItemDetails extends AppCompatActivity {
             item_desc.setText(bundle.getString("Description"));
             item_date.setText(bundle.getString("Date"));
             item_time.setText(bundle.getString("Time"));
-            Glide.with(this).load(bundle.getString("Image")).into(image_full);
+//            Glide.with(this).load(bundle.getString("Image")).into(image_full);
+            Picasso.get().load(bundle.getString("Image")).into(image_full);
         }
 
     }

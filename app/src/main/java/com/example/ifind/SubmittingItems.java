@@ -52,6 +52,7 @@ public class SubmittingItems extends AppCompatActivity {
     private DatabaseReference databaseRef;
     private FirebaseDatabase rootNode;
     String imageURL;
+    String image_path_firebase;
     private static final int PICK_IMAGE_REQUEST = 1;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -231,9 +232,9 @@ public class SubmittingItems extends AppCompatActivity {
         if (imageUri != null) {
             pd.setTitle("Uploading the image...");
             pd.show();
-            StorageReference fileReference = storageRef.child(itemname.toString()+"_"+System.currentTimeMillis());
-            fileReference.putFile(imageUri)
 
+            StorageReference fileReference = storageRef.child(String.valueOf(imageUri));
+            fileReference.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
