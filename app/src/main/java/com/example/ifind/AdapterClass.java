@@ -1,4 +1,5 @@
 package com.example.ifind;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -55,15 +55,16 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
         Picasso.get().load(datalist.get(position).getImageURL()).into(holder.recImage);
 //        Glide.with(context).load(datalist.get(position).getImageURL()).into(holder.recImage);
         holder.textItemName.setText(datalist.get(position).getItemName());
-        holder.textItemLoc.setText(datalist.get(position).getDescription());
+        holder.textItemLoc.setText(datalist.get(position).getLocation());
         holder.textItemTime.setText(datalist.get(position).getDate());
         holder.textItemDate.setText(datalist.get(position).getTime());
+
 
         holder.recCard.setOnClickListener(view -> {
             Intent intent = new Intent(context, LostItemDetails.class);
             intent.putExtra("Image", datalist.get(holder.getAdapterPosition()).getImageURL());
             intent.putExtra("Item Name", datalist.get(holder.getAdapterPosition()).getItemName());
-            intent.putExtra("Description", datalist.get(holder.getAdapterPosition()).getDescription());
+            intent.putExtra("Location", datalist.get(holder.getAdapterPosition()).getLocation());
             intent.putExtra("Date", datalist.get(holder.getAdapterPosition()).getDate());
             intent.putExtra("Time", datalist.get(holder.getAdapterPosition()).getTime());
             context.startActivity(intent);
