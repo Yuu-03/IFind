@@ -28,4 +28,47 @@
     <string name="description">Description</string>
     <string name="enter_item_location">Enter Item Location</string>
 
+    <!--ben's-->
+
+    <string name="tagln">Lost something? Find it here.</string>
+    <string name="homescreen">Home Screen</string>
+    <string name="greet">Sign In</string>
+    <string name="sign_in">Sign In</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="acc_signUp">Sign up</string>
+    <string name="terms_and_conditions">Terms and conditions</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Create an account</string>
+    <string name="sign_up_name">Full Name</string>
+    <string name="sign_up_fname">First Name</string>
+    <string name="sign_up_mname">Middle Initial</string>
+    <string name="sign_up_lname">Last Name</string>
+    <string name="sign_up_username">Username</string>
+    <string name="sign_up_email">Email Address</string>
+    <string name="sign_up_phonenum">Phone Number</string>
+    <string name="sign_up_pass">Password</string>
+    <string name="sign_up_submit">Submit</string>
+    <string name="sign_in_acc">Already have an account?</string>
+    <string name="acc_signIn">Sign In</string>
+    <string name="greeting">Hello</string>
+    <string name="forgotPassTxt">FORGET\nPASSWORD</string>
+    <string name="infoTxt">Provide your account\'s email address in order\nto reset your password! </string>
+    <string name="emailAddtxt">Email Address</string>
+    <string name="otpCodetxt">CODE VERIFICATION</string>
+    <string name="otpInfoTxt">Enter the OTP  sent on</string>
+    <string name="verifyCode">VERIFY CODE</string>
+    <string name="otp">Enter OTP code</string>
+    <string name="contactnum" />
+    <string name="newPass">NEW\nCREDENTIALS</string>
+    <string name="identity">Identity verified!</string>
+    <string name="setpass">Set your new password for your account!</string>
+    <string name="setNewPass">New Password</string>
+    <string name="setConfirmPass">Confirm Password</string>
+    <string name="saveChanges">SAVE CHANGES</string>
+    <string name="passupdateTxt">PASSWORD\nUPDATED</string>
+    <string name="txtupdatepass">Changes have been saved.\nYour password has been updated!</string>
+    <string name="logIn">Back to login</string>
+    <string name="next">Reset password</string>
+
 </resources>

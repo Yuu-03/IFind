@@ -1,4 +1,5 @@
 package com.example.ifind;
+
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -6,9 +7,6 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -17,6 +15,9 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,9 +25,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -39,7 +38,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.UUID;
 
 public class SubmittingItems extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -87,8 +85,7 @@ public class SubmittingItems extends AppCompatActivity {
         submit_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rootNode = FirebaseDatabase.getInstance();
-                databaseRef = rootNode.getReference("SubmitLostItem");
+                databaseRef = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
                 //upload selected pic to database
                 uploadPicture();
 
@@ -127,23 +124,6 @@ public class SubmittingItems extends AppCompatActivity {
             timePickerDialog.updateTime(hour1, minute1);
             timePickerDialog.show();
         });
-//        mAuth.signInAnonymously()
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // Sign in success, update UI with the signed-in user's information
-//                            FirebaseUser user = mAuth.getCurrentUser();
-////                            updateUI(user);
-//                        } else {
-//                            // If sign in fails, display a message to the user.
-//                            Toast.makeText(SubmittingItems.this, "Authentication failed.",
-//                                    Toast.LENGTH_SHORT).show();
-////                            updateUI(null);
-//                        }
-//                    }
-//                });
-
     }
 
     private void openFileChooser() {
@@ -227,7 +207,6 @@ public class SubmittingItems extends AppCompatActivity {
     }
     private void uploadPicture() {
         final ProgressDialog pd = new ProgressDialog(this);
-        final String randomKey = UUID.randomUUID().toString();
         // Create a reference to "mountains.jpg"
         if (imageUri != null) {
             pd.setTitle("Uploading the image...");
@@ -236,13 +215,31 @@ public class SubmittingItems extends AppCompatActivity {
             StorageReference fileReference = storageRef.child(String.valueOf(imageUri));
             fileReference.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                            pd.dismiss();
+//                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+//                            while (!uriTask.isComplete());
+//                            Uri urlImage = uriTask.getResult();
+//                            imageURL = fileReference.toString();
+//                            Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_LONG).show();
+//                        }
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             pd.dismiss();
                             imageURL = imageUri.toString();
-                            uploadItemInformation();
+                            Task <Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                            uriTask
+                                    .addOnSuccessListener(result -> {
+                                        Uri urlImage = uriTask.getResult();
+                                        imageURL = urlImage.toString();
+                                        uploadItemInformation();
+                                        Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_LONG).show();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Snackbar.make(findViewById(android.R.id.content), "Failed", Snackbar.LENGTH_LONG).show();
+                                    });
 
-                            Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_LONG).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -301,14 +298,9 @@ public class SubmittingItems extends AppCompatActivity {
 //    private void updateUI(FirebaseUser user) {
 //
 //        if (user != null) {
-//            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-//            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-//
-//            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-//            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+//            Toast.makeText(SubmittingItems.this,"No user",Toast.LENGTH_SHORT).show();
 //        } else {
-//            mStatusTextView.setText(R.string.signed_out);
-//            mDetailTextView.setText(null);
+//            Toast.makeText(SubmittingItems.this,"Yay user?",Toast.LENGTH_SHORT).show();
 //
 //        }
 //    }
@@ -319,7 +311,7 @@ public class SubmittingItems extends AppCompatActivity {
 //        FirebaseUser currentUser = mAuth.getCurrentUser();
 //        updateUI(currentUser);
 //    }
-//
+
 
 
 }

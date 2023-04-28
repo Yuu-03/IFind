@@ -7,8 +7,18 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Pair;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -18,6 +28,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     FirebaseFirestore firestore;
     private DrawerLayout drawerLayout;
+    //move to main screen after splashscreen
+    private static int SPLASH_SCREEN = 6000;
+
+    //Variables for splashscreen animation
+    Animation topAnim, botAnim;
+
+    ImageView logo;
+    TextView tagline;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_home);

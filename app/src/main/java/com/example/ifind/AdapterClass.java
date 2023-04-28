@@ -53,7 +53,7 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
 //        Picasso picasso = builder.build();
 //        picasso.load(datalist.get(position).getImageURL()).into(holder.recImage);
         Picasso.get().load(datalist.get(position).getImageURL()).into(holder.recImage);
-//        Glide.with(context.getApplicationContext()).load(datalist.get(position).getImageURL()).into(holder.recImage);
+//        Glide.with(context).load(datalist.get(position).getImageURL()).into(holder.recImage);
         holder.textItemName.setText(datalist.get(position).getItemName());
         holder.textItemLoc.setText(datalist.get(position).getDescription());
         holder.textItemTime.setText(datalist.get(position).getDate());
