@@ -38,10 +38,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="0dp"
+                android:layout_margin="10dp"
                 android:text="FAQs"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -51,7 +48,7 @@
                 android:onClick="expand1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="10dp"
                 app:contentPadding="20dp">
@@ -92,7 +89,7 @@
                 android:onClick="expand2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="10dp"
                 app:contentPadding="20dp">
@@ -133,7 +130,7 @@
                 android:onClick="expand3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="10dp"
                 app:contentPadding="20dp">
@@ -174,7 +171,7 @@
                 android:onClick="expand4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="10dp"
                 app:contentPadding="20dp">
@@ -215,7 +212,7 @@
                 android:onClick="expand5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="10dp"
                 app:contentPadding="20dp">
@@ -256,7 +253,7 @@
                 android:onClick="expand6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="10dp"
                 app:contentPadding="20dp">
