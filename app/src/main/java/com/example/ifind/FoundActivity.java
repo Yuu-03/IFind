@@ -88,9 +88,7 @@ public class FoundActivity extends AppCompatActivity {
                 databaseRef = FirebaseDatabase.getInstance().getReference("FoundItems");
                 //upload selected pic to database
                 uploadPicture();
-                uploadItemInformation();
                 //fix the upload where the image always uploads even if the information is empty
-
             }
         });
         date_picker.setOnClickListener(v -> {
@@ -235,6 +233,7 @@ public class FoundActivity extends AppCompatActivity {
                                     .addOnSuccessListener(result -> {
                                         Uri urlImage = uriTask.getResult();
                                         imageURL = urlImage.toString();
+                                        uploadItemInformation();
                                         Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_LONG).show();
                                     })
                                     .addOnFailureListener(e -> {

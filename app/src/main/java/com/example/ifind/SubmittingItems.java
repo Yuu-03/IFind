@@ -88,8 +88,7 @@ public class SubmittingItems extends AppCompatActivity {
                 databaseRef = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
                 //upload selected pic to database
                 uploadPicture();
-                uploadItemInformation();
-                //fix the upload where the image always uploads even if the information is empty
+
             }
         });
         date_picker.setOnClickListener(v -> {
@@ -216,7 +215,7 @@ public class SubmittingItems extends AppCompatActivity {
             StorageReference fileReference = storageRef.child(String.valueOf(imageUri));
             fileReference.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                        @Override
+                        //                        @Override
 //                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 //                            pd.dismiss();
 //                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
@@ -234,6 +233,7 @@ public class SubmittingItems extends AppCompatActivity {
                                     .addOnSuccessListener(result -> {
                                         Uri urlImage = uriTask.getResult();
                                         imageURL = urlImage.toString();
+                                        uploadItemInformation();
                                         Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_LONG).show();
                                     })
                                     .addOnFailureListener(e -> {
