@@ -2,7 +2,6 @@ package com.example.ifind;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,22 +16,24 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
+public class FoundImageAdapter extends RecyclerView.Adapter<MyViewHolder2> {
     private final Context context;
-    private final List<ItemHelperClass> datalist;
+    private final List<FoundImageHelperClass> datalist;
 
 
-    public AdapterClass(Context context, List<ItemHelperClass> datalist) {
+    public FoundImageAdapter (Context context, List<FoundImageHelperClass> datalist) {
         this.context = context;
         this.datalist = datalist;
     }
+
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
-        return new MyViewHolder(view);
+    public MyViewHolder2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.imagerecyclerview, parent, false);
+        return new MyViewHolder2(view);
     }
-//    @Override
+
+    //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
 //
@@ -48,45 +49,33 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
         return datalist.size();
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder2 holder, int position) {
 //        Picasso.Builder builder = new Picasso.Builder(context.getApplicationContext());
 //        Picasso picasso = builder.build();
 //        picasso.load(datalist.get(position).getImageURL()).into(holder.recImage);
         Picasso.get().load(datalist.get(position).getImageURL()).into(holder.recImage);
 //        Glide.with(context).load(datalist.get(position).getImageURL()).into(holder.recImage);
         holder.textItemName.setText(datalist.get(position).getItemName());
-        holder.textItemLoc.setText(datalist.get(position).getLocation());
-        holder.textItemTime.setText(datalist.get(position).getDate());
-        holder.textItemDate.setText(datalist.get(position).getTime());
 
 
         holder.recCard.setOnClickListener(view -> {
             Intent intent = new Intent(context, LostItemDetails.class);
             intent.putExtra("Image", datalist.get(holder.getAdapterPosition()).getImageURL());
-            intent.putExtra("Item Name", datalist.get(holder.getAdapterPosition()).getItemName());
-            intent.putExtra("Location", datalist.get(holder.getAdapterPosition()).getLocation());
-            intent.putExtra("Date", datalist.get(holder.getAdapterPosition()).getDate());
-            intent.putExtra("Time", datalist.get(holder.getAdapterPosition()).getTime());
-            context.startActivity(intent);
 
         });
     }
 }
-class MyViewHolder extends RecyclerView.ViewHolder {
+
+class MyViewHolder2 extends RecyclerView.ViewHolder {
 
     ImageView recImage;
-    TextView textItemName, textItemLoc, textItemDate, textItemTime;
     CardView recCard;
-
-    public MyViewHolder(@NonNull View itemView) {
+    TextView textItemName;
+    public MyViewHolder2(@NonNull View itemView) {
         super(itemView);
-        recImage =  itemView.findViewById(R.id.recImage);
-        textItemTime = itemView.findViewById(R.id.textItemtime);
-        textItemDate = itemView.findViewById(R.id.textItemdate);
+        recImage = itemView.findViewById(R.id.recImage1);
+        recCard = itemView.findViewById(R.id.recCard1);
         textItemName = itemView.findViewById(R.id.textItemName);
-        textItemLoc = itemView.findViewById(R.id.textItemLoc);
-        recCard = itemView.findViewById(R.id.recCard);
 
     }
 

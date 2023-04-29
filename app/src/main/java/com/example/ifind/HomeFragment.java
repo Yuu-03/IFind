@@ -1,18 +1,29 @@
 package com.example.ifind;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -20,6 +31,12 @@ public class HomeFragment extends Fragment {
     Button viewfoundbutton;
     Activity submittingitems;
     Activity foundactivity;
+
+    List<LostImageHelperClass> dataList;
+    List<FoundImageHelperClass> dataList2;
+
+    DatabaseReference databaseReference;
+    ValueEventListener eventListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +69,77 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        RecyclerView recyclerView = view.findViewById(R.id.lostitemsrecycler);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2 );
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        dataList = new ArrayList<>();
+
+        LostImageAdapter adapter = new LostImageAdapter(getContext(), dataList);
+
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
+        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dataList.clear();
+                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+                    LostImageHelperClass dataClass = itemSnapshot.getValue(LostImageHelperClass.class);
+                    dataList.add(dataClass);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RecyclerView recyclerView2 = view.findViewById(R.id.lostitemsrecycler2);
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(), 2 );
+        recyclerView2.setLayoutManager(gridLayoutManager2);
+
+        dataList2 = new ArrayList<>();
+
+        FoundImageAdapter adapter2 = new FoundImageAdapter(getContext(), dataList2);
+
+        recyclerView2.setAdapter(adapter2);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("FoundItems");
+        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dataList2.clear();
+                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+                    FoundImageHelperClass dataClass2 = itemSnapshot.getValue(FoundImageHelperClass.class);
+                    dataList2.add(dataClass2);
+                }
+                adapter2.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
     }
 
 }

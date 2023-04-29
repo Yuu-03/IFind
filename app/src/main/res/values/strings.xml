@@ -23,7 +23,7 @@
     <string name="view_lost_items">Found</string>
     <string name="did_you_lost_something">Did you lost something?</string>
     <string name="navigationHomeText">Submit / View Lost Items</string>
-    <string name="featured">FEATURED</string>
+    <string name="featured">FEATURED LOST ITEMS</string>
 
     <!--lost item submit details-->
     <string name="select_date">Select Date</string>
