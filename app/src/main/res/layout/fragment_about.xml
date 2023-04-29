@@ -45,7 +45,6 @@
                 android:textColor="#0A4D68"
                 />
             <androidx.cardview.widget.CardView
-                android:onClick="expand1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -79,14 +78,13 @@
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
-                        android:text="@string/CardViewFAQ1"
+                        android:text="@string/faqdetail1"
                         android:textSize="12sp"
                         android:textColor="#000000"
                         android:visibility="gone"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:onClick="expand2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -120,14 +118,13 @@
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
-                        android:text="@string/CardViewFAQ2"
+                        android:text="@string/faqdetail1"
                         android:textSize="12sp"
                         android:textColor="#000000"
                         android:visibility="gone"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:onClick="expand3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -161,14 +158,13 @@
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
-                        android:text="@string/CardViewFAQ3"
+                        android:text="@string/faqdetail1"
                         android:textSize="12sp"
                         android:textColor="#000000"
                         android:visibility="gone"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:onClick="expand4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -202,14 +198,13 @@
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
-                        android:text="@string/CardViewFAQ4"
+                        android:text="@string/faqdetail1"
                         android:textSize="12sp"
                         android:textColor="#000000"
                         android:visibility="gone"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:onClick="expand5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -250,7 +245,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:onClick="expand6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"

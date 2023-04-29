@@ -89,5 +89,6 @@
     <string name="MissionIFIND">The Mission of CNSC - IFIND</string>
     <string name="significance">Significance</string>
     <string name="report_found_item">Report Found Item</string>
+    <string name="faqdetail1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut luctus elit at euismod lacinia. In auctor turpis nulla, vitae molestie purus ultricies at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed tempor est eu nulla pretium feugiat. Nullam vel sapien aliquam, porta quam a, tristique mauris. Vivamus et pellentesque arcu. Integer augue nisi, hendrerit sit amet turpis in, aliquet imperdiet nunc. Ut sed nunc quis risus cursus commodo. Nam convallis ante ante, et convallis mauris interdum eu. Aliquam venenatis vel lectus ac pellentesque.</string>
 
 </resources>
