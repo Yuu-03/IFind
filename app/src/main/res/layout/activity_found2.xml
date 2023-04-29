@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".FoundActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:padding="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/report_found_item"
+            android:textColor="#3F51B5"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/image_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="267dp"
+            android:clickable="false"
+            android:src="@drawable/image" />
+
+        <Button
+            android:id="@+id/upload"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/upload_image"
+            android:background="#293CE2"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/textdetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/report_details"
+            android:textColor="#3F51B5"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/itemname"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:textColorHint="@color/black"
+            android:inputType="textPersonName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/itemname_text"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:hint="@string/enter_item_name">
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/itemlocation"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:textColorHint="@color/black"
+            android:inputType="textPersonName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/itemlocation_text"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:hint="@string/enter_item_location">
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/date_picker_text"
+
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:textColorHint="@color/black"
+            android:inputType="date"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/date_picker"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:hint="@string/select_date">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:id="@+id/time_picker_layout"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:textColorHint="@color/black"
+            android:inputType="time"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/time_picker"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:hint="@string/select_time">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/description"
+            android:layout_width="300dp"
+            android:layout_height="160dp"
+            android:layout_marginBottom="15dp"
+            android:textColorHint="@color/black"
+            android:hint="@string/description"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/description_text"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="20dp"
+                android:inputType="textMultiLine"
+                android:lines="20"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/submit_post"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="#293CE2"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:text="@string/submit_lost_item"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="30dp"
+            app:cornerRadius="30dp" />
+
+    </LinearLayout>
+
+</ScrollView>

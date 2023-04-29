@@ -88,5 +88,6 @@
     <string name="next">Reset password</string>
     <string name="MissionIFIND">The Mission of CNSC - IFIND</string>
     <string name="significance">Significance</string>
+    <string name="report_found_item">Report Found Item</string>
 
 </resources>
