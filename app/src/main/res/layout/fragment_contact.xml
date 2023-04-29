@@ -7,18 +7,33 @@
     tools:context=".ContactFragment">
 
     <TextView
-        android:id="@+id/contact_txt"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="111dp"
-        android:text="Contact"
+        android:layout_margin="0dp"
+        android:background="@drawable/rectangle_blue"
         android:textSize="30sp"
+        android:text="Contact"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/header"
+        android:textSize="20sp"
+        android:text="Number"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

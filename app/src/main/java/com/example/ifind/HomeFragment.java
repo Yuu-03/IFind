@@ -1,5 +1,6 @@
 package com.example.ifind;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -92,6 +93,7 @@ public class HomeFragment extends Fragment {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();

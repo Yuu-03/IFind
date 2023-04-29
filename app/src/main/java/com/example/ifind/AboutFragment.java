@@ -2,7 +2,9 @@ package com.example.ifind;
 
 import android.animation.LayoutTransition;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,10 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class AboutFragment extends Fragment {
+    ImageView fblogo;
     LinearLayout linlayout1, linlayout2, linlayout3, linlayout4, linlayout5, linlayout6;
     TextView txtdetail1, txtdetail2, txtdetail3, txtdetail4, txtdetail5, txtdetail6;
 
@@ -44,6 +48,8 @@ public class AboutFragment extends Fragment {
         txtdetail4 = root.findViewById(R.id.faqdets4);
         txtdetail5 = root.findViewById(R.id.faqdets5);
         txtdetail6 = root.findViewById(R.id.faqdets6);
+
+        fblogo = root.findViewById(R.id.fblogo);
 
         return root;
     }
@@ -99,6 +105,7 @@ public class AboutFragment extends Fragment {
 
                 TransitionManager.beginDelayedTransition(linlayout5, new AutoTransition());
                 txtdetail5.setVisibility(v);
+                fblogo.setVisibility(v);
             }
         });
 
@@ -112,7 +119,33 @@ public class AboutFragment extends Fragment {
             }
         });
 
+        fblogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String sAppLink = "https://www.facebook.com/rozvisuals/";
+                String sPackage = "com.facebook.katana";
+                String sWeblink = "https://www.facebook.com/rozvisuals/";
+
+                openLink(sAppLink, sPackage, sWeblink);
+            }
+        });
 
 
+    }
+    private void openLink(String sAppLink, String sPackage, String sWebLink) {
+        try {
+            Uri uri = Uri.parse(sAppLink);
+            Intent intent =new Intent(Intent.ACTION_VIEW);
+            intent.setData(uri);
+            intent.setPackage(sPackage);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }catch (ActivityNotFoundException activityNotFoundException){
+            Uri uri = Uri.parse(sWebLink);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(uri);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
     }
 }
