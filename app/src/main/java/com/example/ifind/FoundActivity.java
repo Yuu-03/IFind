@@ -39,7 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class SubmittingItems extends AppCompatActivity {
+public class FoundActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     int hour1, minute1;
     private TextInputLayout itemname, itemlocation, description;
@@ -55,10 +55,10 @@ public class SubmittingItems extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_submitting_items);
+        setContentView(R.layout.activity_found2);
 
-        storageRef = FirebaseStorage.getInstance().getReference("LostItemImage");
-        databaseRef = FirebaseDatabase.getInstance().getReference("LostItemImage");
+        storageRef = FirebaseStorage.getInstance().getReference("FoundItemImage");
+        databaseRef = FirebaseDatabase.getInstance().getReference("FoundItemImage");
 
         Button mupload = findViewById(R.id.upload);
 
@@ -85,10 +85,10 @@ public class SubmittingItems extends AppCompatActivity {
         submit_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseRef = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
+                databaseRef = FirebaseDatabase.getInstance().getReference("FoundItems");
                 //upload selected pic to database
                 uploadPicture();
-
+                //fix the upload where the image always uploads even if the information is empty
             }
         });
         date_picker.setOnClickListener(v -> {
@@ -209,7 +209,7 @@ public class SubmittingItems extends AppCompatActivity {
         final ProgressDialog pd = new ProgressDialog(this);
         // Create a reference to "mountains.jpg"
         if (imageUri != null) {
-            pd.setTitle("Uploading the image...");
+            pd.setTitle("Uploading...");
             pd.show();
 
             StorageReference fileReference = storageRef.child(String.valueOf(imageUri));
@@ -270,11 +270,11 @@ public class SubmittingItems extends AppCompatActivity {
         String itemName = itemname.getEditText().getText().toString();
         String itemDescription = description.getEditText().getText().toString();
         String itemLocation = itemlocation.getEditText().getText().toString();
-        String dateFound = date_picker.getText().toString();
-        String timeFound = time_picker.getText().toString();
+        String dateRetrieved = date_picker.getText().toString();
+        String timeRetrieved = time_picker.getText().toString();
 
         //call the class UserHelperClass to use and store values to the database
-        ItemHelperClass ItemhelperClass = new ItemHelperClass(itemName, itemDescription, itemLocation, dateFound, timeFound, imageURL);
+        ItemHelperClass ItemhelperClass = new ItemHelperClass(itemName, itemDescription, itemLocation, dateRetrieved, timeRetrieved, imageURL);
 
         //assign an Id to add more users
         String uploadID = databaseRef.push().getKey();
@@ -284,14 +284,14 @@ public class SubmittingItems extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(SubmittingItems.this,"Item Information Uploaded",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FoundActivity.this,"Item Information Uploaded",Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SubmittingItems.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FoundActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
     }

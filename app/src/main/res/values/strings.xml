@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CNSC-IFind</string>
+    <string name="app_name">CNSC-IFIND</string>
     <string name="open_nav">Open Navigation Bar</string>
     <string name="close_nav">Close Navigation Bar</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -16,19 +16,24 @@
     <string name="last_seen">Last Seen:</string>
     <string name="enter_item_name">Enter Item Name</string>
     <string name="photo">Photo</string>
+
+    <!-- Home Fragment-->
     <string name="submit_lost_item">Submit</string>
     <string name="submit_a_lost_item">Submit</string>
     <string name="view_lost_items">Found</string>
     <string name="did_you_lost_something">Did you lost something?</string>
+    <string name="navigationHomeText">Submit / View Lost Items</string>
+    <string name="featured">FEATURED LOST ITEMS</string>
 
+    <!--lost item submit details-->
     <string name="select_date">Select Date</string>
     <string name="select_time">Select Time</string>
     <string name="enter_where_you_have_seen_the_item">Enter where you have seen the item</string>
     <string name="report_details">Report Details</string>
     <string name="description">Description</string>
     <string name="enter_item_location">Enter Item Location</string>
-    <string name="navigationHomeText">Submit / View Lost Items</string>
-    <string name="featured">FEATURED</string>
+
+    <!--About Fragment-->
     <string name="WOW">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor velit ut dignissim tristique. Proin egestas sapien nulla, at suscipit ipsum varius sed. Vivamus commodo efficitur ex. Nunc id erat nec nibh elementum consectetur. Fusce blandit nisl sapien. Duis ut porta dolor. Aliquam eget ipsum quis urna lacinia imperdiet ac ut lorem. Suspendisse ullamcorper nisi orci. In hac habitasse platea dictumst. Pellentesque ac magna aliquam turpis blandit ornare ut ut turpis. Praesent vel eros et ex aliquet tincidunt. Quisque elementum vitae tellus vel bibendum. Aenean aliquam ex neque, convallis consequat ipsum consectetur ut. Duis arcu quam, mattis et molestie quis, lacinia at magna. Nunc enim ex, auctor quis bibendum quis, fringilla vitae lacus. In fringilla justo ex, dignissim ornare ipsum pharetra in. Quisque in mattis felis, ut feugiat eros. Nam tempus odio quis vulputate hendrerit. Aliquam erat volutpat. Vivamus eleifend tincidunt commodo. Suspendisse purus eros, faucibus nec odio sed, dignissim maximus neque. Aenean sit amet ultrices tortor. Quisque et posuere ligula. Integer aliquet eleifend odio, quis porta erat viverra at. Suspendisse a vestibulum turpis. Mauris at quam bibendum, convallis ligula non, varius arcu. Maecenas vestibulum nulla sit amet mi lobortis ullamcorper. Nullam sit amet gravida erat. Nulla hendrerit efficitur arcu dapibus pretium. Fusce diam ipsum, rhoncus ac ultricies nec, vestibulum et ligula. Aliquam eu urna tempus nibh faucibus tempus vel sed enim. In at lectus at erat rhoncus sodales a ac enim. Donec finibus sit amet velit id tempor. Donec aliquam felis libero, fringilla tempus dolor maximus non. Integer malesuada risus in odio rhoncus placerat a a ex. Mauris vel mauris vitae ipsum vulputate mattis quis sit amet purus. Vivamus pretium sed orci et auctor. Nam dui neque, congue eget nunc eget, blandit pharetra justo. Sed sit amet ligula non tellus convallis feugiat eu at risus. Mauris dignissim, maur</string>
     <string name="CardViewFAQ1">How to use the App?</string>
     <string name="CardViewFAQ2">How to send lost item details?</string>
@@ -36,9 +41,10 @@
     <string name="CardViewFAQ4">What information to include when submitting a lost item?</string>
     <string name="CardViewFAQ5">How to contact the developers?</string>
     <string name="CardViewFAQ6">Where are the social platforms?</string>
+    <string name="firstParag">  In rhoncus magna at nunc laoreet semper eget vitae lorem. Ut non pulvinar enim. Fusce sagittis massa sed nunc vehicula, a consequat augue ullamcorper. Mauris consequat venenatis diam vitae egestas. Proin laoreet nulla ut condimentum gravida. Morbi ornare pharetra hendrerit. Pellentesque quis justo quis lacus eleifend molestie. Fusce non feugiat ante. Aliquam tempus massa eu mi sagittis, sit amet rhoncus sapien vestibulum. \n \n Aenean pharetra velit id convallis molestie. Aenean cursus nisl elit, vel tempor dui gravida at. Morbi posuere diam vitae neque laoreet pellentesque.Etiam rhoncus sollicitudin nibh, id blandit ipsum placerat id. Donec dignissim auctor lectus et ullamcorper. Mauris semper feugiat enim id dignissim. Nulla et magna et elit placerat hendrerit. Suspendisse laoreet sem euismod ullamcorper consequat. Etiam mattis eu velit quis volutpat. Curabitur fringilla blandit leo eget dictum. Vestibulum at vestibulum metus, eu maximus lacus. Suspendisse porta felis eu est consectetur laoreet.</string>
+    <string name="secParag">In rhoncus magna at nunc laoreet semper eget vitae lorem. Ut non pulvinar enim. Fusce sagittis massa sed nunc vehicula, a consequat augue ullamcorper. Mauris consequat venenatis diam vitae egestas. Proin laoreet nulla ut condimentum gravida. Morbi ornare pharetra hendrerit. Pellentesque quis justo quis lacus eleifend molestie. Fusce non feugiat ante. Aliquam tempus massa eu mi sagittis, sit amet rhoncus sapien vestibulum. \n \n Aenean pharetra velit id convallis molestie. Aenean cursus nisl elit, vel tempor dui gravida at. Morbi posuere diam vitae neque laoreet pellentesque.Etiam rhoncus sollicitudin nibh, id blandit ipsum placerat id. Donec dignissim auctor lectus et ullamcorper. Mauris semper feugiat enim id dignissim. Nulla et magna et elit placerat hendrerit. Suspendisse laoreet sem euismod ullamcorper consequat. Etiam mattis eu velit quis volutpat. Curabitur fringilla blandit leo eget dictum. Vestibulum at vestibulum metus, eu maximus lacus. Suspendisse porta felis eu est consectetur laoreet.</string>
 
-
-    <!--ben's-->
+    <!--ben's login interface-->
 
     <string name="tagln">Lost something? Find it here.</string>
     <string name="homescreen">Home Screen</string>
@@ -80,5 +86,10 @@
     <string name="txtupdatepass">Changes have been saved.\nYour password has been updated!</string>
     <string name="logIn">Back to login</string>
     <string name="next">Reset password</string>
+    <string name="MissionIFIND">The Mission of CNSC - IFIND</string>
+    <string name="significance">Significance</string>
+    <string name="report_found_item">Report Found Item</string>
+    <string name="faqdetail1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut luctus elit at euismod lacinia. In auctor turpis nulla, vitae molestie purus ultricies at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed tempor est eu nulla pretium feugiat. Nullam vel sapien aliquam, porta quam a, tristique mauris. Vivamus et pellentesque arcu. Integer augue nisi, hendrerit sit amet turpis in, aliquet imperdiet nunc. Ut sed nunc quis risus cursus commodo. Nam convallis ante ante, et convallis mauris interdum eu. Aliquam venenatis vel lectus ac pellentesque.</string>
+    <string name="devpage">If you want to visit the facebook page of the developers just click the logo down below.</string>
 
 </resources>

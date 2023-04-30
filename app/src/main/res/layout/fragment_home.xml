@@ -73,7 +73,7 @@
                     android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/lostbuttons"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:layout_editor_absoluteX="10dp" />
@@ -136,12 +136,18 @@
                     android:textStyle="bold"
                     android:layout_marginTop="40dp" />
 
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="@string/WOW" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/lostitemsrecycler"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="200dp"
+                    android:scrollbars="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="MissingConstraints">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
             </LinearLayout>
 
 
@@ -158,12 +164,17 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textView3"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lostitemsrecycler2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/WOW" />
+                android:layout_height="200dp"
+                android:scrollbars="vertical"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints">
 
+            </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
