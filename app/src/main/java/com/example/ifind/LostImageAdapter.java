@@ -74,7 +74,7 @@ public class LostImageAdapter extends RecyclerView.Adapter<MyViewHolder3> {
 class MyViewHolder3 extends RecyclerView.ViewHolder {
 
     ImageView recImage;
-    TextView textItemTime,textItemDate, textItemName, textItemLoc;
+    TextView textItemName;
     CardView recCard;
     public MyViewHolder3(@NonNull View itemView) {
         super(itemView);

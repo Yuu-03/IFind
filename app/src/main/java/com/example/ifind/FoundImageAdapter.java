@@ -61,6 +61,11 @@ public class FoundImageAdapter extends RecyclerView.Adapter<MyViewHolder2> {
         holder.recCard.setOnClickListener(view -> {
             Intent intent = new Intent(context, LostItemDetails.class);
             intent.putExtra("Image", datalist.get(holder.getAdapterPosition()).getImageURL());
+            intent.putExtra("Item Name", datalist.get(holder.getAdapterPosition()).getItemName());
+            intent.putExtra("Location", datalist.get(holder.getAdapterPosition()).getLocation());
+            intent.putExtra("Date", datalist.get(holder.getAdapterPosition()).getDate());
+            intent.putExtra("Time", datalist.get(holder.getAdapterPosition()).getTime());
+            context.startActivity(intent);
 
         });
     }
