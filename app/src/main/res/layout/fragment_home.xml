@@ -10,7 +10,7 @@
     android:gravity="center"
     android:background="#EBEBEB"
     tools:context=".HomeFragment"
-    >
+    app:layoutManager="android.support.v7.widget.LinearLayoutManager">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -120,8 +120,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginBottom="20dp"
-                android:gravity="center" >
+                android:layout_marginBottom="20dp" >
 
                 <TextView
                     android:id="@+id/textView6"
@@ -139,8 +138,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/lostitemsrecycler"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_height="200dp"
                     android:scrollbars="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -167,9 +166,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lostitemsrecycler2"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scrollbars="vertical"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:scrollbars="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints">
