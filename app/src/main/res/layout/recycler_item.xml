@@ -8,15 +8,13 @@
     android:layout_marginEnd="12dp"
     android:layout_marginHorizontal="10dp"
     android:layout_marginVertical="10dp"
-
-    app:cardCornerRadius="15dp"
+    app:cardCornerRadius="12dp"
     app:cardElevation="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:background="#5466ea"
-       >
+        android:background="#293ce1">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/recImage"
@@ -32,53 +30,59 @@
             android:src="@drawable/image"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
+
         <TextView
             android:id="@+id/textItemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="39dp"
-            android:layout_marginEnd="154dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="17dp"
+            android:layout_toEndOf="@+id/recImage"
+            android:text="Item Name:"
             android:textColor="@color/white"
-            android:text="Item Name" />
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textItemLoc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="71dp"
-            android:layout_marginEnd="145dp"
+            android:layout_below="@+id/textItemName"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@+id/recImage"
+            android:text="Last Seen:"
             android:textColor="@color/white"
-            android:text="Last Seen:" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textItemdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="116dp"
-            android:layout_marginEnd="154dp"
+            android:layout_below="@+id/textItemLoc"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@+id/recImage"
+            android:text="Date Found:"
             android:textColor="@color/white"
-            android:text="Date:" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textItemtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="152dp"
-            android:layout_marginEnd="154dp"
+            android:layout_below="@+id/textItemdate"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="37dp"
+            android:layout_toEndOf="@+id/recImage"
+            android:text="Time Found:"
             android:textColor="@color/white"
-            android:text="Time:" />
+            android:textSize="15sp" />
+
 
     </RelativeLayout>
 

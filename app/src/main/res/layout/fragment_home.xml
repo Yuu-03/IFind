@@ -17,21 +17,8 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:background="@drawable/rectangle_blue" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="291dp"
-            android:layout_height="138dp"
-            android:layout_alignBottom="@+id/textView"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/ifindhome"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <SearchView
             android:id="@+id/searchView"
