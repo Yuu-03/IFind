@@ -65,6 +65,7 @@ public class LostImageAdapter extends RecyclerView.Adapter<MyViewHolder3> {
             intent.putExtra("Location", datalist.get(holder.getAdapterPosition()).getLocation());
             intent.putExtra("Date", datalist.get(holder.getAdapterPosition()).getDate());
             intent.putExtra("Time", datalist.get(holder.getAdapterPosition()).getTime());
+            intent.putExtra("Description", datalist.get(holder.getAdapterPosition()).getDescription());
             context.startActivity(intent);
 
         });

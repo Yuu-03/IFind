@@ -2,7 +2,6 @@ package com.example.ifind;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,11 +49,7 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-//        Picasso.Builder builder = new Picasso.Builder(context.getApplicationContext());
-//        Picasso picasso = builder.build();
-//        picasso.load(datalist.get(position).getImageURL()).into(holder.recImage);
         Picasso.get().load(datalist.get(position).getImageURL()).into(holder.recImage);
-//        Glide.with(context).load(datalist.get(position).getImageURL()).into(holder.recImage);
         holder.textItemName.setText(datalist.get(position).getItemName());
         holder.textItemLoc.setText(datalist.get(position).getLocation());
         holder.textItemTime.setText(datalist.get(position).getDate());
@@ -68,6 +63,7 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
             intent.putExtra("Location", datalist.get(holder.getAdapterPosition()).getLocation());
             intent.putExtra("Date", datalist.get(holder.getAdapterPosition()).getDate());
             intent.putExtra("Time", datalist.get(holder.getAdapterPosition()).getTime());
+            intent.putExtra("Description", datalist.get(holder.getAdapterPosition()).getDescription());
             context.startActivity(intent);
 
         });
