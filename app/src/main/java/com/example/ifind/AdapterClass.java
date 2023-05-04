@@ -14,11 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
-    private final Context context;
-    private final List<ItemHelperClass> datalist;
+    private Context context;
+    private List<ItemHelperClass> datalist;
 
 
     public AdapterClass(Context context, List<ItemHelperClass> datalist) {
@@ -31,20 +32,14 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
         return new MyViewHolder(view);
     }
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null)
-//            ;
-//        imageUri = data.getData();
-//
-//        Picasso.get().load(imageUri).into(image_preview);
-//        image_preview.setImageURI(imageUri);
-//    }
+
     @Override
     public int getItemCount() {
         return datalist.size();
+    }
+    public void searchDataList(ArrayList<ItemHelperClass> searchList){
+        datalist = searchList;
+        notifyDataSetChanged();
     }
 
     @Override

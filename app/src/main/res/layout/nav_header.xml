@@ -7,4 +7,5 @@
     android:padding="16dp"
     android:background="@drawable/header"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
 </LinearLayout>

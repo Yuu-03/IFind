@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,9 @@ public class LostFragment extends Fragment {
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
 
+    SearchView searchView;
+    AdapterClass adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,18 +51,21 @@ public class LostFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        dataList = new ArrayList<>();
+        searchView = view.findViewById(R.id.search);
+        searchView.clearFocus();
 
-        AdapterClass adapter = new AdapterClass(getContext(), dataList);
+        dataList = new ArrayList<>();
+        adapter = new AdapterClass(getContext(), dataList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         databaseReference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
-                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);
                     dataList.add(dataClass);
                 }
@@ -70,5 +77,37 @@ public class LostFragment extends Fragment {
                 Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
             }
         });
+
+        if (searchView != null) {
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    searchList(newText);
+                    return true;
+                }
+            });
+
+            searchView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    searchView.onActionViewExpanded();
+                }
+            });
+        }
     }
+    public void searchList (String text){
+        ArrayList<ItemHelperClass> searchList = new ArrayList<>();
+        for (ItemHelperClass itemHelperClass : dataList) {
+            if (itemHelperClass.getItemName().toLowerCase().contains(text.toLowerCase())) {
+                searchList.add(itemHelperClass);
+            }
+        }
+        adapter.searchDataList(searchList);
+    }
+
 }
