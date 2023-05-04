@@ -1,8 +1,10 @@
 package com.example.ifind;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -17,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -40,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         forgotPass = findViewById(R.id.forgetPass);
 
         auth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+
 
         //Code for Sign in
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -54,8 +59,24 @@ public class LoginActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
-                                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                        // Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                        // startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
+
+                                        //Get instance of the current user
+                                        FirebaseUser firebaseUser = auth.getCurrentUser();
+                                        //check if email is verified before user can access their profile
+                                        if (firebaseUser.isEmailVerified()) {
+                                            Toast.makeText(LoginActivity.this, "You are now logged in.", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                                            //open user profile
+
+                                        } else {
+                                            firebaseUser.sendEmailVerification();
+                                            auth.signOut(); //sign out user if not verified
+                                            showAlertBuilder();
+
+                                        }
 
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -89,5 +110,57 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, ForgotPassActivity.class));
             }
         });
+    }
+    /*
+    private void checkIfEmailVerified(FirebaseUser firebaseUser) {
+        if (!firebaseUser.isEmailVerified()){
+            showAlertBuilder();
+        }
+    }*/
+
+    private void showAlertBuilder() {
+        //setup
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setTitle("Email not verified");
+        builder.setMessage("You can not log in unless you verified your email. Please verify your email first.");
+
+        // open email app is user clicks the button
+        builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // proceed to new window(email app) and not within this app
+                startActivity(intent);
+            }
+        });
+        //create dialog box
+        AlertDialog alertDialog = builder.create();
+
+        //show alert dialog
+        alertDialog.show();
+    }
+
+    //Check if user is already logged in. If true then it will directly open the home screen else it will go to the log in screen.
+
+    protected void onStart() {
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        super.onStart();
+        if (auth.getCurrentUser() != null) {
+            if (!firebaseUser.isEmailVerified()){
+                auth.signOut(); //sign out user if not verified
+
+            }
+            else {
+                //start user profile
+                Toast.makeText(LoginActivity.this, "Already logged in!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish(); //close login screen
+            }
+
+        } else {
+            Toast.makeText(LoginActivity.this, "You can now logged in.", Toast.LENGTH_SHORT).show();
+
+        }
     }
 }

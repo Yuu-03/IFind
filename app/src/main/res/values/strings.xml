@@ -57,9 +57,7 @@
     <string name="dont_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Create an account</string>
     <string name="sign_up_name">Full Name</string>
-    <string name="sign_up_fname">First Name</string>
-    <string name="sign_up_mname">Middle Initial</string>
-    <string name="sign_up_lname">Last Name</string>
+    <string name="sign_up_fname">Full Name</string>
     <string name="sign_up_username">Username</string>
     <string name="sign_up_email">Email Address</string>
     <string name="sign_up_phonenum">Phone Number</string>
@@ -97,5 +95,7 @@
     <string name="item_description3">Item Description</string>
     <string name="item_found_time_label">Item Found Time</string>
     <string name="item_found_date_label">Item Found Date</string>
+    <string name="logout_btn">Logout</string>
+    <string name="confirm_pass">Confirm Password</string>
 
 </resources>

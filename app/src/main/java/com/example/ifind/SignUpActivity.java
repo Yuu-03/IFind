@@ -3,10 +3,12 @@ package com.example.ifind;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,20 +19,27 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class SignUpActivity extends AppCompatActivity {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
 
-
-    TextInputLayout regFname, regMname, regLname, regUsername, regEmail, regPhoneNum, regPassword;
+    private ProgressBar progressBar;
+    TextInputLayout regFname, regUsername, regEmail, regPhoneNum, regPassword, regConfirmPass;
     Button regSubmit;
 
     ImageView backButton;
+
+    private static final String TAG = "SignUpActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +49,14 @@ public class SignUpActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         regFname = findViewById(R.id.signUp_fname);
-        regMname = findViewById(R.id.signUp_mname);
-        regLname = findViewById(R.id.signUp_lname);
         regUsername = findViewById(R.id.signUp_username);
         regEmail = findViewById(R.id.signUp_email);
         regPhoneNum = findViewById(R.id.signUp_phonenum);
         regPassword = findViewById(R.id.signUp_pass);
+        regConfirmPass = findViewById(R.id.confirmPass);
         backButton = findViewById(R.id.back);
         regSubmit = findViewById(R.id.regForm);
+        progressBar = findViewById(R.id.progressBar);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,111 +71,30 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String fname = regFname.getEditText().getText().toString().trim();
-                String mname = regMname.getEditText().getText().toString().trim();
-                String lname = regLname.getEditText().getText().toString().trim();
                 String username = regUsername.getEditText().getText().toString().trim();
                 String email = regEmail.getEditText().getText().toString().trim();
                 String phone = regPhoneNum.getEditText().getText().toString().trim();
                 String pass = regPassword.getEditText().getText().toString().trim();
+                String confirmPass = regConfirmPass.getEditText().getText().toString().trim();
+
+                //Validate phone number
+                String mobileRegex = "[0,6][0-9]{10}"; //first number can be 0 - 6 the rest ca be 0-9
+                Matcher mobMatcher;
+                Pattern mobPattern = Pattern.compile(mobileRegex);
+                mobMatcher = mobPattern.matcher(phone);
 
 
-                if (TextUtils.isEmpty(fname)) {
-                    Toast.makeText(SignUpActivity.this, "Please enter your first name.", Toast.LENGTH_LONG).show();
-                    regFname.setError("First name is required.");
-                    regFname.requestFocus();
-                } else {
-                    regFname.setError(null);
-                    regFname.setErrorEnabled(false);
-
+                if (!regFname() | !regUsername()| !regEmail()| !regPhoneNum()| !regPassword()| !regConfirmPass()) {
+                    return;
                 }
-                if (TextUtils.isEmpty(mname)) {
-                    Toast.makeText(SignUpActivity.this, "Please enter your middle initial.", Toast.LENGTH_LONG).show();
-                    regMname.setError("Middle initial is required.");
-                    regMname.requestFocus();
-
-
-                } else {
-                    regMname.setError(null);
-                    regMname.setErrorEnabled(false);
-
-                }
-                if (TextUtils.isEmpty(lname)) {
-                    Toast.makeText(SignUpActivity.this, "Please enter your last name.", Toast.LENGTH_LONG).show();
-                    regLname.setError("Last name is required.");
-                    regLname.requestFocus();
-
-                } else {
-                    regLname.setError(null);
-                    regLname.setErrorEnabled(false);
-                }
-                if (TextUtils.isEmpty(username)) {
-                    Toast.makeText(SignUpActivity.this, "Please enter your username.", Toast.LENGTH_LONG).show();
-                    regUsername.setError("Username is required.");
-                    regUsername.requestFocus();
-                } else {
-                    regUsername.setError(null);
-                    regUsername.setErrorEnabled(false);
-                }
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(SignUpActivity.this, "Please enter your email.", Toast.LENGTH_LONG).show();
-                    regEmail.setError("Email is required.");
-                    regEmail.requestFocus();
-                }else {
-                    regEmail.setError(null);
-                    regEmail.setErrorEnabled(false);
-                }
-                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    Toast.makeText(SignUpActivity.this, "Please re-enter your email.", Toast.LENGTH_LONG).show();
-                    regEmail.setError("Please enter valid email.");
-                    regEmail.requestFocus();
-                }else {
-                    regEmail.setError(null);
-                    regEmail.setErrorEnabled(false);
-                }
-                if (TextUtils.isEmpty(phone)) {
-                    Toast.makeText(SignUpActivity.this, "Please enter phone number.", Toast.LENGTH_LONG).show();
-                    regPhoneNum.setError("Enter valid phone number");
+                else if (!mobMatcher.find()){
+                    regPhoneNum.setError("Invalid phone number. Re-enter your phone number.");
                     regPhoneNum.requestFocus();
-                }else {
-                    regPhoneNum.setError(null);
-                    regPhoneNum.setErrorEnabled(false);
                 }
-                if (phone.length() != 11) {
-                    Toast.makeText(SignUpActivity.this, "Please re-enter phone number.", Toast.LENGTH_LONG).show();
-                    regPhoneNum.setError("Phone number should be 11 digits");
-                    regPhoneNum.requestFocus();
-                } else {
-                    regPhoneNum.setError(null);
-                    regPhoneNum.setErrorEnabled(false);
-                }
-                if (TextUtils.isEmpty(pass)) {
-                    Toast.makeText(SignUpActivity.this, "Empty Password", Toast.LENGTH_LONG).show();
-                    regPassword.setError("Password is required.");
-                    regPassword.requestFocus();
+                else {
+                    progressBar.setVisibility(View.VISIBLE);
+                    regUser(fname, username, email, phone, pass);
 
-                } else {
-                    regPassword.setError(null);
-                    regPassword.setErrorEnabled(false);
-                }
-                if (pass.length() < 8) {
-                    Toast.makeText(SignUpActivity.this, "Password should be at least 8 digits.", Toast.LENGTH_LONG).show();
-                    regPassword.setError("Password is too weak.");
-                    regPassword.requestFocus();
-
-                } else {
-                    regUser(fname, mname, lname, username, email, phone, pass);
-                    /*
-                    auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(SignUpActivity.this, "SignUp Successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-                            } else {
-                                Toast.makeText(SignUpActivity.this, "SignUp Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });*/
                 }
 
             }
@@ -182,7 +110,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     //Register user
-    private void regUser(String fname,String mname,String lname,String username,String email,String phone,String pass){
+    private void regUser(String fname,String username,String email,String phone,String pass){
         //Oncompletelistener will execute when the user registration is successful
         //create user profile
         auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -190,15 +118,15 @@ public class SignUpActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseUser firebaseUser = auth.getCurrentUser();
-                    /*
+
                     //Update Display name of user
                     UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(fname).build();
                     firebaseUser.updateProfile(profileChangeRequest);
-                    */
+
 
 
                     //Save user data in realtime database , fetch data from the database (auth)
-                    ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails( fname, mname, lname, username, phone); //pass user data to get from the database
+                    ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails( fname, username,email,phone); //pass user data to get from the database
 
                     // Extracts user reference from database for Users
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
@@ -221,7 +149,21 @@ public class SignUpActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 finish(); //closes register activity
                             }else{
-                                Toast.makeText(SignUpActivity.this, "SignUp Failed.Please try again.", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(SignUpActivity.this, "SignUp Failed.Please try again.", Toast.LENGTH_SHORT).show();
+                                try {
+                                    throw task.getException();
+                                    //
+                                } catch (FirebaseAuthInvalidCredentialsException e) {
+                                    regEmail.setError("Your email is invalid or already in use. Please re-enter your email.");
+                                    regEmail.requestFocus();
+                                } catch (FirebaseAuthUserCollisionException e) {
+                                    regEmail.setError("User is already registered with this email. Use another email.");
+                                    regEmail.requestFocus();
+                                } catch (Exception e) {
+                                    Log.e(TAG, e.getMessage());
+                                    Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                    progressBar.setVisibility(View.GONE);
+                                }
                             }
 
                         }
@@ -233,6 +175,123 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    // validate fields,  if empty an error message helper will show
+    private Boolean regFname() {
+        String value  = regFname.getEditText().getText().toString();
+
+        if (value.isEmpty()) {
+            regFname.setError("Field cannot be empty");
+            return false;
+        }
+        else {
+            regFname.setError(null);
+            regFname.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private Boolean regUsername() {
+        String value  = regUsername.getEditText().getText().toString();
+        String noWhiteSpace = "\\A\\w{4,20}\\z";
+        if (value.isEmpty()) {
+            regUsername.setError("Field cannot be empty");
+            return false;
+        } else if (value.length()>=15) {
+            regUsername.setError("Username too long");
+            return false;
+
+
+        } else if (!value.matches(noWhiteSpace)) {
+            regUsername.setError("White space is not allowed");
+            return false;
+
+        } else {
+            regUsername.setError(null);
+            regPhoneNum.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private Boolean regEmail() {
+        String value  = regEmail.getEditText().getText().toString();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        if (value.isEmpty()) {
+            regEmail.setError("Field cannot be empty");
+            return false;
+        } else if (!value.matches(emailPattern)) {
+            regEmail.setError("Invalid email address");
+            return false;
+        } else {
+            regEmail.setError(null);
+            regEmail.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private Boolean regPhoneNum() {
+        String value  = regPhoneNum.getEditText().getText().toString();
+
+        if (value.isEmpty()) {
+            regPhoneNum.setError("Field cannot be empty");
+            return false;
+        }
+        else {
+            regPhoneNum.setError(null);
+            regPhoneNum.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private Boolean regPassword()  {
+        String value  = regPassword.getEditText().getText().toString();
+        String passwordVal = "^" +
+                "(?=.*[0-9])" +         //at least 1 digit
+                "(?=.*[a-z])" +         //at least 1 lower case letter
+                "(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                "(?=\\S+$)" +           //no white spaces
+                ".{4,}" +               //at least 4 characters
+                "$";
+
+        if (value.isEmpty()) {
+            regPassword.setError("Field cannot be empty");
+            return false;
+        }
+        else if (!value.matches(passwordVal)) {
+            regPassword.setError("Password too weak");
+            return false;
+        }
+        else {
+            regPassword.setError(null);
+            regPhoneNum.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private Boolean regConfirmPass()  {
+        String pass  = regPassword.getEditText().getText().toString();
+        String confirmPass  = regConfirmPass.getEditText().getText().toString();
+        String passwordVal = "^" +
+                "(?=.*[0-9])" +         //at least 1 digit
+                "(?=.*[a-z])" +         //at least 1 lower case letter
+                "(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                "(?=\\S+$)" +           //no white spaces
+                ".{4,}" +               //at least 4 characters
+                "$";
+
+        if (confirmPass.isEmpty()) {
+            regConfirmPass.setError("Field cannot be empty");
+            return false;
+        }
+        else if (!confirmPass.equals(pass)) {
+            regConfirmPass.setError("Password too weak");
+            return false;
+        }
+        else {
+            regConfirmPass.setError(null);
+            regConfirmPass.setErrorEnabled(false);
+            return true;
+        }
     }
 }
 

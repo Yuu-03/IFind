@@ -55,7 +55,7 @@
                 android:hint="@string/sign_up_fname"
                 android:textColorHint="@color/black"
                 app:counterEnabled="true"
-                app:counterMaxLength="15"
+                app:counterMaxLength="50"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/black"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -64,43 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:maxLength="16">
-
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/signUp_mname"
-                android:hint="@string/sign_up_mname"
-                android:textColorHint="@color/black"
-                app:counterEnabled="true"
-                app:counterMaxLength="1"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLength="2">
-
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/signUp_lname"
-                android:hint="@string/sign_up_lname"
-                android:textColorHint="@color/black"
-                app:counterEnabled="true"
-                app:counterMaxLength="15"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLength="16">
+                    android:maxLength="51">
 
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -113,6 +77,8 @@
                 app:counterEnabled="true"
                 app:counterMaxLength="15"
                 android:transitionName="username"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/black"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -130,14 +96,16 @@
                 android:hint="@string/sign_up_email"
                 android:textColorHint="@color/black"
                 app:counterEnabled="true"
-                app:counterMaxLength="30"
+                app:counterMaxLength="25"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/black"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textLongMessage"
-                    android:maxLength="31">
+                    android:maxLength="26">
 
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -149,6 +117,8 @@
                 android:textColorHint="@color/black"
                 app:counterEnabled="true"
                 app:counterMaxLength="11"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/black"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -168,6 +138,8 @@
                 app:counterEnabled="true"
                 app:counterMaxLength="25"
                 android:transitionName="password"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/black"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -178,6 +150,28 @@
 
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/confirmPass"
+                android:hint="@string/confirm_pass"
+                android:textColorHint="@color/black"
+                app:counterEnabled="true"
+                app:counterMaxLength="25"
+                android:transitionName="password"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/black"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:maxLength="26">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
 
         </LinearLayout>
 
@@ -215,4 +209,14 @@
             android:layout_marginTop="-33dp"
             android:layout_marginLeft="38dp"
             android:transitionName="sign_Up"/>
-    </LinearLayout></ScrollView>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:layout_gravity="center"
+            android:elevation="10dp"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,9 +1,13 @@
 package com.example.ifind;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,9 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
-    private TextView userName,userEmail,userUsername,userPhone,userPassword;
+    private TextView userName,userEmail,userUsername,userPhone,userPassword,titleName;
 
-    private Button editButton;
+    private Button logoutBttn;
 
     private String fname,mname,lname,username,email,phone,pass;
 
@@ -33,23 +37,60 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        getSupportActionBar().setTitle("Profile");
-
         userName = findViewById(R.id.profName);
         userEmail = findViewById(R.id.profEmail);
         userUsername = findViewById(R.id.profUsername);
         userPhone= findViewById(R.id.profPhone);
-        userPassword= findViewById(R.id.profPassword);
-        editButton = findViewById(R.id.editButton);
+        logoutBttn = findViewById(R.id.logout);
+        titleName = findViewById(R.id.titleName);
+
 
         authProfile = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = authProfile.getCurrentUser();
 
+        logoutBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                authProfile.signOut();
+                signOutUser();
+            }
+        });
+
         if (firebaseUser == null) {
             Toast.makeText(ProfileActivity.this, "Something went wrong!",Toast.LENGTH_SHORT).show();
         }else {
+            checkIfEmailVerified(firebaseUser);
             showProfileActivity(firebaseUser);
         }
+    }
+
+    private void checkIfEmailVerified(FirebaseUser firebaseUser) {
+        if (!firebaseUser.isEmailVerified()){
+            showAlertDialog();
+        }
+    }
+
+    private void showAlertDialog() {
+        //setup
+        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+        builder.setTitle("Email not verified");
+        builder.setMessage("You can not log in unless you verified your email. Please verify your email first.");
+
+        // open email app is user clicks the button
+        builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // proceed to new window(email app) and not within this app
+                startActivity(intent);
+            }
+        });
+        //create dialog box
+        AlertDialog alertDialog = builder.create();
+
+        //show alert dialog
+        alertDialog.show();
     }
 
     private void showProfileActivity(FirebaseUser firebaseUser) {
@@ -61,22 +102,32 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ReadWriteUserDetails readUserDetails = snapshot.getValue(ReadWriteUserDetails.class);
-                if (readUserDetails == null) {
+                if (readUserDetails != null) {
                     fname = firebaseUser.getDisplayName();
                     username = readUserDetails.username;
-                    email = firebaseUser.getDisplayName();
+                    email = firebaseUser.getEmail();
                     phone = readUserDetails.phone;
 
+                    titleName.setText("Welcome,"+fname+"!");
                     userName.setText(fname);
                     userUsername.setText(username);
                     userEmail.setText(email);
                     userPhone.setText(phone);
+
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(ProfileActivity.this, "Something went wrong!",Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void signOutUser() {
+        Intent profActivity = new Intent(ProfileActivity.this, LoginActivity.class);
+        profActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(profActivity);
+        finish();
     }
 }
