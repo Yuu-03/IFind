@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LostItemDetails">
+    tools:context=".LostItemDetails"
+    android:background="@drawable/gradient_bg" >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,40 +22,41 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/image_full"
-                    android:layout_width="wrap_content"
-                    android:layout_height="291dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="19dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginEnd="19dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="25dp"
                     android:background="@drawable/shape_for_post"
-                    android:padding="10dp"
+                    android:padding="0dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/image" />
 
                 <TextView
                     android:id="@+id/shape"
                     android:layout_width="match_parent"
-                    android:layout_height="600dp"
+                    android:layout_height="700dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="336dp"
+                    android:layout_marginTop="355dp"
                     android:layout_marginEnd="0dp"
                     android:background="@drawable/shape_for_post" />
 
                 <TextView
                     android:id="@+id/shape_descrip"
-                    android:layout_width="324dp"
-                    android:layout_height="410dp"
+                    android:layout_width="317dp"
+                    android:layout_height="450dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="43dp"
-                    android:layout_marginTop="462dp"
+                    android:layout_marginTop="480dp"
                     android:layout_marginEnd="44dp"
                     android:background="@drawable/shape_descrip"
                     android:gravity="center" />
@@ -89,11 +91,11 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="43dp"
                     android:layout_marginTop="33dp"
-                    android:layout_marginEnd="51dp"
+                    android:layout_marginEnd="43dp"
                     android:background="@drawable/shape_for_detail_post"
                     android:gravity="center"
                     android:text="@string/item_name1"
-                    android:textColor="#000000"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -122,7 +124,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:text="@string/last_seen_label"
-                    android:textColor="#5A6AFD"
+                    android:textColor="#4C54F3"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -137,7 +139,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="23dp"
                     android:text="@string/item_found_time_label"
-                    android:textColor="#5A6AFD"
+                    android:textColor="#4C54F3"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -152,7 +154,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="54dp"
                     android:text="@string/item_found_date_label"
-                    android:textColor="#5A6AFD"
+                    android:textColor="#4C54F3"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -168,7 +170,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="54dp"
                     android:text="Description"
-                    android:textColor="#5A6AFD"
+                    android:textColor="#4C54F3"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -200,8 +202,26 @@
                     android:textSize="16sp"
                     android:textColor="#000000"/>
 
+                <Button
+                    android:id="@+id/del_button"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/shape_descrip"
+                    android:layout_alignStart="@+id/shape_descrip"
+                    android:layout_alignEnd="@+id/shape_descrip"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="964dp"
+                    android:layout_marginEnd="25dp"
+                    android:backgroundTint="#FF0000"
+                    android:text="Delete Post"
+                    app:icon="@drawable/baseline_delete_24" />
+
+
             </RelativeLayout>
+
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

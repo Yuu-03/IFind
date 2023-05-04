@@ -215,15 +215,6 @@ public class SubmittingItems extends AppCompatActivity {
             StorageReference fileReference = storageRef.child(String.valueOf(imageUri));
             fileReference.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        //                        @Override
-//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                            pd.dismiss();
-//                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-//                            while (!uriTask.isComplete());
-//                            Uri urlImage = uriTask.getResult();
-//                            imageURL = fileReference.toString();
-//                            Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_LONG).show();
-//                        }
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             pd.dismiss();
@@ -239,7 +230,6 @@ public class SubmittingItems extends AppCompatActivity {
                                     .addOnFailureListener(e -> {
                                         Snackbar.make(findViewById(android.R.id.content), "Failed", Snackbar.LENGTH_LONG).show();
                                     });
-
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -295,23 +285,4 @@ public class SubmittingItems extends AppCompatActivity {
                     }
                 });
     }
-//    private void updateUI(FirebaseUser user) {
-//
-//        if (user != null) {
-//            Toast.makeText(SubmittingItems.this,"No user",Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(SubmittingItems.this,"Yay user?",Toast.LENGTH_SHORT).show();
-//
-//        }
-//    }
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        updateUI(currentUser);
-//    }
-
-
-
 }

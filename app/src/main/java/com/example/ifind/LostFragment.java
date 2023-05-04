@@ -67,7 +67,9 @@ public class LostFragment extends Fragment {
                 dataList.clear();
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);
+                    dataClass.setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
+
                 }
                 adapter.notifyDataSetChanged();
             }

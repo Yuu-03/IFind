@@ -2,7 +2,14 @@ package com.example.ifind;
 
 public class ItemHelperClass {
 
-    String itemname, description, location, date, time, imageURL;
+    String itemname;
+    String description;
+    String location;
+    String date;
+    String time;
+    String imageURL;
+
+    String key;
 
     //empty constructor to avoid errors in the database
 
@@ -66,6 +73,9 @@ public class ItemHelperClass {
         this.imageURL = imageURL;
     }
 
+    public String getKey() {return key;}
+
+    public void setKey(String key) {this.key = key;}
     public ItemHelperClass(){
 
     }

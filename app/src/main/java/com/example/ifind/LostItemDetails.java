@@ -1,6 +1,7 @@
 package com.example.ifind;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,7 +12,9 @@ import com.squareup.picasso.Picasso;
 public class LostItemDetails extends AppCompatActivity {
      TextView item_name, item_desc, item_loc, item_date, item_time;
      ImageView image_full;
-
+     Button del_button;
+     String key = "";
+     String imageUrl = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,7 @@ public class LostItemDetails extends AppCompatActivity {
         item_date = findViewById(R.id.item_date);
         item_time = findViewById(R.id.item_time);
         image_full = findViewById(R.id.image_full);
+        del_button = findViewById(R.id.del_button);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -31,8 +35,26 @@ public class LostItemDetails extends AppCompatActivity {
             item_desc.setText(bundle.getString("Description"));
             item_date.setText(bundle.getString("Date"));
             item_time.setText(bundle.getString("Time"));
+            key = bundle.getString("Key");
+            imageUrl = bundle.getString("Image");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
         }
-
+//    del_button.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//
+//            final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
+//            FirebaseStorage storage = FirebaseStorage.getInstance();
+//            StorageReference storageReference =  storage.getReferenceFromUrl(imageUrl);
+//            storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+//                @Override
+//                public void onSuccess(Void unused) {
+//                    reference.child(key).removeValue();
+//                    Snackbar.make(findViewById(android.R.id.content), "Item Deleted", Snackbar.LENGTH_LONG).show();
+//                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                }
+//            });
+//        }
+//    });
     }
 }
