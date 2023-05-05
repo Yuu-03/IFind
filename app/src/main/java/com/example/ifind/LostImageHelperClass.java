@@ -67,7 +67,6 @@ public class LostImageHelperClass {
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
-
     public LostImageHelperClass(){
 
     }

@@ -1,5 +1,7 @@
 package com.example.ifind;
 
+import static java.security.AccessController.getContext;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -69,25 +71,22 @@ public class FoundAdmin extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-
         recyclerView.setLayoutManager(gridLayoutManager);
 
         dataList = new ArrayList<>();
-        adapter = new ApprovedAdapterClass(this, dataList);
+
+        AdapterClass adapter = new AdapterClass(this, dataList);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Found");
+        databaseReference = FirebaseDatabase.getInstance().getReference("FoundItems");
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
-                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
                     ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);
-                    dataClass.setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
-
                 }
                 adapter.notifyDataSetChanged();
             }

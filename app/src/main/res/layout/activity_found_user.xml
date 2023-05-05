@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FoundActivityUSer"
+    android:background="@drawable/gradient_bg" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/image_full"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:background="@drawable/shape_for_post"
+                    android:padding="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/image" />
+
+                <TextView
+                    android:id="@+id/shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="700dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="355dp"
+                    android:layout_marginEnd="0dp"
+                    android:background="@drawable/shape_for_post" />
+
+                <TextView
+                    android:id="@+id/shape_descrip"
+                    android:layout_width="317dp"
+                    android:layout_height="450dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="43dp"
+                    android:layout_marginTop="480dp"
+                    android:layout_marginEnd="44dp"
+                    android:background="@drawable/shape_descrip"
+                    android:gravity="center" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="item_loc,item_time,item_date,item_desc,item_name" />
+
+                <TextView
+                    android:id="@+id/item_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_loc6"
+                    android:layout_alignStart="@+id/shape_descrip"
+                    android:layout_alignEnd="@+id/shape_descrip"
+                    android:layout_alignBottom="@+id/shape_descrip"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="53dp"
+                    android:text="@string/item_description3"
+                    android:textSize="16sp"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:id="@+id/item_name"
+                    android:layout_width="317dp"
+                    android:layout_height="65dp"
+                    android:layout_alignTop="@+id/shape"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="43dp"
+                    android:layout_marginTop="33dp"
+                    android:layout_marginEnd="43dp"
+                    android:background="@drawable/shape_for_detail_post"
+                    android:gravity="center"
+                    android:text="@string/item_name1"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/item_loc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_loc2"
+                    android:layout_alignStart="@+id/shape_descrip"
+                    android:layout_alignEnd="@+id/shape_descrip"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="25dp"
+                    android:text="@string/location"
+                    android:textSize="16sp"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:id="@+id/item_loc2"
+                    android:layout_width="298dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/shape_descrip"
+                    android:layout_alignTop="@+id/shape_descrip"
+                    android:layout_alignEnd="@+id/shape_descrip"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/last_seen_label"
+                    android:textColor="#4C54F3"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/item_loc4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_date"
+                    android:layout_alignStart="@+id/shape_descrip"
+                    android:layout_alignEnd="@+id/shape_descrip"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="23dp"
+                    android:text="@string/item_found_time_label"
+                    android:textColor="#4C54F3"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/item_loc5"
+                    android:layout_width="255dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_loc"
+                    android:layout_alignStart="@+id/shape_descrip"
+                    android:layout_alignEnd="@+id/shape_descrip"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="54dp"
+                    android:text="@string/item_found_date_label"
+                    android:textColor="#4C54F3"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/item_loc6"
+                    android:layout_width="255dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_time"
+                    android:layout_alignStart="@+id/shape_descrip"
+                    android:layout_alignEnd="@+id/shape_descrip"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="54dp"
+                    android:text="Description"
+                    android:textColor="#4C54F3"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/item_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_loc5"
+                    android:layout_alignStart="@+id/shape_descrip"
+                    android:layout_alignEnd="@+id/shape_descrip"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="25dp"
+                    android:text="Date"
+                    android:textSize="16sp"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:id="@+id/item_time"
+                    android:layout_width="276dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_loc4"
+                    android:layout_alignStart="@+id/shape_descrip"
+                    android:layout_alignEnd="@+id/shape_descrip"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="25dp"
+                    android:text="Time:"
+                    android:textSize="16sp"
+                    android:textColor="#000000"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

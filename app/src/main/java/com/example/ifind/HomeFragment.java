@@ -86,12 +86,12 @@ public class HomeFragment extends Fragment {
 
         dataList = new ArrayList<>();
 
-        LostImageAdapter adapter = new LostImageAdapter(getContext(), dataList);
+        lostimageuserviewadapter adapter = new lostimageuserviewadapter(getContext(), dataList);
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Approved");
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

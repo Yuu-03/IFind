@@ -12,6 +12,15 @@
         android:theme="@style/Theme.IFind"
         tools:targetApi="31">
         <activity
+            android:name=".FoundActivityUSer"
+            android:exported="false" />
+        <activity
+            android:name=".userviewlostdetails"
+            android:exported="false" />
+        <activity
+            android:name=".Founditems"
+            android:exported="false" />
+        <activity
             android:name=".ApprovedItemDetails"
             android:exported="false" />
         <activity

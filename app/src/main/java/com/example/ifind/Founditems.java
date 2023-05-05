@@ -2,6 +2,8 @@ package com.example.ifind;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,42 +14,34 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-public class ApprovedItemDetails extends AppCompatActivity {
+public class Founditems extends AppCompatActivity {
     TextView item_name, item_desc, item_loc, item_date, item_time;
     ImageView image_full;
     Button del_button, approve_button;
     String key = "";
     String imageUrl = "";
     private DatabaseReference toPath;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_approved_item_details);
-
+        setContentView(R.layout.activity_founditems);
         item_name = findViewById(R.id.item_name);
         item_desc = findViewById(R.id.item_desc);
         item_loc = findViewById(R.id.item_loc);
         item_date = findViewById(R.id.item_date);
         item_time = findViewById(R.id.item_time);
         image_full = findViewById(R.id.image_full);
-        del_button = findViewById(R.id.del_buttA);
-        approve_button = findViewById(R.id.approve_buttA);
+        del_button = findViewById(R.id.del_buttF);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Approved");
         toPath = FirebaseDatabase.getInstance().getReference("FoundItems");
@@ -84,7 +78,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
                             @Override
                             public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(ApprovedItemDetails.this, "Found!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Founditems.this, "Found!", Toast.LENGTH_LONG).show();
                                     //remove if you want to delete the copied record from the pending
                                     reference.child(key).removeValue();
                                     startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
@@ -93,7 +87,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@androidx.annotation.NonNull Exception e) {
-                                Toast.makeText(ApprovedItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Founditems.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             }
@@ -108,7 +102,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
                 reference.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(ApprovedItemDetails.this, "Request Deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Founditems.this, "Record Deleted", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
