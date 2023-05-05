@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,6 +23,7 @@ public class AdminMain extends AppCompatActivity {
 
     private FirebaseAuth auth;
     BottomNavigationView nav;
+    private Button mLogbutt;
 
     private boolean doubleBackToExitPressedOnce;
     private Handler mHandler = new Handler();
@@ -29,6 +31,8 @@ public class AdminMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main);
+
+        mLogbutt = findViewById(R.id.adminLogoutButt);
 
         auth = FirebaseAuth.getInstance();
         nav = findViewById(R.id.nav);
@@ -40,14 +44,17 @@ public class AdminMain extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.pending_:
                         startActivity(new Intent(getApplicationContext(), pendingRequests.class));
+                        finish();
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.approved_:
                         startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
+                        finish();
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.found_:
                         startActivity(new Intent(getApplicationContext(), FoundAdmin.class));
+                        finish();
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.adminProfile:
@@ -55,6 +62,14 @@ public class AdminMain extends AppCompatActivity {
 
                 }
                 return false;
+            }
+        });
+        mLogbutt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.signOut();
+                startActivity(new Intent(AdminMain.this, LoginActivity.class));
+                finish();
             }
         });
 
@@ -90,10 +105,4 @@ public class AdminMain extends AppCompatActivity {
 
         mHandler.postDelayed(mRunnable, 2000);
     }
-
-
-
-
-
-
 }

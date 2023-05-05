@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminMain">
+    tools:context=".FoundAdmin">
     <TextView
+        android:id="@+id/hed"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/rectangle_blue"
@@ -35,4 +36,18 @@
         android:background="#54b8ff"
         app:menu="@menu/menu_bar"
         />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hed"
+        android:layout_marginTop="16dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hed"
+        tools:ignore="MissingConstraints">
+
+    </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>

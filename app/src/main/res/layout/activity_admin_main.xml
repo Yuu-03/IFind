@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".AdminMain">
     <TextView
+        android:id="@+id/hed"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/rectangle_blue"
@@ -36,4 +37,23 @@
         android:background="#54b8ff"
         app:menu="@menu/menu_bar"
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        android:layout_below="@+id/hed">
+
+        <Button
+            android:id="@+id/adminLogoutButt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/adminLogout"
+            android:textStyle="bold"
+            android:backgroundTint="#FF1B1B"
+            app:cornerRadius="15dp"
+            />
+
+    </LinearLayout>
 </RelativeLayout>

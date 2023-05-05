@@ -109,5 +109,6 @@
     <string name="admin_settings">Admin Settings</string>
     <string name="foundAdmin">Found</string>
     <string name="approvedadmin">Approved</string>
+    <string name="adminLogout">LOGOUT</string>
 
 </resources>

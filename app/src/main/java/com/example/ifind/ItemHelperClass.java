@@ -1,5 +1,7 @@
 package com.example.ifind;
 
+import android.widget.TextView;
+
 public class ItemHelperClass {
 
     String itemname;
@@ -11,6 +13,9 @@ public class ItemHelperClass {
 
     String key;
 
+
+    String item_name, item_desc, item_loc, item_date, item_time, imageUrl;
+
     //empty constructor to avoid errors in the database
 
     //these are the constructors to cal for the variables
@@ -21,6 +26,15 @@ public class ItemHelperClass {
         this.date = date;
         this.time = time;
         this.imageURL = imageURL;
+    }
+
+    public ItemHelperClass(TextView item_name, TextView item_desc, TextView item_loc, TextView item_date, TextView item_time, String imageUrl) {
+        this.item_name = itemname;
+        this.item_desc = description;
+        this.item_loc = location;
+        this.item_date = date;
+        this.item_time = time;
+        this.imageUrl = imageURL;
     }
 
     //getter and setters

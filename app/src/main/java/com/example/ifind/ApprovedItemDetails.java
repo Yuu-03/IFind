@@ -27,7 +27,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-public class LostItemDetails extends AppCompatActivity {
+public class ApprovedItemDetails extends AppCompatActivity {
     TextView item_name, item_desc, item_loc, item_date, item_time;
     ImageView image_full;
     Button del_button, approve_button;
@@ -38,7 +38,7 @@ public class LostItemDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lost_item_details);
+        setContentView(R.layout.activity_approved_item_details);
 
         item_name = findViewById(R.id.item_name);
         item_desc = findViewById(R.id.item_desc);
@@ -46,11 +46,11 @@ public class LostItemDetails extends AppCompatActivity {
         item_date = findViewById(R.id.item_date);
         item_time = findViewById(R.id.item_time);
         image_full = findViewById(R.id.image_full);
-        del_button = findViewById(R.id.del_button);
-        approve_button = findViewById(R.id.approve_button);
+        del_button = findViewById(R.id.del_buttA);
+        approve_button = findViewById(R.id.approve_buttA);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
-        toPath = FirebaseDatabase.getInstance().getReference("Approved");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Approved");
+        toPath = FirebaseDatabase.getInstance().getReference("Found");
 
 
         Bundle bundle = getIntent().getExtras();
@@ -69,16 +69,13 @@ public class LostItemDetails extends AppCompatActivity {
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
-
         }
-
-
 
         approve_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                toPath = FirebaseDatabase.getInstance().getReference("Approved");
+                toPath = FirebaseDatabase.getInstance().getReference("Found");
 
                 ItemHelperClass ItemhelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl);
 
@@ -87,16 +84,16 @@ public class LostItemDetails extends AppCompatActivity {
                             @Override
                             public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(LostItemDetails.this, "Approved!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(ApprovedItemDetails.this, "Found!", Toast.LENGTH_LONG).show();
                                     //remove if you want to delete the copied record from the pending
                                     reference.child(key).removeValue();
-                                    startActivity(new Intent(getApplicationContext(), pendingRequests.class));
+                                    startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
                                 }
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@androidx.annotation.NonNull Exception e) {
-                                Toast.makeText(LostItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ApprovedItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             }
@@ -107,12 +104,12 @@ public class LostItemDetails extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
-                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                storageReference.delete();
+                reference.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        reference.child(key).removeValue();
-                        Toast.makeText(LostItemDetails.this, "Request Deleted", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), pendingRequests.class));
+                        Toast.makeText(ApprovedItemDetails.this, "Request Deleted", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

@@ -12,6 +12,9 @@
         android:theme="@style/Theme.IFind"
         tools:targetApi="31">
         <activity
+            android:name=".ApprovedItemDetails"
+            android:exported="false" />
+        <activity
             android:name=".FoundAdmin"
             android:exported="false" />
         <activity
