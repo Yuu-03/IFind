@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -30,7 +31,8 @@ public class LostFragment extends Fragment {
     ValueEventListener eventListener;
 
     SearchView searchView;
-    AdapterClass adapter;
+    AdapterClass2 adapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,15 +53,16 @@ public class LostFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+
         searchView = view.findViewById(R.id.search);
         searchView.clearFocus();
 
         dataList = new ArrayList<>();
-        adapter = new AdapterClass(getContext(), dataList);
+        adapter = new AdapterClass2(getContext(), dataList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Approved");
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -69,6 +72,7 @@ public class LostFragment extends Fragment {
                     ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);
                     dataClass.setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
+
 
                 }
                 adapter.notifyDataSetChanged();

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LostItemDetails"
+    tools:context=".ApprovedItemDetails"
     android:background="@drawable/gradient_bg" >
 
     <ScrollView
@@ -203,7 +203,7 @@
                     android:textColor="#000000"/>
 
                 <Button
-                    android:id="@+id/approve_button"
+                    android:id="@+id/approve_buttA"
                     android:layout_width="317dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/shape_descrip"
@@ -219,7 +219,7 @@
                     android:onClick="copyRecord"/>
 
                 <Button
-                    android:id="@+id/del_button"
+                    android:id="@+id/del_buttA"
                     android:layout_width="317dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/shape_descrip"

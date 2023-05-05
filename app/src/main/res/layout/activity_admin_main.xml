@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminMain">
+    <TextView
+        android:id="@+id/hed"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/rectangle_blue"
+        android:layout_alignParentTop="true"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/admin_settings"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemTextColor="@drawable/admin_nav"
+        app:itemIconTint="@drawable/admin_nav"
+        android:background="#54b8ff"
+        app:menu="@menu/menu_bar"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        android:layout_below="@+id/hed">
+
+        <Button
+            android:id="@+id/adminLogoutButt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/adminLogout"
+            android:textStyle="bold"
+            android:backgroundTint="#FF1B1B"
+            app:cornerRadius="15dp"
+            />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LostItemDetails"
+    tools:context=".Founditems"
     android:background="@drawable/gradient_bg" >
 
     <ScrollView
@@ -203,7 +203,7 @@
                     android:textColor="#000000"/>
 
                 <Button
-                    android:id="@+id/approve_button"
+                    android:id="@+id/approve_buttF"
                     android:layout_width="317dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/shape_descrip"
@@ -214,12 +214,12 @@
                     android:layout_marginTop="942dp"
                     android:layout_marginEnd="25dp"
                     android:backgroundTint="#44FF00"
-                    android:text="APPROVE"
+                    android:text="CLAIMED"
                     app:icon="@drawable/approved_ic"
                     android:onClick="copyRecord"/>
 
                 <Button
-                    android:id="@+id/del_button"
+                    android:id="@+id/del_buttF"
                     android:layout_width="317dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/shape_descrip"

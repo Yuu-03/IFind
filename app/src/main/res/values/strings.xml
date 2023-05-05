@@ -97,5 +97,18 @@
     <string name="item_found_date_label">Item Found Date</string>
     <string name="logout_btn">Logout</string>
     <string name="confirm_pass">Confirm Password</string>
+    <string name="pending">Pending</string>
+    <string name="approved">Approved</string>
+    <string name="found">Found</string>
+    <string name="logout">Logout</string>
+    <string name="additem">AddItem</string>
+    <string name="adminoption">adminOption</string>
+    <string name="logoutadmin">LogoutAdmin</string>
+    <string name="pendingRequests">Pending Requests</string>
+    <string name="A">Admin</string>
+    <string name="admin_settings">Admin Settings</string>
+    <string name="foundAdmin">Found</string>
+    <string name="approvedadmin">Approved</string>
+    <string name="adminLogout">LOGOUT</string>
 
 </resources>

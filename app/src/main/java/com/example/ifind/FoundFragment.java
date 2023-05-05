@@ -49,7 +49,7 @@ public class FoundFragment extends Fragment {
 
         dataList = new ArrayList<>();
 
-        AdapterClass adapter = new AdapterClass(getContext(), dataList);
+        AdapterClass2 adapter = new AdapterClass2(getContext(), dataList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 

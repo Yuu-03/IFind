@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LostItemDetails"
+    tools:context=".userviewlostdetails"
     android:background="@drawable/gradient_bg" >
 
     <ScrollView
@@ -201,38 +201,6 @@
                     android:text="Time:"
                     android:textSize="16sp"
                     android:textColor="#000000"/>
-
-                <Button
-                    android:id="@+id/approve_button"
-                    android:layout_width="317dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/shape_descrip"
-                    android:layout_alignStart="@+id/shape_descrip"
-                    android:layout_alignEnd="@+id/shape_descrip"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="942dp"
-                    android:layout_marginEnd="25dp"
-                    android:backgroundTint="#44FF00"
-                    android:text="APPROVE"
-                    app:icon="@drawable/approved_ic"
-                    android:onClick="copyRecord"/>
-
-                <Button
-                    android:id="@+id/del_button"
-                    android:layout_width="317dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/shape_descrip"
-                    android:layout_alignStart="@+id/shape_descrip"
-                    android:layout_alignEnd="@+id/shape_descrip"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="26dp"
-                    android:layout_marginTop="998dp"
-                    android:layout_marginEnd="24dp"
-                    android:backgroundTint="#FF0000"
-                    android:text="REJECT"
-                    app:icon="@drawable/baseline_delete_24" />
-
 
             </RelativeLayout>
 
