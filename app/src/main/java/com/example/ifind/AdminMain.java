@@ -34,18 +34,24 @@ public class AdminMain extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         nav = findViewById(R.id.nav);
 
-        nav.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
+        nav.getMenu().findItem(R.id.pending_).setChecked(false);
+
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.pending_:
                         startActivity(new Intent(AdminMain.this, pendingRequests.class));
+                        finish();
                         break;
 
-                    default:
+                    case R.id.adminProfile:
+                        break;
 
                 }
+                return true;
             }
+
         });
 
     }

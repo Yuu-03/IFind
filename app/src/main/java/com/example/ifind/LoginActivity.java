@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                             if (firebaseUser.getUid().equals(ADMIN)) {
                                                 Toast.makeText(LoginActivity.this, "You are now logged in Admin Ifind.", Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(LoginActivity.this, AdminMain.class));
+                                                startActivity(new Intent(LoginActivity.this, pendingRequests.class));
                                             } else {
                                                 Toast.makeText(LoginActivity.this, "You are now logged in.", Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -160,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
             if (firebaseUser.isEmailVerified()){
                 if (firebaseUser.getUid().equals(ADMIN)) {
                     Toast.makeText(LoginActivity.this, "Already logged in Master!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, AdminMain.class));
+                    startActivity(new Intent(LoginActivity.this, pendingRequests.class));
                     finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "Already logged in!", Toast.LENGTH_SHORT).show();
