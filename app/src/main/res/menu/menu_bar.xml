@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/pending_"
+        android:icon="@drawable/pending_ic"
+        android:title="@string/pending"/>
+
+    <item android:id="@+id/approved_"
+        android:icon="@drawable/approved_ic"
+        android:title="@string/approved"/>
+
+    <item android:id="@+id/found_"
+        android:icon="@drawable/found_ic"
+        android:title="@string/found"/>
+
+    <item android:id="@+id/adminAdd_"
+        android:icon="@drawable/add_item"
+        android:title="@string/additem"/>
+</menu>
