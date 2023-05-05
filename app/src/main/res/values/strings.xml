@@ -104,5 +104,6 @@
     <string name="additem">AddItem</string>
     <string name="adminoption">adminOption</string>
     <string name="logoutadmin">LogoutAdmin</string>
+    <string name="pendingRequests">Pending Requests</string>
 
 </resources>
