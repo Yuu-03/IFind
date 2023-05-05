@@ -6,20 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-public class AdminMain extends AppCompatActivity {
-
+public class FoundAdmin extends AppCompatActivity {
     private FirebaseAuth auth;
     BottomNavigationView nav;
 
@@ -28,11 +21,9 @@ public class AdminMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_main);
-
-        auth = FirebaseAuth.getInstance();
+        setContentView(R.layout.activity_foundadmin);
         nav = findViewById(R.id.nav);
-        nav.setSelectedItemId(R.id.adminProfile);
+        nav.setSelectedItemId(R.id.found_);
 
         nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -47,12 +38,11 @@ public class AdminMain extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.found_:
-                        startActivity(new Intent(getApplicationContext(), FoundAdmin.class));
-                        overridePendingTransition(0,0);
                         return true;
                     case R.id.adminProfile:
+                        startActivity(new Intent(getApplicationContext(), AdminMain.class));
+                        overridePendingTransition(0,0);
                         return true;
-
                 }
                 return false;
             }

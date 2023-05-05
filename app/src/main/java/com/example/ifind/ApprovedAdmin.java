@@ -6,33 +6,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-public class AdminMain extends AppCompatActivity {
-
+public class ApprovedAdmin extends AppCompatActivity {
     private FirebaseAuth auth;
     BottomNavigationView nav;
 
     private boolean doubleBackToExitPressedOnce;
     private Handler mHandler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_main);
-
+        setContentView(R.layout.activity_approvedadmin);
         auth = FirebaseAuth.getInstance();
         nav = findViewById(R.id.nav);
-        nav.setSelectedItemId(R.id.adminProfile);
+        nav.setSelectedItemId(R.id.approved_);
 
         nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -43,14 +36,14 @@ public class AdminMain extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.approved_:
-                        startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
-                        overridePendingTransition(0,0);
                         return true;
                     case R.id.found_:
                         startActivity(new Intent(getApplicationContext(), FoundAdmin.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.adminProfile:
+                        startActivity(new Intent(getApplicationContext(), AdminMain.class));
+                        overridePendingTransition(0,0);
                         return true;
 
                 }

@@ -31,6 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        app:itemTextColor="@drawable/admin_nav"
+        app:itemIconTint="@drawable/admin_nav"
         android:background="#54b8ff"
         app:menu="@menu/menu_bar"
         />

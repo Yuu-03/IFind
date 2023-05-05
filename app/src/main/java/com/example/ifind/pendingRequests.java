@@ -27,26 +27,33 @@ public class pendingRequests extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         nav = findViewById(R.id.nav);
-        nav.getMenu().findItem(R.id.pending_).setChecked(false);
-        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        nav.setSelectedItemId(R.id.pending_);
+
+        nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.pending_:
-                        break;
-
+                        return true;
+                    case R.id.approved_:
+                        startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.found_:
+                        startActivity(new Intent(getApplicationContext(), FoundAdmin.class));
+                        overridePendingTransition(0,0);
+                        return true;
                     case R.id.adminProfile:
-                        startActivity(new Intent(pendingRequests.this, AdminMain.class));
-                        finish();
-                        break;
+                        startActivity(new Intent(getApplicationContext(), AdminMain.class));
+                        overridePendingTransition(0,0);
+                        return true;
 
                 }
-                return true;
+                return false;
             }
-
         });
-    }
 
+    }
 
 
     private final Runnable mRunnable = new Runnable() {
@@ -55,6 +62,15 @@ public class pendingRequests extends AppCompatActivity {
             doubleBackToExitPressedOnce = false;
         }
     };
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+
+        if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }
+    }
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -69,5 +85,10 @@ public class pendingRequests extends AppCompatActivity {
 
         mHandler.postDelayed(mRunnable, 2000);
     }
+
+
+
+
+
 
 }

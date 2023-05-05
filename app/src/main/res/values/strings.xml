@@ -107,5 +107,7 @@
     <string name="pendingRequests">Pending Requests</string>
     <string name="A">Admin</string>
     <string name="admin_settings">Admin Settings</string>
+    <string name="foundAdmin">Found</string>
+    <string name="approvedadmin">Approved</string>
 
 </resources>
