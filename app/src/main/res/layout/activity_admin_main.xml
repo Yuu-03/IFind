@@ -6,6 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AdminMain">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/rectangle_blue"
+        android:layout_alignParentTop="true"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/admin_settings"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav"

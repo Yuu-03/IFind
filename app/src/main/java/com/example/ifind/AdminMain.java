@@ -25,7 +25,6 @@ public class AdminMain extends AppCompatActivity {
 
     private boolean doubleBackToExitPressedOnce;
     private Handler mHandler = new Handler();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +39,13 @@ public class AdminMain extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.adminProfile:                        break;
+
                     case R.id.pending_:
                         startActivity(new Intent(AdminMain.this, pendingRequests.class));
                         finish();
                         break;
 
-                    case R.id.adminProfile:
-                        break;
 
                 }
                 return true;
@@ -55,27 +54,7 @@ public class AdminMain extends AppCompatActivity {
         });
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        menu.add("Logout");
-        menu.add("Options");
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (item.getTitle().equals("Logout")) {
-            auth.signOut();
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
-        }else{
-            Toast.makeText(this, "Hi", Toast.LENGTH_SHORT).show();
-        }
-
-        return super.onOptionsItemSelected(item);
-
-    }
     private final Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
