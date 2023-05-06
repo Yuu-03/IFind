@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,10 @@ public class FoundFragment extends Fragment {
     List<ItemHelperClass> dataList;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
+    SearchView searchView1;
+
+    AdapterClass2 adapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +54,11 @@ public class FoundFragment extends Fragment {
 
         dataList = new ArrayList<>();
 
+        searchView1 = view.findViewById(R.id.search2);
+        searchView1.clearFocus();
+
         AdapterClass2 adapter = new AdapterClass2(getContext(), dataList);
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
@@ -69,6 +78,41 @@ public class FoundFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
             }
+
         });
+
+        if (searchView1 != null) {
+            searchView1.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    searchList(newText);
+                    return true;
+                }
+            });
+
+            searchView1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                     searchView1.onActionViewExpanded();
+                }
+            });
+        }
     }
+    public void searchList (String text){
+        ArrayList<ItemHelperClass> searchList = new ArrayList<>();
+        for (ItemHelperClass itemHelperClass : dataList) {
+            if (itemHelperClass.getItemName().toLowerCase().contains(text.toLowerCase())) {
+                searchList.add(itemHelperClass);
+            }
+        }
+        adapter.searchDataList(searchList);
+    }
+
+
+
 }
