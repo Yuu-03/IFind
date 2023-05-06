@@ -214,7 +214,7 @@
                     android:layout_marginTop="942dp"
                     android:layout_marginEnd="25dp"
                     android:backgroundTint="#44FF00"
-                    android:text="APPROVE"
+                    android:text="CLAIMED"
                     app:icon="@drawable/approved_ic"
                     android:onClick="copyRecord"/>
 
@@ -230,7 +230,7 @@
                     android:layout_marginTop="998dp"
                     android:layout_marginEnd="24dp"
                     android:backgroundTint="#FF0000"
-                    android:text="REJECT"
+                    android:text="FORGOTTEN"
                     app:icon="@drawable/baseline_delete_24" />
 
 

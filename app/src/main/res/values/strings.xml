@@ -110,5 +110,9 @@
     <string name="foundAdmin">Found</string>
     <string name="approvedadmin">Approved</string>
     <string name="adminLogout">LOGOUT</string>
+    <string name="delete">DELETE</string>
+    <string name="diamessage">Good day! You can now drop your item at CNSC PICRO office located besides the gate near the Graduate School</string>
+    <string name="diaTitle">Attention!</string>
+    <string name="aleTitle">CNSC IFIND</string>
 
 </resources>

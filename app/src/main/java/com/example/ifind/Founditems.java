@@ -2,8 +2,10 @@ package com.example.ifind;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -65,53 +67,49 @@ public class Founditems extends AppCompatActivity {
             Picasso.get().load(bundle.getString("Image")).into(image_full);
         }
 
-        approve_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                toPath = FirebaseDatabase.getInstance().getReference("FoundItems");
-
-                ItemHelperClass ItemhelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl);
-
-                toPath.child(key)
-                        .setValue(ItemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(Founditems.this, "Found!", Toast.LENGTH_LONG).show();
-                                    //remove if you want to delete the copied record from the pending
-                                    reference.child(key).removeValue();
-                                    startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
-                                }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@androidx.annotation.NonNull Exception e) {
-                                Toast.makeText(Founditems.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
-        });
-
         del_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
-                storageReference.delete();
-                reference.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(Founditems.this, "Record Deleted", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, "Error requesting connection", e);
-                    }
+                AlertDialog.Builder builder = new AlertDialog.Builder(Founditems.this);
 
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseStorage storage = FirebaseStorage.getInstance();
+                        StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
+                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                reference.child(key).removeValue();
+                                Toast.makeText(Founditems.this, "Request Deleted", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), FoundAdmin.class));
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e(TAG, "Error requesting connection", e);
+                            }
+
+                        });
+                    }
                 });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
             }
         });
 

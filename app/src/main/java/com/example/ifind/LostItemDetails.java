@@ -2,6 +2,7 @@ package com.example.ifind;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -78,49 +80,100 @@ public class LostItemDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                toPath = FirebaseDatabase.getInstance().getReference("Approved");
+                AlertDialog.Builder builder = new AlertDialog.Builder(LostItemDetails.this);
 
-                ItemHelperClass ItemhelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl);
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
 
-                toPath.child(key)
-                        .setValue(ItemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(LostItemDetails.this, "Approved!", Toast.LENGTH_LONG).show();
-                                    //remove if you want to delete the copied record from the pending
-                                    reference.child(key).removeValue();
-                                    startActivity(new Intent(getApplicationContext(), pendingRequests.class));
-                                }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@androidx.annotation.NonNull Exception e) {
-                                Toast.makeText(LostItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        toPath = FirebaseDatabase.getInstance().getReference("Approved");
+
+                        ItemHelperClass ItemhelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl);
+
+                        toPath.child(key)
+                                .setValue(ItemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(LostItemDetails.this, "Approved! Displayed in Lost Items!", Toast.LENGTH_LONG).show();
+                                            //remove if you want to delete the copied record from the pending
+                                            reference.child(key).removeValue();
+                                            startActivity(new Intent(getApplicationContext(), pendingRequests.class));
+                                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@androidx.annotation.NonNull Exception e) {
+                                        Toast.makeText(LostItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
             }
         });
 
         del_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
-                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        reference.child(key).removeValue();
-                        Toast.makeText(LostItemDetails.this, "Request Deleted", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), pendingRequests.class));
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, "Error requesting connection", e);
-                    }
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(LostItemDetails.this);
+
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseStorage storage = FirebaseStorage.getInstance();
+                        StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
+                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                reference.child(key).removeValue();
+                                Toast.makeText(LostItemDetails.this, "Request Deleted", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), pendingRequests.class));
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e(TAG, "Error requesting connection", e);
+                            }
+
+                        });
+                    }
                 });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
             }
         });
 
