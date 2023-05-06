@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,11 +32,15 @@ import com.squareup.picasso.Picasso;
 
 public class LostItemDetails extends AppCompatActivity {
     TextView item_name, item_desc, item_loc, item_date, item_time;
+
+    EditText student_name;
+    String student_nme;
     ImageView image_full;
     Button del_button, approve_button;
     String key = "";
     String imageUrl = "";
-    private DatabaseReference toPath;
+    private DatabaseReference toPath, toPathAppr;
+    private ItemHelperClass itemHelperClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +54,9 @@ public class LostItemDetails extends AppCompatActivity {
         item_time = findViewById(R.id.item_time);
         image_full = findViewById(R.id.image_full);
         del_button = findViewById(R.id.del_button);
-        approve_button = findViewById(R.id.approve_button);
+        approve_button = findViewById(R.id.approve_butt);
+        student_name = findViewById(R.id.Student_namee);
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
         toPath = FirebaseDatabase.getInstance().getReference("Approved");
@@ -61,6 +68,8 @@ public class LostItemDetails extends AppCompatActivity {
         String desc = bundle.getString("Description");
         String date = bundle.getString("Date");
         String time = bundle.getString("Time");
+        student_nme = student_name.getText().toString();
+
 
         if (bundle != null) {
             item_name.setText(bundle.getString("Item Name"));
@@ -89,14 +98,17 @@ public class LostItemDetails extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int which) {
                         toPath = FirebaseDatabase.getInstance().getReference("Approved");
+                        toPathAppr =  FirebaseDatabase.getInstance().getReference("Appreciate");
 
-                        ItemHelperClass ItemhelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl);
+                        ItemHelperClass itemhelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl);
 
                         toPath.child(key)
-                                .setValue(ItemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                .setValue(itemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
+                                            toPathAppr.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl));
+                                            toPathAppr.child(key).setValue(student_nme);
                                             Toast.makeText(LostItemDetails.this, "Approved! Displayed in Lost Items!", Toast.LENGTH_LONG).show();
                                             //remove if you want to delete the copied record from the pending
                                             reference.child(key).removeValue();

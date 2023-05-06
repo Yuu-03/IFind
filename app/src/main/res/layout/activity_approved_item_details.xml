@@ -41,7 +41,7 @@
                 <TextView
                     android:id="@+id/shape"
                     android:layout_width="match_parent"
-                    android:layout_height="700dp"
+                    android:layout_height="860dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="355dp"
@@ -74,13 +74,13 @@
                     android:layout_alignStart="@+id/shape_descrip"
                     android:layout_alignEnd="@+id/shape_descrip"
                     android:layout_alignBottom="@+id/shape_descrip"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="53dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="23dp"
+                    android:layout_marginBottom="10dp"
                     android:text="@string/item_description3"
-                    android:textSize="16sp"
-                    android:textColor="#000000"/>
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/item_name"
@@ -202,6 +202,7 @@
                     android:textSize="16sp"
                     android:textColor="#000000"/>
 
+
                 <Button
                     android:id="@+id/approve_buttA"
                     android:layout_width="317dp"
@@ -210,13 +211,13 @@
                     android:layout_alignStart="@+id/shape_descrip"
                     android:layout_alignEnd="@+id/shape_descrip"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="942dp"
-                    android:layout_marginEnd="25dp"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="979dp"
+                    android:layout_marginEnd="22dp"
                     android:backgroundTint="#44FF00"
+                    android:onClick="copyRecord"
                     android:text="CLAIMED"
-                    app:icon="@drawable/approved_ic"
-                    android:onClick="copyRecord"/>
+                    app:icon="@drawable/approved_ic" />
 
                 <Button
                     android:id="@+id/del_buttA"
@@ -226,12 +227,12 @@
                     android:layout_alignStart="@+id/shape_descrip"
                     android:layout_alignEnd="@+id/shape_descrip"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="26dp"
-                    android:layout_marginTop="998dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="1043dp"
+                    android:layout_marginEnd="22dp"
                     android:backgroundTint="#FF0000"
                     android:text="FORGOTTEN"
-                    app:icon="@drawable/baseline_delete_24" />
+                    app:icon="@drawable/baseline_storage_24" />
 
 
             </RelativeLayout>

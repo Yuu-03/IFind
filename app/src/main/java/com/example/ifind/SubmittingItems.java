@@ -101,23 +101,6 @@ public class SubmittingItems extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         uploadPicture();
 
-                        builder.setMessage(R.string.diamessage) .setTitle(R.string.diaTitle);
-
-                        //Setting message manually and performing action on button click
-                        builder.setMessage("Do you want to close this application ?")
-                                .setCancelable(false)
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        finish();
-                                        Toast.makeText(getApplicationContext(),"Thank You!",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                        //Creating dialog box
-                        AlertDialog alert = builder.create();
-                        //Setting the title manually
-                        alert.setTitle(getString(R.string.aleTitle));
-                        alert.show();
                     }
 
                 });

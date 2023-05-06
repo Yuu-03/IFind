@@ -16,6 +16,7 @@ public class ItemHelperClass {
 
     String item_name, item_desc, item_loc, item_date, item_time, imageUrl;
 
+
     //empty constructor to avoid errors in the database
 
     //these are the constructors to cal for the variables
@@ -26,6 +27,7 @@ public class ItemHelperClass {
         this.date = date;
         this.time = time;
         this.imageURL = imageURL;
+
     }
 
     public ItemHelperClass(TextView item_name, TextView item_desc, TextView item_loc, TextView item_date, TextView item_time, String imageUrl) {
@@ -86,6 +88,7 @@ public class ItemHelperClass {
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
+
 
     public String getKey() {return key;}
 
