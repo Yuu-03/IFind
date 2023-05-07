@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -85,9 +87,36 @@ public class SubmittingItems extends AppCompatActivity {
         submit_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseRef = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
                 //upload selected pic to database
-                uploadPicture();
+
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(SubmittingItems.this);
+
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        uploadPicture();
+
+                    }
+
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
 
             }
         });
@@ -252,6 +281,8 @@ public class SubmittingItems extends AppCompatActivity {
 
     public void uploadItemInformation() {
         // conditions
+        databaseRef = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
+
         if (!item_name_condition() | !item_loc_condition() | !item_date_condition()| !item_time_condition()| !item_description_condition()) {
             return;
         }

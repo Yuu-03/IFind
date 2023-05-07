@@ -1,6 +1,5 @@
 package com.example.ifind;
 
-import static java.security.AccessController.getContext;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

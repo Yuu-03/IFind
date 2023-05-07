@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +40,6 @@ public class HomeFragment extends Fragment {
 
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,7 +82,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         RecyclerView recyclerView = view.findViewById(R.id.lostitemsrecycler);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2 );
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
         dataList = new ArrayList<>();
@@ -96,7 +97,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
-                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     LostImageHelperClass dataClass = itemSnapshot.getValue(LostImageHelperClass.class);
                     dataList.add(dataClass);
                 }
@@ -110,7 +111,7 @@ public class HomeFragment extends Fragment {
         });
 
         RecyclerView recyclerView2 = view.findViewById(R.id.lostitemsrecycler2);
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(), 2 );
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(), 2);
         recyclerView2.setLayoutManager(gridLayoutManager2);
 
         dataList2 = new ArrayList<>();
@@ -125,7 +126,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList2.clear();
-                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     FoundImageHelperClass dataClass2 = itemSnapshot.getValue(FoundImageHelperClass.class);
                     dataList2.add(dataClass2);
                 }
@@ -139,8 +140,7 @@ public class HomeFragment extends Fragment {
         });
 
 
-
-
     }
+
 
 }
