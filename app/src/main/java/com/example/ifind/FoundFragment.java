@@ -53,11 +53,10 @@ public class FoundFragment extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         dataList = new ArrayList<>();
+        adapter = new AdapterClass2(getContext(), dataList);
 
         searchView1 = view.findViewById(R.id.search2);
         searchView1.clearFocus();
-
-        AdapterClass2 adapter = new AdapterClass2(getContext(), dataList);
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -69,6 +68,7 @@ public class FoundFragment extends Fragment {
                 dataList.clear();
                 for (DataSnapshot itemSnapshot: snapshot.getChildren()){
                     ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);
+                    dataClass.setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
                 }
                 adapter.notifyDataSetChanged();
