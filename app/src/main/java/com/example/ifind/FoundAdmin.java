@@ -78,7 +78,7 @@ public class FoundAdmin extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("FoundItems");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Found");
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

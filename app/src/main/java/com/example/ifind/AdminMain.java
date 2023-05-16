@@ -23,7 +23,7 @@ public class AdminMain extends AppCompatActivity {
 
     private FirebaseAuth auth;
     BottomNavigationView nav;
-    private Button mLogbutt;
+    private Button mLogbutt, mPostLost;
 
     private boolean doubleBackToExitPressedOnce;
     private Handler mHandler = new Handler();
@@ -33,6 +33,7 @@ public class AdminMain extends AppCompatActivity {
         setContentView(R.layout.activity_admin_main);
 
         mLogbutt = findViewById(R.id.adminLogoutButt);
+        mPostLost = findViewById(R.id.adminLostPost);
 
         auth = FirebaseAuth.getInstance();
         nav = findViewById(R.id.nav);
@@ -70,6 +71,14 @@ public class AdminMain extends AppCompatActivity {
                 auth.signOut();
                 startActivity(new Intent(AdminMain.this, LoginActivity.class));
                 finish();
+            }
+        });
+        mPostLost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(AdminMain.this, "Upload Successfull!" , Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AdminMain.this, AdminPostLost.class));
+
             }
         });
 

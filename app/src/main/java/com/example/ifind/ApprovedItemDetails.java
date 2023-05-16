@@ -30,12 +30,12 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class ApprovedItemDetails extends AppCompatActivity {
-    TextView item_name, item_desc, item_loc, item_date, item_time;
+    TextView item_name, item_desc, item_loc, item_date, item_time, foundName;
     ImageView image_full;
     Button del_button, approve_button;
     String key = "";
     String imageUrl = "";
-    private DatabaseReference toPath;
+    private DatabaseReference toFound, toAppreciation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +50,12 @@ public class ApprovedItemDetails extends AppCompatActivity {
         image_full = findViewById(R.id.image_full);
         del_button = findViewById(R.id.del_buttA);
         approve_button = findViewById(R.id.approve_buttA);
+        foundName = findViewById(R.id.item_foundName);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Approved");
-        toPath = FirebaseDatabase.getInstance().getReference("FoundItems");
+        toFound = FirebaseDatabase.getInstance().getReference("FoundItems");
+        toAppreciation = FirebaseDatabase.getInstance().getReference("Appreciation");
+
 
 
         Bundle bundle = getIntent().getExtras();
@@ -68,6 +71,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
             item_desc.setText(bundle.getString("Description"));
             item_date.setText(bundle.getString("Date"));
             item_time.setText(bundle.getString("Time"));
+            foundName.setText(bundle.getString("userID"));
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
@@ -85,17 +89,32 @@ public class ApprovedItemDetails extends AppCompatActivity {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        toPath = FirebaseDatabase.getInstance().getReference("Found");
+                        toFound = FirebaseDatabase.getInstance().getReference("Found");
+                        toAppreciation = FirebaseDatabase.getInstance().getReference("Appreciation");
 
                         ItemHelperClass ItemhelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl);
+                        AppreciationItemHelperClass appreciationItemHelperClass = new AppreciationItemHelperClass(name, date, time, imageUrl);
 
-                        toPath.child(key)
+                        toFound.child(key)
                                 .setValue(ItemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            Toast.makeText(ApprovedItemDetails.this, "Claimed! Displayed in Found Items!", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(ApprovedItemDetails.this, "Claimed! Displayed in Found Items and Appreciation Posted!", Toast.LENGTH_LONG).show();
                                             //remove if you want to delete the copied record from the pending
+                                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@androidx.annotation.NonNull Exception e) {
+                                        Toast.makeText(ApprovedItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                        toAppreciation.child(key)
+                                .setValue(appreciationItemHelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {//remove if you want to delete the copied record from the pending
                                             reference.child(key).removeValue();
                                             startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
                                         }

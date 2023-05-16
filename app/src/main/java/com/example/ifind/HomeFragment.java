@@ -49,7 +49,6 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         submitlostbutton = root.findViewById(R.id.submitlostbutton);
-        viewfoundbutton = root.findViewById(R.id.viewlost);
         return root;
     }
     public void onStart(){
@@ -63,14 +62,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        Button viewfoundbutton = (Button) foundactivity.findViewById(R.id.viewlost);
-        viewfoundbutton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(foundactivity, FoundActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {

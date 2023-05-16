@@ -44,7 +44,7 @@
                     android:layout_height="800dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="355dp"
+                    android:layout_marginTop="356dp"
                     android:layout_marginEnd="0dp"
                     android:background="@drawable/shape_for_post" />
 
@@ -77,7 +77,7 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="120dp"
+                    android:layout_marginBottom="130dp"
                     android:text="@string/item_description3"
                     android:textSize="16sp"
                     android:textColor="#000000"/>
@@ -175,6 +175,21 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/item_loc8"
+                    android:layout_width="255dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_time"
+                    android:layout_alignStart="@+id/shape_descrip"
+                    android:layout_alignEnd="@+id/shape_descrip"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="201dp"
+                    android:layout_marginEnd="56dp"
+                    android:text="Found By"
+                    android:textColor="#4C54F3"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/item_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -202,6 +217,20 @@
                     android:textSize="16sp"
                     android:textColor="#000000"/>
 
+                <TextView
+                    android:id="@+id/pendingFoundName"
+                    android:layout_width="276dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_loc4"
+                    android:layout_alignStart="@+id/shape_descrip"
+                    android:layout_alignEnd="@+id/shape_descrip"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="285dp"
+                    android:layout_marginEnd="27dp"
+                    android:text="Name"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
                 <Button
                     android:id="@+id/approve_butt"
                     android:layout_width="317dp"
@@ -217,36 +246,6 @@
                     android:onClick="copyRecord"
                     android:text="APPROVE"
                     app:icon="@drawable/approved_ic" />
-
-                <TextView
-                    android:id="@+id/student_name"
-                    android:layout_width="255dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/shape_descrip"
-                    android:layout_alignStart="@+id/shape_descrip"
-                    android:layout_alignEnd="@+id/shape_descrip"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="-103dp"
-                    android:layout_marginEnd="70dp"
-                    android:layout_marginBottom="600dp"
-                    android:text="Student Name"
-                    android:textColor="#4C54F3"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/Student_namee"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/shape_descrip"
-                    android:layout_alignStart="@+id/shape_descrip"
-                    android:layout_alignEnd="@+id/shape_descrip"
-                    android:layout_marginStart="27dp"
-                    android:layout_marginTop="-66dp"
-                    android:layout_marginEnd="28dp"
-                    android:hint="Student Name"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/del_button"

@@ -37,7 +37,7 @@ public class LostFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_lost, container, false);
+        return inflater.inflate(R.layout.fragment_appre, container, false);
     }
 
     @Override

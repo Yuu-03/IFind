@@ -37,13 +37,40 @@
         android:background="#54b8ff"
         app:menu="@menu/menu_bar"
         />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:orientation="vertical"
         android:layout_below="@+id/hed">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/adminLostPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/teal_200"
+                android:text="@string/post_lost_item_admin_button"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:cornerRadius="15dp" />
+
+            <Button
+                android:id="@+id/adminApprePost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/teal_200"
+                android:text="@string/post_announcement_admin_button"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:cornerRadius="15dp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/adminLogoutButt"
@@ -56,4 +83,5 @@
             />
 
     </LinearLayout>
+
 </RelativeLayout>

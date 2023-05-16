@@ -31,9 +31,8 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class LostItemDetails extends AppCompatActivity {
-    TextView item_name, item_desc, item_loc, item_date, item_time;
+    TextView item_name, item_desc, item_loc, item_date, item_time, foundName;
 
-    EditText student_name;
     String student_nme;
     ImageView image_full;
     Button del_button, approve_button;
@@ -55,7 +54,7 @@ public class LostItemDetails extends AppCompatActivity {
         image_full = findViewById(R.id.image_full);
         del_button = findViewById(R.id.del_button);
         approve_button = findViewById(R.id.approve_butt);
-        student_name = findViewById(R.id.Student_namee);
+        foundName = findViewById(R.id.pendingFoundName);
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
@@ -68,7 +67,6 @@ public class LostItemDetails extends AppCompatActivity {
         String desc = bundle.getString("Description");
         String date = bundle.getString("Date");
         String time = bundle.getString("Time");
-        student_nme = student_name.getText().toString();
 
 
         if (bundle != null) {
@@ -77,6 +75,7 @@ public class LostItemDetails extends AppCompatActivity {
             item_desc.setText(bundle.getString("Description"));
             item_date.setText(bundle.getString("Date"));
             item_time.setText(bundle.getString("Time"));
+            foundName.setText(bundle.getString("userID"));
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
@@ -108,7 +107,6 @@ public class LostItemDetails extends AppCompatActivity {
                                     public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             toPathAppr.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl));
-                                            toPathAppr.child(key).setValue(student_nme);
                                             Toast.makeText(LostItemDetails.this, "Approved! Displayed in Lost Items!", Toast.LENGTH_LONG).show();
                                             //remove if you want to delete the copied record from the pending
                                             reference.child(key).removeValue();

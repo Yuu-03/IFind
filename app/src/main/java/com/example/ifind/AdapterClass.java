@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -44,12 +46,12 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         Picasso.get().load(datalist.get(position).getImageURL()).into(holder.recImage);
         holder.textItemName.setText(datalist.get(position).getItemName());
         holder.textItemLoc.setText(datalist.get(position).getLocation());
         holder.textItemTime.setText(datalist.get(position).getDate());
         holder.textItemDate.setText(datalist.get(position).getTime());
-
 
         holder.recCard.setOnClickListener(view -> {
             Intent intent = new Intent(context, LostItemDetails.class);
@@ -68,7 +70,7 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
 class MyViewHolder extends RecyclerView.ViewHolder {
 
     ImageView recImage;
-    TextView textItemName, textItemLoc, textItemDate, textItemTime;
+    TextView textItemName, textItemLoc, textItemDate, textItemTime, textName;
     CardView recCard;
 
     public MyViewHolder(@NonNull View itemView) {
@@ -78,6 +80,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         textItemDate = itemView.findViewById(R.id.textItemdate);
         textItemName = itemView.findViewById(R.id.textItemName);
         textItemLoc = itemView.findViewById(R.id.textItemLoc);
+        textName = itemView.findViewById(R.id.pendingFoundName);
         recCard = itemView.findViewById(R.id.recCard);
 
     }

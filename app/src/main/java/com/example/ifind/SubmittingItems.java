@@ -28,6 +28,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -50,7 +51,7 @@ public class SubmittingItems extends AppCompatActivity {
     private ImageView image_preview;
     private StorageReference storageRef;
     private DatabaseReference databaseRef;
-    private FirebaseDatabase rootNode;
+    private DatabaseReference userRef;
     String imageURL;
     String image_path_firebase;
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -61,7 +62,6 @@ public class SubmittingItems extends AppCompatActivity {
 
         storageRef = FirebaseStorage.getInstance().getReference("LostItemImage");
         databaseRef = FirebaseDatabase.getInstance().getReference("LostItemImage");
-
         Button mupload = findViewById(R.id.upload);
 
         date_picker = findViewById(R.id.date_picker);
@@ -282,6 +282,9 @@ public class SubmittingItems extends AppCompatActivity {
     public void uploadItemInformation() {
         // conditions
         databaseRef = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
 
         if (!item_name_condition() | !item_loc_condition() | !item_date_condition()| !item_time_condition()| !item_description_condition()) {
             return;
@@ -293,9 +296,10 @@ public class SubmittingItems extends AppCompatActivity {
         String itemLocation = itemlocation.getEditText().getText().toString();
         String dateFound = date_picker.getText().toString();
         String timeFound = time_picker.getText().toString();
+        String userID = String.valueOf(currentUser.getDisplayName());
 
         //call the class UserHelperClass to use and store values to the database
-        ItemHelperClass ItemhelperClass = new ItemHelperClass(itemName, itemDescription, itemLocation, dateFound, timeFound, imageURL);
+        ItemHelperClass ItemhelperClass = new ItemHelperClass(itemName, itemDescription, itemLocation, dateFound, timeFound, imageURL, userID);
 
         //assign an Id to add more users
         String uploadID = databaseRef.push().getKey();

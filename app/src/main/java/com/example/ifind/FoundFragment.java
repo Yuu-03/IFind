@@ -61,7 +61,7 @@ public class FoundFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("FoundItems");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Found");
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

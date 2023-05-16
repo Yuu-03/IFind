@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".FoundActivity">
+    tools:context=".AdminPostLost">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,15 +15,28 @@
         android:layout_marginBottom="20dp"
         android:padding="10dp"
         android:gravity="center">
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="textEnd"
+            android:text="ADMIN MODE"
+            android:textColor="@color/red"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="sans-serif-medium"
-            android:text="@string/report_found_item"
+            android:text="@string/upload_lost_item"
             android:textColor="#3F51B5"
             android:textSize="23sp"
             android:textStyle="bold" />
@@ -37,12 +50,12 @@
 
         <Button
             android:id="@+id/upload"
-            android:layout_width="300dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="20dp"
             android:text="@string/upload_image"
-            android:background="#293CE2"
+            android:backgroundTint="@color/teal_700"
             android:textAlignment="center"
             android:textColor="#FFFFFF" />
 
@@ -53,7 +66,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="sans-serif-medium"
-            android:text="@string/report_details"
+            android:text="@string/item_details"
             android:textColor="#3F51B5"
             android:textSize="23sp"
             android:textStyle="bold" />
@@ -64,6 +77,7 @@
             android:layout_height="60dp"
             android:textColorHint="@color/black"
             android:inputType="textPersonName"
+            android:layout_margin="10dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -79,6 +93,7 @@
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:textColorHint="@color/black"
+            android:layout_margin="10dp"
             android:inputType="textPersonName"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -92,10 +107,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/date_picker_text"
-
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:textColorHint="@color/black"
+            android:layout_margin="10dp"
             android:inputType="date"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -115,6 +130,7 @@
             android:layout_height="60dp"
             android:textColorHint="@color/black"
             android:inputType="time"
+            android:layout_margin="10dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -133,6 +149,7 @@
             android:layout_marginBottom="15dp"
             android:textColorHint="@color/black"
             android:hint="@string/description"
+            android:layout_margin="10dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -156,7 +173,7 @@
             android:layout_marginTop="20dp"
             android:background="#293CE2"
             android:elevation="@dimen/cardview_default_elevation"
-            android:text="@string/submit_lost_item"
+            android:text="@string/upload_lost_item"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="30dp"

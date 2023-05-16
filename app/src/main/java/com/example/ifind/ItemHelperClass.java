@@ -2,6 +2,8 @@ package com.example.ifind;
 
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class ItemHelperClass {
 
     String itemname;
@@ -11,10 +13,7 @@ public class ItemHelperClass {
     String time;
     String imageURL;
 
-    String key;
-
-
-    String item_name, item_desc, item_loc, item_date, item_time, imageUrl;
+    String key, userID;
 
 
     //empty constructor to avoid errors in the database
@@ -30,14 +29,15 @@ public class ItemHelperClass {
 
     }
 
-    public ItemHelperClass(TextView item_name, TextView item_desc, TextView item_loc, TextView item_date, TextView item_time, String imageUrl) {
-        this.item_name = itemname;
-        this.item_desc = description;
-        this.item_loc = location;
-        this.item_date = date;
-        this.item_time = time;
-        this.imageUrl = imageURL;
-    }
+    public ItemHelperClass(String itemName, String itemDescription, String itemLocation, String dateFound, String timeFound, String imageURL, String userID) {
+        this.itemname = itemName;
+        this.description = itemDescription;
+        this.location = itemLocation;
+        this.date = dateFound;
+        this.time = timeFound;
+        this.imageURL = imageURL;
+        this.userID = userID;}
+
 
     //getter and setters
 
@@ -93,6 +93,12 @@ public class ItemHelperClass {
     public String getKey() {return key;}
 
     public void setKey(String key) {this.key = key;}
+    public String getUserID() {
+        return userID;
+    }
+    public void setUserID(String userID) {
+        this.userID = userID ;}
+
     public ItemHelperClass(){
 
     }

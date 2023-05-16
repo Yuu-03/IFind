@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,7 +41,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class FoundActivity extends AppCompatActivity {
+public class AdminPostLost extends AppCompatActivity {
     private FirebaseAuth mAuth;
     int hour1, minute1;
     private TextInputLayout itemname, itemlocation, description;
@@ -55,10 +57,10 @@ public class FoundActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_found2);
+        setContentView(R.layout.activity_admin_post_lost);
 
-        storageRef = FirebaseStorage.getInstance().getReference("FoundItemImage");
-        databaseRef = FirebaseDatabase.getInstance().getReference("FoundItemImage");
+        storageRef = FirebaseStorage.getInstance().getReference("Approved");
+        databaseRef = FirebaseDatabase.getInstance().getReference("Approved");
 
         Button mupload = findViewById(R.id.upload);
 
@@ -85,10 +87,37 @@ public class FoundActivity extends AppCompatActivity {
         submit_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseRef = FirebaseDatabase.getInstance().getReference("FoundItems");
                 //upload selected pic to database
-                uploadPicture();
-                //fix the upload where the image always uploads even if the information is empty
+
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(AdminPostLost.this);
+
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        uploadPicture();
+
+                    }
+
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
             }
         });
         date_picker.setOnClickListener(v -> {
@@ -209,21 +238,12 @@ public class FoundActivity extends AppCompatActivity {
         final ProgressDialog pd = new ProgressDialog(this);
         // Create a reference to "mountains.jpg"
         if (imageUri != null) {
-            pd.setTitle("Uploading...");
+            pd.setTitle("Uploading the image...");
             pd.show();
 
             StorageReference fileReference = storageRef.child(String.valueOf(imageUri));
             fileReference.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        //                        @Override
-//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                            pd.dismiss();
-//                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-//                            while (!uriTask.isComplete());
-//                            Uri urlImage = uriTask.getResult();
-//                            imageURL = fileReference.toString();
-//                            Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_LONG).show();
-//                        }
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             pd.dismiss();
@@ -239,7 +259,6 @@ public class FoundActivity extends AppCompatActivity {
                                     .addOnFailureListener(e -> {
                                         Snackbar.make(findViewById(android.R.id.content), "Failed", Snackbar.LENGTH_LONG).show();
                                     });
-
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -262,6 +281,8 @@ public class FoundActivity extends AppCompatActivity {
 
     public void uploadItemInformation() {
         // conditions
+        databaseRef = FirebaseDatabase.getInstance().getReference("Approved");
+
         if (!item_name_condition() | !item_loc_condition() | !item_date_condition()| !item_time_condition()| !item_description_condition()) {
             return;
         }
@@ -270,11 +291,11 @@ public class FoundActivity extends AppCompatActivity {
         String itemName = itemname.getEditText().getText().toString();
         String itemDescription = description.getEditText().getText().toString();
         String itemLocation = itemlocation.getEditText().getText().toString();
-        String dateRetrieved = date_picker.getText().toString();
-        String timeRetrieved = time_picker.getText().toString();
+        String dateFound = date_picker.getText().toString();
+        String timeFound = time_picker.getText().toString();
 
         //call the class UserHelperClass to use and store values to the database
-        ItemHelperClass ItemhelperClass = new ItemHelperClass(itemName, itemDescription, itemLocation, dateRetrieved, timeRetrieved, imageURL);
+        ItemHelperClass ItemhelperClass = new ItemHelperClass(itemName, itemDescription, itemLocation, dateFound, timeFound, imageURL);
 
         //assign an Id to add more users
         String uploadID = databaseRef.push().getKey();
@@ -284,34 +305,15 @@ public class FoundActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(FoundActivity.this,"Item Information Uploaded",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminPostLost.this,"Item Information Uploaded",Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(FoundActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminPostLost.this,e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-//    private void updateUI(FirebaseUser user) {
-//
-//        if (user != null) {
-//            Toast.makeText(SubmittingItems.this,"No user",Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(SubmittingItems.this,"Yay user?",Toast.LENGTH_SHORT).show();
-//
-//        }
-//    }
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        updateUI(currentUser);
-//    }
-
-
-
 }

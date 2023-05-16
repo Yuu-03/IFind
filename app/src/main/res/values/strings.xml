@@ -113,4 +113,12 @@
     <string name="delete">DELETE</string>
     <string name="diamessage">Good day! You can now drop your item at CNSC PICRO office located besides the gate near the Graduate School</string>
 
+    <string name="post_lost_item_admin_button">Post Lost Item</string>
+    <string name="post_announcement_admin_button">Announcement</string>
+    <string name="upload_lost_item">UPLOAD LOST ITEM</string>
+    <string name="item_details">Item Details</string>
+    <string name="thank_you">Thank You!</string>
+    <string name="student_name">Student Name</string>
+    <string name="date_found">Date Found:</string>
+    <string name="time_found">Time Found:</string>
 </resources>
