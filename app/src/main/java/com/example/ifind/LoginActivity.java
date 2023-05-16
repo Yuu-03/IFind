@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     ImageView logo;
     TextView signUpText;
     TextInputLayout logEmail,logPassword;
-    private static final String ADMIN = "wauBG9kZlaXwhe8eW0JT4M8MAm63";
+    private static final String ADMIN = "s1Olp2MGwRVpuj2UiJh9zcnpu4j1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

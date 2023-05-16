@@ -95,6 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.VISIBLE);
                     regUser(fname, username, email, phone, pass);
 
+
                 }
 
             }
