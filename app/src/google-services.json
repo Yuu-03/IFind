@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1072060168921:android:1b48ea350071a4856e5cc8",
+        "mobilesdk_app_id": "1:434672326137:android:c149173041206d536cd928",
         "android_client_info": {
           "package_name": "com.example.ifind"
         }
@@ -20,7 +20,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDepnsBmCc7d0MT9n_4Mm6-mn8Q5CiJ3WE"
+          "current_key": "AIzaSyCXjUiRYZ8HkYP2Nz6CmrwZCXoADEd4nKc"
         }
       ],
       "services": {
