@@ -61,6 +61,8 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
             intent.putExtra("Date", datalist.get(holder.getAdapterPosition()).getDate());
             intent.putExtra("Time", datalist.get(holder.getAdapterPosition()).getTime());
             intent.putExtra("Description", datalist.get(holder.getAdapterPosition()).getDescription());
+            intent.putExtra("userID_", datalist.get(holder.getAdapterPosition()).getUserID());
+
             intent.putExtra("Key", datalist.get(holder.getAdapterPosition()).getKey());
             context.startActivity(intent);
 
@@ -82,7 +84,6 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         textItemLoc = itemView.findViewById(R.id.textItemLoc);
         textName = itemView.findViewById(R.id.pendingFoundName);
         recCard = itemView.findViewById(R.id.recCard);
-
     }
 
 }

@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,14 +33,14 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class LostItemDetails extends AppCompatActivity {
-    TextView item_name, item_desc, item_loc, item_date, item_time, foundName;
+    TextView item_name, item_desc, item_loc, item_date, item_time, userID;
 
     String student_nme;
     ImageView image_full;
     Button del_button, approve_button;
     String key = "";
     String imageUrl = "";
-    private DatabaseReference toPath, toPathAppr;
+    private DatabaseReference toPath;
     private ItemHelperClass itemHelperClass;
 
     @Override
@@ -54,7 +56,7 @@ public class LostItemDetails extends AppCompatActivity {
         image_full = findViewById(R.id.image_full);
         del_button = findViewById(R.id.del_button);
         approve_button = findViewById(R.id.approve_butt);
-        foundName = findViewById(R.id.pendingFoundName);
+        userID = findViewById(R.id.pendingFoundName);
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
@@ -67,6 +69,8 @@ public class LostItemDetails extends AppCompatActivity {
         String desc = bundle.getString("Description");
         String date = bundle.getString("Date");
         String time = bundle.getString("Time");
+        String userID_ = bundle.getString("userID");
+
 
 
         if (bundle != null) {
@@ -75,7 +79,7 @@ public class LostItemDetails extends AppCompatActivity {
             item_desc.setText(bundle.getString("Description"));
             item_date.setText(bundle.getString("Date"));
             item_time.setText(bundle.getString("Time"));
-            foundName.setText(bundle.getString("userID"));
+            userID.setText(bundle.getString("userID_"));
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
@@ -96,17 +100,15 @@ public class LostItemDetails extends AppCompatActivity {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        toPath = FirebaseDatabase.getInstance().getReference("Approved");
-                        toPathAppr =  FirebaseDatabase.getInstance().getReference("Appreciate");
 
-                        ItemHelperClass itemhelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl);
+                        ItemHelperClass itemhelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_);
 
                         toPath.child(key)
                                 .setValue(itemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            toPathAppr.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl));
+                                            toPath.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_));
                                             Toast.makeText(LostItemDetails.this, "Approved! Displayed in Lost Items!", Toast.LENGTH_LONG).show();
                                             //remove if you want to delete the copied record from the pending
                                             reference.child(key).removeValue();
@@ -119,6 +121,7 @@ public class LostItemDetails extends AppCompatActivity {
                                         Toast.makeText(LostItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
+
                     }
                 });
 
