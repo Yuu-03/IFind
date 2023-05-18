@@ -29,10 +29,9 @@ import com.squareup.picasso.Picasso;
 public class Founditems extends AppCompatActivity {
     TextView item_name, item_desc, item_loc, item_date, item_time;
     ImageView image_full;
-    Button del_button, approve_button;
+    Button del_button;
     String key = "";
     String imageUrl = "";
-    private DatabaseReference toPath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +43,6 @@ public class Founditems extends AppCompatActivity {
         item_time = findViewById(R.id.item_time);
         image_full = findViewById(R.id.image_full);
         del_button = findViewById(R.id.del_buttF);
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Approved");
-        toPath = FirebaseDatabase.getInstance().getReference("FoundItems");
-
 
         Bundle bundle = getIntent().getExtras();
         String name = bundle.getString("Item Name");
@@ -66,10 +61,12 @@ public class Founditems extends AppCompatActivity {
             imageUrl = bundle.getString("Image");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
         }
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Found");
 
         del_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(Founditems.this);
 
                 builder.setTitle("Confirm");
@@ -110,8 +107,8 @@ public class Founditems extends AppCompatActivity {
                 AlertDialog alert = builder.create();
                 alert.show();
 
+
             }
         });
-
     }
 }

@@ -53,7 +53,6 @@ public class ApprovedItemDetails extends AppCompatActivity {
         userID = findViewById(R.id.item_foundName);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Approved");
-        toFound = FirebaseDatabase.getInstance().getReference("FoundItems");
 
 
 
@@ -63,7 +62,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
         String desc = bundle.getString("Description");
         String date = bundle.getString("Date");
         String time = bundle.getString("Time");
-        String userID_ = bundle.getString("userID");
+        String userID_ = bundle.getString("userID_");
 
         if (bundle != null) {
             item_name.setText(bundle.getString("Item Name"));
@@ -71,7 +70,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
             item_desc.setText(bundle.getString("Description"));
             item_date.setText(bundle.getString("Date"));
             item_time.setText(bundle.getString("Time"));
-            userID.setText(bundle.getString("userID"));
+            userID.setText(bundle.getString("userID_"));
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
@@ -99,9 +98,12 @@ public class ApprovedItemDetails extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
+                                            toFound.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_));
                                             Toast.makeText(ApprovedItemDetails.this, "Claimed! Displayed in Found Items", Toast.LENGTH_LONG).show();
                                             reference.child(key).removeValue();
                                             //remove if you want to delete the copied record from the pending
+                                            startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
+
                                         }
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {

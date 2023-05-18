@@ -66,6 +66,7 @@ public class FoundImageAdapter extends RecyclerView.Adapter<MyViewHolder2> {
             intent.putExtra("Date", datalist.get(holder.getAdapterPosition()).getDate());
             intent.putExtra("Time", datalist.get(holder.getAdapterPosition()).getTime());
             intent.putExtra("Description", datalist.get(holder.getAdapterPosition()).getDescription());
+
             context.startActivity(intent);
 
         });

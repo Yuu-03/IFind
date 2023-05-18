@@ -74,7 +74,7 @@ public class FoundAdmin extends AppCompatActivity {
 
         dataList = new ArrayList<>();
 
-        AdapterClass adapter = new AdapterClass(this, dataList);
+        FoundAdapterClass adapter = new FoundAdapterClass(this, dataList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
