@@ -9,17 +9,18 @@ public class AppreciationItemHelperClass {
     String time;
     String imageURL;
 
-    String key;
+    String key, userID_;
 
 
     //empty constructor to avoid errors in the database
 
     //these are the constructors to cal for the variables
-    public AppreciationItemHelperClass(String itemname, String date, String time, String imageURL) {
+    public AppreciationItemHelperClass(String itemname, String date, String time, String imageURL, String userID_) {
         this.itemname = itemname;
         this.date = date;
         this.time = time;
         this.imageURL = imageURL;
+        this.userID_ = userID_;
 
     }
 

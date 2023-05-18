@@ -69,7 +69,7 @@ public class LostItemDetails extends AppCompatActivity {
         String desc = bundle.getString("Description");
         String date = bundle.getString("Date");
         String time = bundle.getString("Time");
-        String userID_ = bundle.getString("userID");
+        String userID_ = bundle.getString("userID_");
 
 
 
@@ -129,7 +129,6 @@ public class LostItemDetails extends AppCompatActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         // Do nothing
                         dialog.dismiss();
                     }

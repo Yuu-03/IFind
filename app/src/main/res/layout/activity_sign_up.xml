@@ -96,7 +96,7 @@
                 android:hint="@string/sign_up_email"
                 android:textColorHint="@color/black"
                 app:counterEnabled="true"
-                app:counterMaxLength="25"
+                app:counterMaxLength="35"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/black"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">

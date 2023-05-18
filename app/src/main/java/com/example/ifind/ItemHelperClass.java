@@ -13,7 +13,7 @@ public class ItemHelperClass {
     String time;
     String imageURL;
 
-    String key, userID;
+    String key, userID, name;
 
 
     //empty constructor to avoid errors in the database
@@ -37,6 +37,14 @@ public class ItemHelperClass {
         this.time = timeFound;
         this.imageURL = imageURL;
         this.userID = userID;}
+
+    public ItemHelperClass(String name, String date, String time, String imageUrl, String userID_) {
+        this.name = itemname;
+        this.date = date;
+        this.time = time;
+        this.userID = userID_;
+
+    }
 
 
     //getter and setters
