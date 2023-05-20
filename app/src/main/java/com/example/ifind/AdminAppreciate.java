@@ -29,7 +29,7 @@ public class AdminAppreciate extends AppCompatActivity {
     private FirebaseAuth auth;
     BottomNavigationView nav;
 
-    AppreciationUserViewAdapterClass adapter;
+    AppreciationAdminViewAdapterClass adapter;
     List<AppreciationItemHelperClass> dataList;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
@@ -95,11 +95,12 @@ public class AdminAppreciate extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         dataList = new ArrayList<>();
-        adapter = new AppreciationUserViewAdapterClass(this, dataList);
+        adapter = new AppreciationAdminViewAdapterClass(this, dataList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
 
         databaseReference = FirebaseDatabase.getInstance().getReference("AppreciationPost");
+
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -113,6 +114,7 @@ public class AdminAppreciate extends AppCompatActivity {
                 }
                 adapter.notifyDataSetChanged();
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

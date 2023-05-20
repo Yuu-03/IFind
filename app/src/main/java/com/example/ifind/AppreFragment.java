@@ -57,7 +57,7 @@ public class AppreFragment extends Fragment {
         searchView.clearFocus();
 
         dataList = new ArrayList<>();
-        adapter = new AppreciationUserViewAdapterClass(getContext(), dataList);
+        adapter = new AppreciationUserViewAdapterClass(getContext(), dataList); // Pass true if in admin mode, false otherwise
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 

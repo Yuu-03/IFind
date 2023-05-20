@@ -2,6 +2,7 @@ package com.example.ifind;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,7 +49,7 @@ public class AppreciationUserView extends AppCompatActivity {
         Caption = findViewById(R.id.AppreUserCaption);
         image_full = findViewById(R.id.image_full);
 
-
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("AppreciationPost");
         Bundle bundle = getIntent().getExtras();
 
 
@@ -64,7 +66,6 @@ public class AppreciationUserView extends AppCompatActivity {
             Picasso.get().load(bundle.getString("Image")).into(image_full);
 
         }
-
 
     }
 }

@@ -31,7 +31,6 @@
             android:src="@drawable/image"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
-
         <TextView
             android:id="@+id/postNameAppre"
             android:layout_width="wrap_content"
