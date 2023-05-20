@@ -13,6 +13,9 @@
     <item android:id="@+id/found_"
         android:icon="@drawable/found_ic"
         android:title="@string/found" />
+    <item android:id="@+id/appre_"
+        android:icon="@drawable/apprelogo"
+        android:title="@string/appreciate" />
 
     <item android:id="@+id/adminProfile"
         android:icon="@drawable/admin_"

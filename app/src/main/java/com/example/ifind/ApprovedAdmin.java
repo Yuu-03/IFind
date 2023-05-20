@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -44,6 +46,7 @@ public class ApprovedAdmin extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         nav = findViewById(R.id.nav);
         nav.setSelectedItemId(R.id.approved_);
+        Button mpostButton = findViewById(R.id.adminLostPost);
 
         nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -51,16 +54,24 @@ public class ApprovedAdmin extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.pending_:
                         startActivity(new Intent(getApplicationContext(), pendingRequests.class));
+                        finish();
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.approved_:
                         return true;
                     case R.id.found_:
                         startActivity(new Intent(getApplicationContext(), FoundAdmin.class));
+                        finish();
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.appre_:
+                        startActivity(new Intent(getApplicationContext(), AdminAppreciate.class));
+                        finish();
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.adminProfile:
                         startActivity(new Intent(getApplicationContext(), AdminMain.class));
+                        finish();
                         overridePendingTransition(0,0);
                         return true;
 
@@ -69,6 +80,14 @@ public class ApprovedAdmin extends AppCompatActivity {
             }
         });
 
+        mpostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ApprovedAdmin.this, "Upload Lost Items!" , Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(ApprovedAdmin.this, AdminPostLost.class));
+
+            }
+        });
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
 

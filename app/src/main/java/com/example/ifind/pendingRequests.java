@@ -62,6 +62,11 @@ public class pendingRequests extends AppCompatActivity {
                         finish();
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.appre_:
+                        startActivity(new Intent(getApplicationContext(), AdminAppreciate.class));
+                        finish();
+                        overridePendingTransition(0,0);
+                        return true;
                     case R.id.adminProfile:
                         startActivity(new Intent(getApplicationContext(), AdminMain.class));
                         finish();

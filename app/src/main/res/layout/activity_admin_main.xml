@@ -54,27 +54,6 @@
                 android:columnCount="2"
                 android:rowCount="2">
                 <Button
-                    android:id="@+id/adminLostPost"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/addbutt"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="10dp"
-                    android:textStyle="bold"
-                    app:cornerRadius="5dp" />
-                <Button
-                    android:id="@+id/adminAppreciate"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/teal_700"
-                    android:text="Post Appreciation"
-                    android:textColor="@color/white"
-                    android:layout_margin="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textStyle="bold"
-                    android:textSize="10sp"
-                    app:cornerRadius="5dp" />
-                <Button
                     android:id="@+id/ViewHistory"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
@@ -84,20 +63,7 @@
                     android:layout_margin="20dp"
                     android:layout_gravity="center_horizontal"
                     android:textStyle="bold"
-                    android:textSize="10sp"
-                    app:cornerRadius="5dp"/>
-                <Button
-                    android:id="@+id/adminViewAppreciate"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/teal_700"
-                    android:text="View Appreciation"
-                    android:textColor="@color/white"
-                    android:layout_margin="20dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textStyle="bold"
-                    android:textSize="10sp"
-                    app:cornerRadius="5dp" />
+                    android:textSize="10sp"/>
             </GridLayout>
 
 
