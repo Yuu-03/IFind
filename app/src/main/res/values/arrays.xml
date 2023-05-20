@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_items">
+        <item>ICS</item>
+        <item>COENG</item>
+        <item>COED</item>
+        <item>CAS</item>
+        <item>CBPA</item>
+        <item>CANR</item>
+        <item>IFMS</item>
+        <item>COTT</item>
+        <item>ENTIENZA</item>
+        <item>STAFF</item>
+        <item>GUARD</item>
+    </string-array>
+</resources>

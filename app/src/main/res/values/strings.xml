@@ -122,4 +122,12 @@
     <string name="date_found">Date Found:</string>
     <string name="time_found">Time Found:</string>
     <string name="found_by">Found By</string>
+    <string name="appreciate">Appreciate</string>
+    <string name="post_details">Post Details</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="item_name11">Item Name</string>
+    <string name="enter_department">Enter Department</string>
+    <string name="post_appreciation">Post</string>
+
+
 </resources>

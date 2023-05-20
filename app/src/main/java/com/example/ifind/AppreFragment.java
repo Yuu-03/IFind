@@ -25,12 +25,12 @@ import java.util.List;
 
 public class AppreFragment extends Fragment {
 
-    List<AppreciationItemHelperClass> dataList;
+    List<ItemHelperClass> dataList;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
 
     SearchView searchView;
-    AppreciationAdapterClass adapter;
+    AdapterClass adapter;
 
 
     @Override
@@ -57,7 +57,7 @@ public class AppreFragment extends Fragment {
         searchView.clearFocus();
 
         dataList = new ArrayList<>();
-        adapter = new AppreciationAdapterClass(getContext(), dataList);
+        adapter = new AdapterClass(getContext(), dataList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
@@ -68,7 +68,7 @@ public class AppreFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                    AppreciationItemHelperClass dataClass = itemSnapshot.getValue(AppreciationItemHelperClass.class);
+                    ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);
                     dataClass.setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
 
@@ -106,8 +106,8 @@ public class AppreFragment extends Fragment {
         }
     }
     public void searchList (String text){
-        ArrayList<AppreciationItemHelperClass> searchList = new ArrayList<>();
-        for (AppreciationItemHelperClass itemHelperClass : dataList) {
+        ArrayList<ItemHelperClass> searchList = new ArrayList<>();
+        for (ItemHelperClass itemHelperClass : dataList) {
             if (itemHelperClass.getItemName().toLowerCase().contains(text.toLowerCase())) {
                 searchList.add(itemHelperClass);
             }

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".AdminPostAppreciate">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:padding="10dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:textAlignment="textEnd"
+            android:text="ADMIN MODE"
+            android:textColor="@color/red"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="APPRECIATION POST"
+            android:textColor="#3F51B5"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/image_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="267dp"
+            android:clickable="false"
+            android:src="@drawable/image" />
+
+        <Button
+            android:id="@+id/upload"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/upload_image"
+            android:backgroundTint="@color/teal_700"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/textdetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/post_details"
+            android:textColor="#3F51B5"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/person_name"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:textColorHint="@color/black"
+            android:inputType="textPersonName"
+            android:layout_margin="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/personName"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:hint="@string/found_by" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/spinnerType"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:textColorHint="@color/black"
+            android:background="@drawable/spinnerdes"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/item_found"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:textColorHint="@color/black"
+            android:layout_margin="10dp"
+            android:inputType="textPersonName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/itemfound"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:hint="@string/item_name11">
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/description"
+            android:layout_width="300dp"
+            android:layout_height="160dp"
+            android:layout_marginBottom="15dp"
+            android:textColorHint="@color/black"
+            android:hint="@string/description"
+            android:layout_margin="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/description_text"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="20dp"
+                android:inputType="textMultiLine"
+                android:lines="20"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/submit_appre"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/teal_700"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:text="@string/post_appreciation"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="30dp"
+            app:cornerRadius="30dp" />
+
+
+
+    </LinearLayout>
+
+</ScrollView>

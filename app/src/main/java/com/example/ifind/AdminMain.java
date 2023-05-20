@@ -23,7 +23,7 @@ public class AdminMain extends AppCompatActivity {
 
     private FirebaseAuth auth;
     BottomNavigationView nav;
-    private Button mLogbutt, mPostLost;
+    private Button mLogbutt, mPostLost,mPostAppre;
 
     private boolean doubleBackToExitPressedOnce;
     private Handler mHandler = new Handler();
@@ -34,6 +34,7 @@ public class AdminMain extends AppCompatActivity {
 
         mLogbutt = findViewById(R.id.adminLogoutButt);
         mPostLost = findViewById(R.id.adminLostPost);
+        mPostAppre = findViewById(R.id.adminAppreciate);
 
         auth = FirebaseAuth.getInstance();
         nav = findViewById(R.id.nav);
@@ -76,11 +77,20 @@ public class AdminMain extends AppCompatActivity {
         mPostLost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AdminMain.this, "Upload Successfull!" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminMain.this, "Upload Lost Items!" , Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(AdminMain.this, AdminPostLost.class));
 
             }
         });
+        mPostAppre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(AdminMain.this, "Upload Appreciation Post!" , Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AdminMain.this, AdminPostAppreciate.class));
+
+            }
+        });
+
 
     }
 
