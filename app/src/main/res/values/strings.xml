@@ -127,6 +127,9 @@
     <string name="item_name11">Item Name</string>
     <string name="enter_department">Enter Department</string>
     <string name="post_appreciation">Post</string>
+    <string name="filter">Filter</string>
+    <string name="end_date">End Date</string>
+    <string name="start_date">Start Date</string>
 
 
 </resources>
