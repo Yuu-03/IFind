@@ -25,12 +25,12 @@ import java.util.List;
 
 public class AppreFragment extends Fragment {
 
-    List<ItemHelperClass> dataList;
+    List<AppreciationItemHelperClass> dataList;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
 
     SearchView searchView;
-    AdapterClass adapter;
+    AppreciationUserViewAdapterClass adapter;
 
 
     @Override
@@ -57,18 +57,18 @@ public class AppreFragment extends Fragment {
         searchView.clearFocus();
 
         dataList = new ArrayList<>();
-        adapter = new AdapterClass(getContext(), dataList);
+        adapter = new AppreciationUserViewAdapterClass(getContext(), dataList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Appreciation");
+        databaseReference = FirebaseDatabase.getInstance().getReference("AppreciationPost");
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                    ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);
+                    AppreciationItemHelperClass dataClass = itemSnapshot.getValue(AppreciationItemHelperClass.class);
                     dataClass.setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
 
@@ -106,10 +106,10 @@ public class AppreFragment extends Fragment {
         }
     }
     public void searchList (String text){
-        ArrayList<ItemHelperClass> searchList = new ArrayList<>();
-        for (ItemHelperClass itemHelperClass : dataList) {
-            if (itemHelperClass.getItemName().toLowerCase().contains(text.toLowerCase())) {
-                searchList.add(itemHelperClass);
+        ArrayList<AppreciationItemHelperClass> searchList = new ArrayList<>();
+        for (AppreciationItemHelperClass appreciationItemHelperClass : dataList) {
+            if (appreciationItemHelperClass.getItemname().toLowerCase().contains(text.toLowerCase())) {
+                searchList.add(appreciationItemHelperClass);
             }
         }
         adapter.searchDataList(searchList);
