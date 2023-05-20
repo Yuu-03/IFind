@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "434672326137",
+    "project_id": "ifindproject-24c98",
+    "storage_bucket": "ifindproject-24c98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434672326137:android:c149173041206d536cd928",
+        "android_client_info": {
+          "package_name": "com.example.ifind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "434672326137-f57pf3131f7fj3nc7tatsu575e4e48ti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXjUiRYZ8HkYP2Nz6CmrwZCXoADEd4nKc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "434672326137-f57pf3131f7fj3nc7tatsu575e4e48ti.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
