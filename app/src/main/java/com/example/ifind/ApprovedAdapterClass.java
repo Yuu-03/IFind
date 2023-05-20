@@ -60,7 +60,6 @@ public class ApprovedAdapterClass extends RecyclerView.Adapter<MyViewHolder4> {
             intent.putExtra("Time", datalist.get(holder.getAdapterPosition()).getTime());
             intent.putExtra("Description", datalist.get(holder.getAdapterPosition()).getDescription());
             intent.putExtra("userID_", datalist.get(holder.getAdapterPosition()).getUserID());
-
             intent.putExtra("Key", datalist.get(holder.getAdapterPosition()).getKey());
             context.startActivity(intent);
 

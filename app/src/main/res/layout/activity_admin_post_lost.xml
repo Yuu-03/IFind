@@ -84,8 +84,7 @@
                 android:id="@+id/itemname_text"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:hint="@string/enter_item_name">
-            </com.google.android.material.textfield.TextInputEditText>
+                android:hint="@string/enter_item_name"></com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -166,6 +165,22 @@
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/foundname"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:textColorHint="@color/black"
+            android:inputType="textPersonName"
+            android:layout_margin="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/foundname_text"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:hint="@string/found_by">
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/submit_post"
             android:layout_width="300dp"

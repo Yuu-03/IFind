@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -44,7 +45,7 @@ import java.util.Date;
 public class AdminPostLost extends AppCompatActivity {
     private FirebaseAuth mAuth;
     int hour1, minute1;
-    private TextInputLayout itemname, itemlocation, description;
+    private TextInputLayout itemname, itemlocation, description, foundname;
     private TextInputEditText date_picker, time_picker;
     private Uri imageUri;
     private ImageView image_preview;
@@ -59,7 +60,7 @@ public class AdminPostLost extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_post_lost);
 
-        storageRef = FirebaseStorage.getInstance().getReference("Approved");
+        storageRef = FirebaseStorage.getInstance().getReference("LostItemImage");
         databaseRef = FirebaseDatabase.getInstance().getReference("Approved");
 
         Button mupload = findViewById(R.id.upload);
@@ -71,6 +72,7 @@ public class AdminPostLost extends AppCompatActivity {
         description = findViewById(R.id.description);
         Button submit_post = findViewById(R.id.submit_post);
         image_preview = findViewById(R.id.image_preview);
+        foundname = findViewById(R.id.foundname);
 
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
@@ -99,7 +101,12 @@ public class AdminPostLost extends AppCompatActivity {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        uploadPicture();
+                        if (!item_name_condition() | !item_loc_condition() | !item_date_condition()| !item_time_condition()| !item_description_condition()| !found_name_description()) {
+                            return;
+                        } else {
+                            uploadPicture();
+
+                        }
 
                     }
 
@@ -234,6 +241,17 @@ public class AdminPostLost extends AppCompatActivity {
             return true;
         }
     }
+    private Boolean found_name_description() {
+        String value  = foundname.getEditText().getText().toString();
+        if (value.isEmpty()) {
+            foundname.setError("Field cannot be empty");
+            return false;
+        } else {
+            foundname.setError(null);
+            foundname.setErrorEnabled(false);
+            return true;
+        }
+    }
     private void uploadPicture() {
         final ProgressDialog pd = new ProgressDialog(this);
         // Create a reference to "mountains.jpg"
@@ -283,7 +301,7 @@ public class AdminPostLost extends AppCompatActivity {
         // conditions
         databaseRef = FirebaseDatabase.getInstance().getReference("Approved");
 
-        if (!item_name_condition() | !item_loc_condition() | !item_date_condition()| !item_time_condition()| !item_description_condition()) {
+        if (!item_name_condition() | !item_loc_condition() | !item_date_condition()| !item_time_condition()| !item_description_condition()| !found_name_description()) {
             return;
         }
 
@@ -293,9 +311,10 @@ public class AdminPostLost extends AppCompatActivity {
         String itemLocation = itemlocation.getEditText().getText().toString();
         String dateFound = date_picker.getText().toString();
         String timeFound = time_picker.getText().toString();
+        String foundName = foundname.getEditText().getText().toString();
 
         //call the class UserHelperClass to use and store values to the database
-        ItemHelperClass ItemhelperClass = new ItemHelperClass(itemName, itemDescription, itemLocation, dateFound, timeFound, imageURL);
+        ItemHelperClass ItemhelperClass = new ItemHelperClass(itemName, itemDescription, itemLocation, dateFound, timeFound, imageURL, foundName);
 
         //assign an Id to add more users
         String uploadID = databaseRef.push().getKey();
@@ -316,4 +335,5 @@ public class AdminPostLost extends AppCompatActivity {
                     }
                 });
     }
+
 }

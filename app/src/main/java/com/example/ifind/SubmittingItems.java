@@ -99,7 +99,12 @@ public class SubmittingItems extends AppCompatActivity {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        uploadPicture();
+                        if (!item_name_condition() | !item_loc_condition() | !item_date_condition()| !item_time_condition()| !item_description_condition()) {
+                            return;
+                        } else {
+                            uploadPicture();
+
+                        }
 
                     }
 

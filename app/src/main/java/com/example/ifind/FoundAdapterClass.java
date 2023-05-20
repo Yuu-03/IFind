@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -46,12 +44,12 @@ public class FoundAdapterClass extends RecyclerView.Adapter<MyViewHolder9> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder9 holder, int position) {
-
         Picasso.get().load(datalist.get(position).getImageURL()).into(holder.recImage);
         holder.textItemName.setText(datalist.get(position).getItemName());
         holder.textItemLoc.setText(datalist.get(position).getLocation());
         holder.textItemTime.setText(datalist.get(position).getDate());
         holder.textItemDate.setText(datalist.get(position).getTime());
+
 
         holder.recCard.setOnClickListener(view -> {
             Intent intent = new Intent(context, Founditems.class);
@@ -62,7 +60,6 @@ public class FoundAdapterClass extends RecyclerView.Adapter<MyViewHolder9> {
             intent.putExtra("Time", datalist.get(holder.getAdapterPosition()).getTime());
             intent.putExtra("Description", datalist.get(holder.getAdapterPosition()).getDescription());
             intent.putExtra("userID_", datalist.get(holder.getAdapterPosition()).getUserID());
-
             intent.putExtra("Key", datalist.get(holder.getAdapterPosition()).getKey());
             context.startActivity(intent);
 
@@ -72,7 +69,7 @@ public class FoundAdapterClass extends RecyclerView.Adapter<MyViewHolder9> {
 class MyViewHolder9 extends RecyclerView.ViewHolder {
 
     ImageView recImage;
-    TextView textItemName, textItemLoc, textItemDate, textItemTime, textName;
+    TextView textItemName, textItemLoc, textItemDate, textItemTime;
     CardView recCard;
 
     public MyViewHolder9(@NonNull View itemView) {
@@ -82,8 +79,8 @@ class MyViewHolder9 extends RecyclerView.ViewHolder {
         textItemDate = itemView.findViewById(R.id.textItemdate);
         textItemName = itemView.findViewById(R.id.textItemName);
         textItemLoc = itemView.findViewById(R.id.textItemLoc);
-        textName = itemView.findViewById(R.id.pendingFoundName);
         recCard = itemView.findViewById(R.id.recCard);
+
     }
 
 }

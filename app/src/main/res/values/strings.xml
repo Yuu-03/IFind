@@ -121,4 +121,5 @@
     <string name="student_name">Student Name</string>
     <string name="date_found">Date Found:</string>
     <string name="time_found">Time Found:</string>
+    <string name="found_by">Found By</string>
 </resources>

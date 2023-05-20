@@ -56,7 +56,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="43dp"
-                    android:layout_marginTop="480dp"
+                    android:layout_marginTop="478dp"
                     android:layout_marginEnd="44dp"
                     android:background="@drawable/shape_descrip"
                     android:gravity="center" />
@@ -77,10 +77,38 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="53dp"
+                    android:layout_marginBottom="100dp"
                     android:text="@string/item_description3"
                     android:textSize="16sp"
                     android:textColor="#000000"/>
+                <TextView
+                    android:id="@+id/item_loc8"
+                    android:layout_width="255dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_time"
+                    android:layout_alignStart="@+id/shape_descrip"
+                    android:layout_alignEnd="@+id/shape_descrip"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="131dp"
+                    android:layout_marginEnd="56dp"
+                    android:text="Found By"
+                    android:textColor="#4C54F3"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/pendingFoundName_"
+                    android:layout_width="276dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_loc4"
+                    android:layout_alignStart="@+id/shape_descrip"
+                    android:layout_alignEnd="@+id/shape_descrip"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="205dp"
+                    android:layout_marginEnd="27dp"
+                    android:text="Name"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/item_name"
@@ -203,7 +231,7 @@
                     android:textColor="#000000"/>
 
                 <Button
-                    android:id="@+id/del_buttF"
+                    android:id="@+id/del_buttonFound"
                     android:layout_width="317dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/shape_descrip"

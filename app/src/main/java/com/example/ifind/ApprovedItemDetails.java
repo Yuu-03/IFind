@@ -35,7 +35,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
     Button del_button, approve_button;
     String key = "";
     String imageUrl = "";
-    private DatabaseReference toFound, toAppreciation;
+    private DatabaseReference toFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
         userID = findViewById(R.id.item_foundName);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Approved");
+        toFound = FirebaseDatabase.getInstance().getReference("Found");
 
 
 
@@ -75,6 +76,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
             imageUrl = bundle.getString("Image");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
         }
+        Toast.makeText(ApprovedItemDetails.this, key, Toast.LENGTH_LONG).show();
 
         approve_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,22 +90,19 @@ public class ApprovedItemDetails extends AppCompatActivity {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        toFound = FirebaseDatabase.getInstance().getReference("Found");
 
-
-                        ItemHelperClass itemHelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl, userID_);
+                        ItemHelperClass itemhelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_);
 
                         toFound.child(key)
-                                .setValue(itemHelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                .setValue(itemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             toFound.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_));
-                                            Toast.makeText(ApprovedItemDetails.this, "Claimed! Displayed in Found Items", Toast.LENGTH_LONG).show();
-                                            reference.child(key).removeValue();
+                                            Toast.makeText(ApprovedItemDetails.this, "Approved! Displayed in Lost Items!", Toast.LENGTH_LONG).show();
                                             //remove if you want to delete the copied record from the pending
-                                            startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
-
+                                            reference.child(key).removeValue();
+                                            startActivity(new Intent(getApplicationContext(), pendingRequests.class));
                                         }
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -112,6 +111,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
                                         Toast.makeText(ApprovedItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
+
                     }
                 });
 
@@ -119,7 +119,6 @@ public class ApprovedItemDetails extends AppCompatActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         // Do nothing
                         dialog.dismiss();
                     }
@@ -127,6 +126,8 @@ public class ApprovedItemDetails extends AppCompatActivity {
 
                 AlertDialog alert = builder.create();
                 alert.show();
+
+
             }
         });
 

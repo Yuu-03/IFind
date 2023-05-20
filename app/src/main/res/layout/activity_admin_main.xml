@@ -46,14 +46,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="10dp">
 
             <Button
                 android:id="@+id/adminLostPost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
                 android:backgroundTint="@color/teal_200"
                 android:text="@string/post_lost_item_admin_button"
                 android:textColor="@color/black"
@@ -62,18 +61,6 @@
                 android:textSize="12sp"
                 app:cornerRadius="5dp" />
 
-            <Button
-                android:id="@+id/adminApprePost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="@color/teal_200"
-                android:text="@string/post_announcement_admin_button"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:cornerRadius="5dp" />
         </LinearLayout>
 
         <Button
