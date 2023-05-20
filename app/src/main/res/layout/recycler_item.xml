@@ -42,8 +42,7 @@
             android:layout_toEndOf="@+id/recImage"
             android:text="Item Name:"
             android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/textItemLoc"
@@ -79,7 +78,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="37dp"
             android:layout_toEndOf="@+id/recImage"
-            android:text="Time Found:"
+            android:text="Time Posted:"
             android:textColor="@color/white"
             android:textSize="15sp" />
 

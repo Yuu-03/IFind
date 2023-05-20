@@ -13,7 +13,7 @@ public class ItemHelperClass {
     String time;
     String imageURL;
 
-    String key, userID, name;
+    String key, userID, name, postType, datePosted, timePosted;
 
 
     //empty constructor to avoid errors in the database
@@ -46,8 +46,16 @@ public class ItemHelperClass {
 
     }
 
+    public ItemHelperClass(String datePosted, String timePosted, String userID, String postType) {
+        this.date = datePosted;
+        this.time = timePosted;
+        this.userID = userID;
+        this.postType = postType;
+    }
+
 
     //getter and setters
+
 
     public String getItemName() {
         return itemname;
@@ -106,6 +114,14 @@ public class ItemHelperClass {
     }
     public void setUserID(String userID) {
         this.userID = userID ;}
+    public String getPostType(){
+        return postType;
+    }
+    public void setPostType(String postType){
+        this.postType = postType;
+
+    }
+
 
     public ItemHelperClass(){
 

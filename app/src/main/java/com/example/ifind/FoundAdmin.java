@@ -27,7 +27,7 @@ import java.util.List;
 public class FoundAdmin extends AppCompatActivity {
     private FirebaseAuth auth;
     BottomNavigationView nav;
-    ApprovedAdapterClass adapter;
+    FoundAdapterClass adapter;
     List<ItemHelperClass> dataList;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;

@@ -54,11 +54,11 @@
                 android:columnCount="2"
                 android:rowCount="2">
                 <Button
-                    android:id="@+id/ViewHistory"
+                    android:id="@+id/LogView"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/teal_700"
-                    android:text="View History"
+                    android:text="View Activity"
                     android:textColor="@color/white"
                     android:layout_margin="20dp"
                     android:layout_gravity="center_horizontal"

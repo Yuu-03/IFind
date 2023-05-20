@@ -20,6 +20,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,13 +31,18 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class ApprovedItemDetails extends AppCompatActivity {
     TextView item_name, item_desc, item_loc, item_date, item_time, userID;
     ImageView image_full;
     Button del_button, approve_button;
-    String key = "";
     String imageUrl = "";
-    private DatabaseReference toFound;
+    String key = "";
+    private DatabaseReference toFound, logref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +61,8 @@ public class ApprovedItemDetails extends AppCompatActivity {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Approved");
         toFound = FirebaseDatabase.getInstance().getReference("Found");
+        logref = FirebaseDatabase.getInstance().getReference("AdminActivityLogs");
+
 
 
 
@@ -76,7 +85,25 @@ public class ApprovedItemDetails extends AppCompatActivity {
             imageUrl = bundle.getString("Image");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
         }
-        Toast.makeText(ApprovedItemDetails.this, key, Toast.LENGTH_LONG).show();
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // Format the date and time
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
+
+        String currentDateString = dateFormat.format(currentDate);
+        String currentTimeString = timeFormat.format(currentDate);
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        String AdminID = String.valueOf(currentUser.getDisplayName());
+        String postType = "Lost Item Claimed By Owner";
+
+        String datePosted = currentDateString;
+        String timePosted = currentTimeString;
+        String uploadID = reference.getKey();
+        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, postType);
 
         approve_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,24 +120,49 @@ public class ApprovedItemDetails extends AppCompatActivity {
 
                         ItemHelperClass itemhelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_);
 
-                        toFound.child(key)
-                                .setValue(itemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            toFound.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_));
-                                            Toast.makeText(ApprovedItemDetails.this, "Approved! Displayed in Lost Items!", Toast.LENGTH_LONG).show();
-                                            //remove if you want to delete the copied record from the pending
-                                            reference.child(key).removeValue();
-                                            startActivity(new Intent(getApplicationContext(), pendingRequests.class));
-                                        }
+                        logref.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
+                                long uploadCount = dataSnapshot.getChildrenCount();
+                                if (uploadCount >= 10) {
+                                    // Remove the oldest key
+                                    String oldestKey = null;
+                                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                                        oldestKey = childSnapshot.getKey();
+                                        break; // Get the first key (oldest)
                                     }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@androidx.annotation.NonNull Exception e) {
-                                        Toast.makeText(ApprovedItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    if (oldestKey != null) {
+                                        logref.child(oldestKey).removeValue();
                                     }
-                                });
+                                }
+
+                                toFound.child(key)
+                                        .setValue(itemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    toFound.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_));
+                                                    logref.child(key).setValue(loghelperclass);
+                                                    Toast.makeText(ApprovedItemDetails.this, "Approved! Displayed in Lost Items!", Toast.LENGTH_LONG).show();
+                                                    //remove if you want to delete the copied record from the pending
+                                                    reference.child(key).removeValue();
+                                                    startActivity(new Intent(getApplicationContext(), pendingRequests.class));
+                                                }
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@androidx.annotation.NonNull Exception e) {
+                                                Toast.makeText(ApprovedItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+
+                            @Override
+                            public void onCancelled(@androidx.annotation.NonNull DatabaseError databaseError) {
+                                Toast.makeText(ApprovedItemDetails.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
 
                     }
                 });
@@ -148,9 +200,35 @@ public class ApprovedItemDetails extends AppCompatActivity {
                         storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                reference.child(key).removeValue();
-                                Toast.makeText(ApprovedItemDetails.this, "Record Deleted", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
+
+                                logref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
+                                        long uploadCount = dataSnapshot.getChildrenCount();
+                                        if (uploadCount >= 10) {
+                                            // Remove the oldest key
+                                            String oldestKey = null;
+                                            for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                                                oldestKey = childSnapshot.getKey();
+                                                break; // Get the first key (oldest)
+                                            }
+                                            if (oldestKey != null) {
+                                                logref.child(oldestKey).removeValue();
+                                            }
+                                        }
+
+                                        logref.child(key).setValue(new ItemHelperClass(datePosted, timePosted, AdminID, "Deleted an item from Approved"));
+                                        reference.child(key).removeValue();
+                                        Toast.makeText(ApprovedItemDetails.this, "Record Deleted", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@androidx.annotation.NonNull DatabaseError databaseError) {
+                                        Toast.makeText(ApprovedItemDetails.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

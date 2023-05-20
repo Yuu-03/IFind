@@ -51,11 +51,6 @@ public class userviewlostdetails extends AppCompatActivity {
 
 
         Bundle bundle = getIntent().getExtras();
-        String name = bundle.getString("Item Name");
-        String loc = bundle.getString("Location");
-        String desc = bundle.getString("Description");
-        String date = bundle.getString("Date");
-        String time = bundle.getString("Time");
 
         if (bundle != null) {
             item_name.setText(bundle.getString("Item Name"));

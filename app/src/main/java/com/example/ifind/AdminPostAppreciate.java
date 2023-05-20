@@ -26,8 +26,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -45,7 +49,7 @@ public class AdminPostAppreciate extends AppCompatActivity {
     private Uri imageUri;
     private ImageView image_preview;
     private StorageReference storageRef;
-    private DatabaseReference databaseRef;
+    private DatabaseReference databaseRef,logref;
 
     String imageURL;
     String selected = "";
@@ -57,6 +61,8 @@ public class AdminPostAppreciate extends AppCompatActivity {
 
         storageRef = FirebaseStorage.getInstance().getReference("AppreciationImage");
         databaseRef = FirebaseDatabase.getInstance().getReference("AppreciationPost");
+        logref = FirebaseDatabase.getInstance().getReference("AdminActivityLogs");
+
 
         Button mupload = findViewById(R.id.upload);
 
@@ -281,6 +287,10 @@ public class AdminPostAppreciate extends AppCompatActivity {
         String datePosted = currentDateString;
         String timePosted = currentTimeString;
         String PersonName = personname.getEditText().getText().toString();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        String AdminID = String.valueOf(currentUser.getDisplayName());
+        String postType = "Posted an Appreciation";
 
         //call the class UserHelperClass to use and store values to the database
         AppreciationItemHelperClass AppreciationItemHelperClass = new AppreciationItemHelperClass(Itemname, Description, Department,datePosted,timePosted, PersonName, imageURL);
@@ -288,21 +298,49 @@ public class AdminPostAppreciate extends AppCompatActivity {
         //assign an Id to add more users
         String uploadID = databaseRef.push().getKey();
 
-        databaseRef.child(uploadID)
-                .setValue(AppreciationItemHelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(),"Uploaded",Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
+
+        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, postType);
+        //assign an Id to add more users
+
+        logref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                long uploadCount = dataSnapshot.getChildrenCount();
+                if (uploadCount >= 10) {
+                    // Remove the oldest key
+                    String oldestKey = null;
+                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                        oldestKey = childSnapshot.getKey();
+                        break; // Get the first key (oldest)
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                    if (oldestKey != null) {
+                        logref.child(oldestKey).removeValue();
                     }
-                });
+                }
+
+                databaseRef.child(uploadID)
+                        .setValue(AppreciationItemHelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    logref.child(uploadID).setValue(loghelperclass);
+                                    Toast.makeText(getApplicationContext(),"Uploaded",Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(AdminPostAppreciate.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

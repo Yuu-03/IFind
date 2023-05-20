@@ -29,8 +29,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -41,6 +44,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class SubmittingItems extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -50,7 +54,7 @@ public class SubmittingItems extends AppCompatActivity {
     private Uri imageUri;
     private ImageView image_preview;
     private StorageReference storageRef;
-    private DatabaseReference databaseRef;
+    private DatabaseReference databaseRef, logref;
     private DatabaseReference userRef;
     String imageURL;
     String image_path_firebase;
@@ -61,6 +65,7 @@ public class SubmittingItems extends AppCompatActivity {
         setContentView(R.layout.fragment_submitting_items);
 
         storageRef = FirebaseStorage.getInstance().getReference("LostItemImage");
+        logref = FirebaseDatabase.getInstance().getReference("UserActivityLogs");
         databaseRef = FirebaseDatabase.getInstance().getReference("LostItemImage");
         Button mupload = findViewById(R.id.upload);
 
@@ -289,7 +294,15 @@ public class SubmittingItems extends AppCompatActivity {
         databaseRef = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
 
+        // Format the date and time
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
+
+        String currentDateString = dateFormat.format(currentDate);
+        String currentTimeString = timeFormat.format(currentDate);
 
         if (!item_name_condition() | !item_loc_condition() | !item_date_condition()| !item_time_condition()| !item_description_condition()) {
             return;
@@ -302,27 +315,55 @@ public class SubmittingItems extends AppCompatActivity {
         String dateFound = date_picker.getText().toString();
         String timeFound = time_picker.getText().toString();
         String userID = String.valueOf(currentUser.getDisplayName());
+        String datePosted = currentDateString;
+        String timePosted = currentTimeString;
+        String postType = "Posted Lost Item";
 
         //call the class UserHelperClass to use and store values to the database
         ItemHelperClass ItemhelperClass = new ItemHelperClass(itemName, itemDescription, itemLocation, dateFound, timeFound, imageURL, userID);
-
+        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, userID, postType);
         //assign an Id to add more users
         String uploadID = databaseRef.push().getKey();
 
-        databaseRef.child(uploadID)
-                .setValue(ItemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(SubmittingItems.this,"Item Information Uploaded",Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
+
+        logref.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            long uploadCount = dataSnapshot.getChildrenCount();
+                            if (uploadCount >= 10) {
+                                // Remove the oldest key
+                                String oldestKey = null;
+                                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                        oldestKey = childSnapshot.getKey();
+                        break; // Get the first key (oldest)
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SubmittingItems.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                    if (oldestKey != null) {
+                        logref.child(oldestKey).removeValue();
                     }
-                });
+                }
+
+                databaseRef.child(uploadID)
+                        .setValue(ItemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    logref.child(uploadID).setValue(loghelperclass);
+                                    Toast.makeText(SubmittingItems.this,"Item Information Uploaded",Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(SubmittingItems.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(SubmittingItems.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
