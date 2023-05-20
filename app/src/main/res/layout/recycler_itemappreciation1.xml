@@ -24,6 +24,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginBottom="39dp"
             android:padding="8dp"
             android:scaleType="centerCrop"
@@ -32,7 +33,7 @@
 
 
         <TextView
-            android:id="@+id/textItemNameAppre"
+            android:id="@+id/postNameAppre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -40,28 +41,28 @@
             android:layout_marginTop="45dp"
             android:layout_marginEnd="17dp"
             android:layout_toEndOf="@+id/recImage1"
-            android:text="@string/thank_you"
+            android:text="@string/found_by"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/studentNameAppre"
+            android:id="@+id/postTypeAppre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textItemNameAppre"
+            android:layout_below="@+id/postNameAppre"
             android:layout_marginStart="14dp"
             android:layout_marginTop="12dp"
             android:layout_toEndOf="@+id/recImage1"
-            android:text="@string/student_name"
+            android:text="@string/person_type"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/textItemdateAppre"
+            android:id="@+id/postDateAppre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/studentNameAppre"
+            android:layout_below="@+id/postTypeAppre"
             android:layout_marginStart="14dp"
             android:layout_marginTop="12dp"
             android:layout_toEndOf="@+id/recImage1"
@@ -70,10 +71,10 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/textItemtimeAppre"
+            android:id="@+id/postTimeAppre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textItemdateAppre"
+            android:layout_below="@+id/postDateAppre"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="14dp"
             android:layout_marginTop="12dp"

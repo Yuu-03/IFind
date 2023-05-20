@@ -117,10 +117,9 @@
     <string name="post_announcement_admin_button">Announcement</string>
     <string name="upload_lost_item">UPLOAD LOST ITEM</string>
     <string name="item_details">Item Details</string>
-    <string name="thank_you">Thank You!</string>
-    <string name="student_name">Student Name</string>
-    <string name="date_found">Date Found:</string>
-    <string name="time_found">Time Found:</string>
+    <string name="person_type">Person Type</string>
+    <string name="date_found">Date Posted</string>
+    <string name="time_found">Time Posted</string>
     <string name="found_by">Found By</string>
     <string name="appreciate">Appreciate</string>
     <string name="post_details">Post Details</string>

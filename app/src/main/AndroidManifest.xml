@@ -12,6 +12,9 @@
         android:theme="@style/Theme.IFind"
         tools:targetApi="31">
         <activity
+            android:name=".AppreciationUserView"
+            android:exported="false" />
+        <activity
             android:name=".AdminPostAppreciate"
             android:exported="false" />
         <activity
