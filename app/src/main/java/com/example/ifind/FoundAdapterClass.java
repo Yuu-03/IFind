@@ -1,5 +1,6 @@
 package com.example.ifind;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -42,30 +43,32 @@ public class FoundAdapterClass extends RecyclerView.Adapter<MyViewHolder9> {
         notifyDataSetChanged();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder9 holder, int position) {
-        Picasso.get().load(datalist.get(position).getImageURL()).into(holder.recImage);
-        holder.textItemName.setText(datalist.get(position).getItemName());
-        holder.textItemLoc.setText(datalist.get(position).getLocation());
-        holder.textItemTime.setText(datalist.get(position).getDate());
-        holder.textItemDate.setText(datalist.get(position).getTime());
+        ItemHelperClass item = datalist.get(position);
+        Picasso.get().load(item.getImageURL()).into(holder.recImage);
+        holder.textItemName.setText(item.getItemName());
+        holder.textItemLoc.setText(item.getLocation());
+        holder.textItemTime.setText(item.getDate());
+        holder.textItemDate.setText(item.getTime());
+
 
 
         holder.recCard.setOnClickListener(view -> {
             Intent intent = new Intent(context, Founditems.class);
-            intent.putExtra("Image", datalist.get(holder.getAdapterPosition()).getImageURL());
-            intent.putExtra("Item Name", datalist.get(holder.getAdapterPosition()).getItemName());
-            intent.putExtra("Location", datalist.get(holder.getAdapterPosition()).getLocation());
-            intent.putExtra("Date", datalist.get(holder.getAdapterPosition()).getDate());
-            intent.putExtra("Time", datalist.get(holder.getAdapterPosition()).getTime());
-            intent.putExtra("Description", datalist.get(holder.getAdapterPosition()).getDescription());
-            intent.putExtra("userID_", datalist.get(holder.getAdapterPosition()).getUserID());
-            intent.putExtra("key", datalist.get(holder.getAdapterPosition()).getKey());
-
+            intent.putExtra("Image", item.getImageURL());
+            intent.putExtra("Item Name", item.getItemName());
+            intent.putExtra("Location", item.getLocation());
+            intent.putExtra("Date", item.getDate());
+            intent.putExtra("Time", item.getTime());
+            intent.putExtra("Description", item.getDescription());
+            intent.putExtra("Key", item.getKey());
+            intent.putExtra("userID_", item.getUserID());
             context.startActivity(intent);
-
         });
     }
+
 }
 class MyViewHolder9 extends RecyclerView.ViewHolder {
 

@@ -42,6 +42,8 @@ public class FoundAdmin extends AppCompatActivity {
         nav = findViewById(R.id.nav);
         nav.setSelectedItemId(R.id.found_);
 
+        databaseReference = FirebaseDatabase.getInstance().getReference("Found");
+
         nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -79,17 +81,16 @@ public class FoundAdmin extends AppCompatActivity {
 
         dataList = new ArrayList<>();
 
-        FoundAdapterClass adapter = new FoundAdapterClass(this, dataList);
+        adapter = new FoundAdapterClass(this, dataList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("Found");
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
                 for (DataSnapshot itemSnapshot: snapshot.getChildren()){
                     ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);
+                    dataClass.setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
                 }
                 adapter.notifyDataSetChanged();

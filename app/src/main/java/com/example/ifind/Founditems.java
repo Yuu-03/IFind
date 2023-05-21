@@ -51,10 +51,10 @@ public class Founditems extends AppCompatActivity {
             item_time.setText(bundle.getString("Time"));
             userID.setText(bundle.getString("userID_"));
             imageUrl = bundle.getString("Image");
-            key = bundle.getString("key");
+            key = bundle.getString("Key");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
         }
-        System.out.println(key);
+
         del_button.setOnClickListener(v -> {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(Founditems.this);

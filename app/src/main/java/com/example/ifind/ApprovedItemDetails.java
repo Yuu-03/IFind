@@ -103,9 +103,9 @@ public class ApprovedItemDetails extends AppCompatActivity {
 
         String datePosted = currentDateString;
         String timePosted = currentTimeString;
-        String uploadID = reference.getKey();
-        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, postType);
 
+
+        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, postType);
         approve_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +119,6 @@ public class ApprovedItemDetails extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int which) {
 
-                        ItemHelperClass itemhelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_);
 
                         logref.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -137,17 +136,17 @@ public class ApprovedItemDetails extends AppCompatActivity {
                                     }
                                 }
 
-                                toFound.child(key)
-                                        .setValue(itemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                toFound.child(bundle.getString("Key"))
+                                        .setValue( new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    toFound.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_));
                                                     logref.child(key).setValue(loghelperclass);
                                                     Toast.makeText(ApprovedItemDetails.this, "Approved! Displayed in Lost Items!", Toast.LENGTH_LONG).show();
                                                     //remove if you want to delete the copied record from the pending
+
                                                     reference.child(key).removeValue();
-                                                    startActivity(new Intent(getApplicationContext(), pendingRequests.class));
+                                                    startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
                                                 }
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {

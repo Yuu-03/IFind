@@ -63,7 +63,18 @@
                     android:layout_margin="20dp"
                     android:layout_gravity="center_horizontal"
                     android:textStyle="bold"
-                    android:textSize="10sp"/>
+                    android:textSize="11sp"/>
+                <Button
+                    android:id="@+id/ForgottenBox"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/teal_700"
+                    android:text="Forgotten Box"
+                    android:textColor="@color/white"
+                    android:layout_margin="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:textSize="11sp"/>
             </GridLayout>
 
 
