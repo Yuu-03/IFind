@@ -1,0 +1,1655 @@
+Index: app/src/main/java/com/example/ifind/FoundAdapterClass.java
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/FoundAdapterClass.java b/app/src/main/java/com/example/ifind/FoundAdapterClass.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/ifind/FoundAdapterClass.java	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ /dev/null	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
+@@ -1,91 +0,0 @@
+-package com.example.ifind;
+-
+-import android.annotation.SuppressLint;
+-import android.content.Context;
+-import android.content.Intent;
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.widget.ImageView;
+-import android.widget.TextView;
+-
+-import androidx.annotation.NonNull;
+-import androidx.cardview.widget.CardView;
+-import androidx.recyclerview.widget.RecyclerView;
+-
+-import com.squareup.picasso.Picasso;
+-
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-public class FoundAdapterClass extends RecyclerView.Adapter<MyViewHolder9> {
+-    private Context context;
+-    private List<ItemHelperClass> datalist;
+-
+-
+-    public FoundAdapterClass(Context context, List<ItemHelperClass> datalist) {
+-        this.context = context;
+-        this.datalist = datalist;
+-    }
+-    @NonNull
+-    @Override
+-    public MyViewHolder9 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
+-        return new MyViewHolder9(view);
+-    }
+-
+-    @Override
+-    public int getItemCount() {
+-        return datalist.size();
+-    }
+-    public void searchDataList(ArrayList<ItemHelperClass> searchList){
+-        datalist = searchList;
+-        notifyDataSetChanged();
+-    }
+-
+-    @SuppressLint("SetTextI18n")
+-    @Override
+-    public void onBindViewHolder(@NonNull MyViewHolder9 holder, int position) {
+-        ItemHelperClass item = datalist.get(position);
+-        Picasso.get().load(item.getImageURL()).into(holder.recImage);
+-        holder.textItemName.setText(item.getItemName());
+-        holder.textItemLoc.setText(item.getLocation());
+-        holder.textItemTime.setText(item.getDate());
+-        holder.textItemDate.setText(item.getTime());
+-
+-
+-
+-        holder.recCard.setOnClickListener(view -> {
+-            Intent intent = new Intent(context, Founditems.class);
+-            intent.putExtra("Image", item.getImageURL());
+-            intent.putExtra("Item Name", item.getItemName());
+-            intent.putExtra("Location", item.getLocation());
+-            intent.putExtra("Date", item.getDate());
+-            intent.putExtra("Time", item.getTime());
+-            intent.putExtra("Description", item.getDescription());
+-            intent.putExtra("Key", item.getKey());
+-            intent.putExtra("userID_", item.getUserID());
+-            context.startActivity(intent);
+-        });
+-    }
+-
+-}
+-class MyViewHolder9 extends RecyclerView.ViewHolder {
+-
+-    ImageView recImage;
+-    TextView textItemName, textItemLoc, textItemDate, textItemTime;
+-    CardView recCard;
+-
+-    public MyViewHolder9(@NonNull View itemView) {
+-        super(itemView);
+-        recImage =  itemView.findViewById(R.id.recImage);
+-        textItemTime = itemView.findViewById(R.id.textItemtime);
+-        textItemDate = itemView.findViewById(R.id.textItemdate);
+-        textItemName = itemView.findViewById(R.id.textItemName);
+-        textItemLoc = itemView.findViewById(R.id.textItemLoc);
+-        recCard = itemView.findViewById(R.id.recCard);
+-
+-    }
+-
+-}
+-
+Index: app/src/main/java/com/example/ifind/ApprovedAdapterClass.java
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/ApprovedAdapterClass.java b/app/src/main/java/com/example/ifind/ApprovedAdapterClass.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/ifind/ApprovedAdapterClass.java	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ /dev/null	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
+@@ -1,87 +0,0 @@
+-package com.example.ifind;
+-
+-import android.content.Context;
+-import android.content.Intent;
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.widget.ImageView;
+-import android.widget.TextView;
+-
+-import androidx.annotation.NonNull;
+-import androidx.cardview.widget.CardView;
+-import androidx.recyclerview.widget.RecyclerView;
+-
+-import com.squareup.picasso.Picasso;
+-
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-public class ApprovedAdapterClass extends RecyclerView.Adapter<MyViewHolder4> {
+-    private Context context;
+-    private List<ItemHelperClass> datalist;
+-
+-
+-    public ApprovedAdapterClass(Context context, List<ItemHelperClass> datalist) {
+-        this.context = context;
+-        this.datalist = datalist;
+-    }
+-    @NonNull
+-    @Override
+-    public MyViewHolder4 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
+-        return new MyViewHolder4(view);
+-    }
+-
+-    @Override
+-    public int getItemCount() {
+-        return datalist.size();
+-    }
+-    public void searchDataList(ArrayList<ItemHelperClass> searchList){
+-        datalist = searchList;
+-        notifyDataSetChanged();
+-    }
+-
+-    @Override
+-    public void onBindViewHolder(@NonNull MyViewHolder4 holder, int position) {
+-        Picasso.get().load(datalist.get(position).getImageURL()).into(holder.recImage);
+-        holder.textItemName.setText(datalist.get(position).getItemName());
+-        holder.textItemLoc.setText(datalist.get(position).getLocation());
+-        holder.textItemTime.setText(datalist.get(position).getDate());
+-        holder.textItemDate.setText(datalist.get(position).getTime());
+-
+-
+-        holder.recCard.setOnClickListener(view -> {
+-            Intent intent = new Intent(context, ApprovedItemDetails.class);
+-            intent.putExtra("Image", datalist.get(holder.getAdapterPosition()).getImageURL());
+-            intent.putExtra("Item Name", datalist.get(holder.getAdapterPosition()).getItemName());
+-            intent.putExtra("Location", datalist.get(holder.getAdapterPosition()).getLocation());
+-            intent.putExtra("Date", datalist.get(holder.getAdapterPosition()).getDate());
+-            intent.putExtra("Time", datalist.get(holder.getAdapterPosition()).getTime());
+-            intent.putExtra("Description", datalist.get(holder.getAdapterPosition()).getDescription());
+-            intent.putExtra("userID_", datalist.get(holder.getAdapterPosition()).getUserID());
+-            intent.putExtra("Key", datalist.get(holder.getAdapterPosition()).getKey());
+-            context.startActivity(intent);
+-
+-        });
+-    }
+-}
+-class MyViewHolder4 extends RecyclerView.ViewHolder {
+-
+-    ImageView recImage;
+-    TextView textItemName, textItemLoc, textItemDate, textItemTime;
+-    CardView recCard;
+-
+-    public MyViewHolder4(@NonNull View itemView) {
+-        super(itemView);
+-        recImage =  itemView.findViewById(R.id.recImage);
+-        textItemTime = itemView.findViewById(R.id.textItemtime);
+-        textItemDate = itemView.findViewById(R.id.textItemdate);
+-        textItemName = itemView.findViewById(R.id.textItemName);
+-        textItemLoc = itemView.findViewById(R.id.textItemLoc);
+-        recCard = itemView.findViewById(R.id.recCard);
+-
+-    }
+-
+-}
+-
+Index: app/src/main/java/com/example/ifind/AdapterClass2.java
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/AdapterClass2.java b/app/src/main/java/com/example/ifind/AdapterClass2.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/ifind/AdapterClass2.java	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ /dev/null	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
+@@ -1,86 +0,0 @@
+-package com.example.ifind;
+-
+-import android.content.Context;
+-import android.content.Intent;
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.widget.ImageView;
+-import android.widget.TextView;
+-
+-import androidx.annotation.NonNull;
+-import androidx.cardview.widget.CardView;
+-import androidx.recyclerview.widget.RecyclerView;
+-
+-import com.squareup.picasso.Picasso;
+-
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-public class AdapterClass2 extends RecyclerView.Adapter<MyViewHolder1> {
+-    private Context context;
+-    private List<ItemHelperClass> datalist;
+-
+-
+-    public AdapterClass2(Context context, List<ItemHelperClass> datalist) {
+-        this.context = context;
+-        this.datalist = datalist;
+-    }
+-    @NonNull
+-    @Override
+-    public MyViewHolder1 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
+-        return new MyViewHolder1(view);
+-    }
+-
+-    @Override
+-    public int getItemCount() {
+-        return datalist.size();
+-    }
+-    public void searchDataList(ArrayList<ItemHelperClass> searchList){
+-        datalist = searchList;
+-        notifyDataSetChanged();
+-    }
+-
+-    @Override
+-    public void onBindViewHolder(@NonNull MyViewHolder1 holder, int position) {
+-        Picasso.get().load(datalist.get(position).getImageURL()).into(holder.recImage);
+-        holder.textItemName.setText(datalist.get(position).getItemName());
+-        holder.textItemLoc.setText(datalist.get(position).getLocation());
+-        holder.textItemTime.setText(datalist.get(position).getDate());
+-        holder.textItemDate.setText(datalist.get(position).getTime());
+-
+-
+-        holder.recCard.setOnClickListener(view -> {
+-            Intent intent = new Intent(context, userviewlostdetails.class);
+-            intent.putExtra("Image", datalist.get(holder.getAdapterPosition()).getImageURL());
+-            intent.putExtra("Item Name", datalist.get(holder.getAdapterPosition()).getItemName());
+-            intent.putExtra("Location", datalist.get(holder.getAdapterPosition()).getLocation());
+-            intent.putExtra("Date", datalist.get(holder.getAdapterPosition()).getDate());
+-            intent.putExtra("Time", datalist.get(holder.getAdapterPosition()).getTime());
+-            intent.putExtra("Description", datalist.get(holder.getAdapterPosition()).getDescription());
+-            intent.putExtra("Key", datalist.get(holder.getAdapterPosition()).getKey());
+-            context.startActivity(intent);
+-
+-        });
+-    }
+-}
+-class MyViewHolder1 extends RecyclerView.ViewHolder {
+-
+-    ImageView recImage;
+-    TextView textItemName, textItemLoc, textItemDate, textItemTime;
+-    CardView recCard;
+-
+-    public MyViewHolder1(@NonNull View itemView) {
+-        super(itemView);
+-        recImage =  itemView.findViewById(R.id.recImage);
+-        textItemTime = itemView.findViewById(R.id.textItemtime);
+-        textItemDate = itemView.findViewById(R.id.textItemdate);
+-        textItemName = itemView.findViewById(R.id.textItemName);
+-        textItemLoc = itemView.findViewById(R.id.textItemLoc);
+-        recCard = itemView.findViewById(R.id.recCard);
+-
+-    }
+-
+-}
+-
+Index: app/src/main/java/com/example/ifind/ForgottenView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ifind;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\n\r\npublic class ForgottenView extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_forgotten_view);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/ForgottenView.java b/app/src/main/java/com/example/ifind/ForgottenView.java
+--- a/app/src/main/java/com/example/ifind/ForgottenView.java	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/java/com/example/ifind/ForgottenView.java	(date 1684684449365)
+@@ -1,14 +1,89 @@
+ package com.example.ifind;
+ 
++import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
++import androidx.recyclerview.widget.GridLayoutManager;
++import androidx.recyclerview.widget.LinearLayoutManager;
++import androidx.recyclerview.widget.RecyclerView;
+ 
++import android.content.Intent;
+ import android.os.Bundle;
++import android.view.MenuItem;
++import android.view.View;
++import android.widget.Button;
++import android.widget.SearchView;
++import android.widget.Toast;
++
++import com.google.android.material.bottomnavigation.BottomNavigationView;
++import com.google.firebase.database.DataSnapshot;
++import com.google.firebase.database.DatabaseError;
++import com.google.firebase.database.DatabaseReference;
++import com.google.firebase.database.FirebaseDatabase;
++import com.google.firebase.database.ValueEventListener;
++
++import java.util.ArrayList;
++import java.util.List;
+ 
+ public class ForgottenView extends AppCompatActivity {
++    List<ItemHelperClass> dataList;
++    DatabaseReference databaseReference;
++    ValueEventListener eventListener;
++
++    AdapterClass adapter;
++
++    Button mBack;
++    BottomNavigationView nav;
++
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_forgotten_view);
++
++        mBack = findViewById(R.id.back);
++
++
++
++
++        RecyclerView recyclerView = findViewById(R.id.recyclerView);
++        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
++        recyclerView.setLayoutManager(gridLayoutManager);
++
++
++        dataList = new ArrayList<>();
++        adapter = new AdapterClass(getApplicationContext(), dataList, true, false, false, false, false);
++        recyclerView.setAdapter(adapter);
++        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
++
++        databaseReference = FirebaseDatabase.getInstance().getReference("Forgotten");
++        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
++
++            @Override
++            public void onDataChange(@NonNull DataSnapshot snapshot) {
++                dataList.clear();
++                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
++                    ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);
++                    dataClass.setKey(itemSnapshot.getKey());
++                    dataList.add(dataClass);
++
++
++                }
++                adapter.notifyDataSetChanged();
++            }
++
++            @Override
++            public void onCancelled(@NonNull DatabaseError error) {
++                Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
++            }
++        });
++
++        mBack.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                startActivity(new Intent(ForgottenView.this, AdminMain.class));
++                finish();
++            }
++        });
++
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/ifind/AdapterClass.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ifind;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.cardview.widget.CardView;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.squareup.picasso.Picasso;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {\r\n    private Context context;\r\n    private List<ItemHelperClass> datalist;\r\n\r\n    public AdapterClass(Context context, List<ItemHelperClass> datalist) {\r\n        this.context = context;\r\n        this.datalist = datalist;\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {\r\n        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);\r\n        return new MyViewHolder(view);\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return datalist.size();\r\n    }\r\n\r\n    public void searchDataList(ArrayList<ItemHelperClass> searchList) {\r\n        datalist = searchList;\r\n        notifyDataSetChanged();\r\n    }\r\n\r\n    @SuppressLint(\"SetTextI18n\")\r\n    @Override\r\n    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {\r\n        ItemHelperClass item = datalist.get(position);\r\n        Picasso.get().load(item.getImageURL()).into(holder.recImage);\r\n        holder.textItemName.setText(item.getItemName());\r\n        holder.textItemLoc.setText(item.getLocation());\r\n        holder.textItemTime.setText(item.getDate());\r\n        holder.textItemDate.setText(item.getTime());\r\n\r\n        holder.recCard.setOnClickListener(view -> {\r\n            Intent intent = new Intent(context, LostItemDetails.class);\r\n            intent.putExtra(\"Image\", item.getImageURL());\r\n            intent.putExtra(\"Item Name\", item.getItemName());\r\n            intent.putExtra(\"Location\", item.getLocation());\r\n            intent.putExtra(\"Date\", item.getDate());\r\n            intent.putExtra(\"Time\", item.getTime());\r\n            intent.putExtra(\"Description\", item.getDescription());\r\n            intent.putExtra(\"userID_\", item.getUserID());\r\n\r\n            intent.putExtra(\"Key\", item.getKey());\r\n            context.startActivity(intent);\r\n        });\r\n    }\r\n}\r\n\r\nclass MyViewHolder extends RecyclerView.ViewHolder {\r\n    ImageView recImage;\r\n    TextView textItemName, textItemLoc, textItemDate, textItemTime, textName;\r\n    CardView recCard;\r\n\r\n    public MyViewHolder(@NonNull View itemView) {\r\n        super(itemView);\r\n        recImage = itemView.findViewById(R.id.recImage);\r\n        textItemTime = itemView.findViewById(R.id.textItemtime);\r\n        textItemDate = itemView.findViewById(R.id.textItemdate);\r\n        textItemName = itemView.findViewById(R.id.textItemName);\r\n        textItemLoc = itemView.findViewById(R.id.textItemLoc);\r\n        textName = itemView.findViewById(R.id.pendingFoundName);\r\n        recCard = itemView.findViewById(R.id.recCard);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/AdapterClass.java b/app/src/main/java/com/example/ifind/AdapterClass.java
+--- a/app/src/main/java/com/example/ifind/AdapterClass.java	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/java/com/example/ifind/AdapterClass.java	(date 1684685682110)
+@@ -9,6 +9,7 @@
+ import android.view.ViewGroup;
+ import android.widget.ImageView;
+ import android.widget.TextView;
++import android.widget.Toast;
+ 
+ import androidx.annotation.NonNull;
+ import androidx.cardview.widget.CardView;
+@@ -24,10 +25,15 @@
+ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
+     private Context context;
+     private List<ItemHelperClass> datalist;
+-
+-    public AdapterClass(Context context, List<ItemHelperClass> datalist) {
++    private boolean isForgotten, isApprove, isUserLostView,isFound,isFoundAdmin;
++    public AdapterClass(Context context, List<ItemHelperClass> datalist, boolean isForgotten, boolean  isApprove, boolean isUserLostView,boolean isFound, boolean isFoundAdmin) {
+         this.context = context;
+         this.datalist = datalist;
++        this.isForgotten = isForgotten;
++        this.isApprove = isApprove;
++        this.isUserLostView = isUserLostView;
++        this.isFound = isFound;
++        this.isFoundAdmin = isFoundAdmin;
+     }
+ 
+     @NonNull
+@@ -57,19 +63,106 @@
+         holder.textItemTime.setText(item.getDate());
+         holder.textItemDate.setText(item.getTime());
+ 
+-        holder.recCard.setOnClickListener(view -> {
+-            Intent intent = new Intent(context, LostItemDetails.class);
+-            intent.putExtra("Image", item.getImageURL());
+-            intent.putExtra("Item Name", item.getItemName());
+-            intent.putExtra("Location", item.getLocation());
+-            intent.putExtra("Date", item.getDate());
+-            intent.putExtra("Time", item.getTime());
+-            intent.putExtra("Description", item.getDescription());
+-            intent.putExtra("userID_", item.getUserID());
++        if (isForgotten) {
++            holder.recCard.setOnClickListener(view -> {
++                Intent intent = new Intent(context, ForgottenItemView.class);
++                intent.putExtra("Image", item.getImageURL());
++                intent.putExtra("Item Name", item.getItemName());
++                intent.putExtra("Location", item.getLocation());
++                intent.putExtra("Date", item.getDate());
++                intent.putExtra("Time", item.getTime());
++                intent.putExtra("Description", item.getDescription());
++                intent.putExtra("userID_", item.getUserID());
++
++                intent.putExtra("Key", item.getKey());
++                Toast.makeText(context.getApplicationContext(), "FORGOTTEN", Toast.LENGTH_SHORT).show();
++
++                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
++
++            });
++        } else if (isApprove) {
++            holder.recCard.setOnClickListener(view -> {
++                Intent intent = new Intent(context, ApprovedItemDetails.class);
++                intent.putExtra("Image", item.getImageURL());
++                intent.putExtra("Item Name", item.getItemName());
++                intent.putExtra("Location", item.getLocation());
++                intent.putExtra("Date", item.getDate());
++                intent.putExtra("Time", item.getTime());
++                intent.putExtra("Description", item.getDescription());
++                intent.putExtra("userID_", item.getUserID());
++
++                intent.putExtra("Key", item.getKey());
++                Toast.makeText(context.getApplicationContext(), "APPROVED", Toast.LENGTH_SHORT).show();
++
++                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
++
++            });
++            
++        }else if (isUserLostView) {
++            holder.recCard.setOnClickListener(view -> {
++                Intent intent = new Intent(context, userviewlostdetails.class);
++                intent.putExtra("Image", item.getImageURL());
++                intent.putExtra("Item Name", item.getItemName());
++                intent.putExtra("Location", item.getLocation());
++                intent.putExtra("Date", item.getDate());
++                intent.putExtra("Time", item.getTime());
++                intent.putExtra("Description", item.getDescription());
++                intent.putExtra("userID_", item.getUserID());
++
++                intent.putExtra("Key", item.getKey());
++                Toast.makeText(context.getApplicationContext(), "USER LOST VIEW", Toast.LENGTH_SHORT).show();
++
++                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
++            });
++        }else if (isFound){
++            holder.recCard.setOnClickListener(view -> {
++                Intent intent = new Intent(context, FoundActivityUSer.class);
++                intent.putExtra("Image", item.getImageURL());
++                intent.putExtra("Item Name", item.getItemName());
++                intent.putExtra("Location", item.getLocation());
++                intent.putExtra("Date", item.getDate());
++                intent.putExtra("Time", item.getTime());
++                intent.putExtra("Description", item.getDescription());
++                intent.putExtra("userID_", item.getUserID());
++
++                intent.putExtra("Key", item.getKey());
++                Toast.makeText(context.getApplicationContext(), "FOUND USER VIEW", Toast.LENGTH_SHORT).show();
++
++                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
++            });
++        }else if (isFoundAdmin) {
++            holder.recCard.setOnClickListener(view -> {
++                Intent intent = new Intent(context, Founditems.class);
++                intent.putExtra("Image", item.getImageURL());
++                intent.putExtra("Item Name", item.getItemName());
++                intent.putExtra("Location", item.getLocation());
++                intent.putExtra("Date", item.getDate());
++                intent.putExtra("Time", item.getTime());
++                intent.putExtra("Description", item.getDescription());
++                intent.putExtra("userID_", item.getUserID());
++
++                intent.putExtra("Key", item.getKey());
++                Toast.makeText(context.getApplicationContext(), "FOUND ADMIN VIEW", Toast.LENGTH_SHORT).show();
++
++                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
++            });
++        }else{
++            holder.recCard.setOnClickListener(view -> {
++                Intent intent = new Intent(context, LostItemDetails.class);
++                intent.putExtra("Image", item.getImageURL());
++                intent.putExtra("Item Name", item.getItemName());
++                intent.putExtra("Location", item.getLocation());
++                intent.putExtra("Date", item.getDate());
++                intent.putExtra("Time", item.getTime());
++                intent.putExtra("Description", item.getDescription());
++                intent.putExtra("userID_", item.getUserID());
+ 
+-            intent.putExtra("Key", item.getKey());
+-            context.startActivity(intent);
+-        });
++                intent.putExtra("Key", item.getKey());
++                Toast.makeText(context.getApplicationContext(), "LostItemDetails", Toast.LENGTH_SHORT).show();
++
++                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
++            });
++        }
+     }
+ }
+ 
+Index: app/src/main/java/com/example/ifind/ApprovedAdmin.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ifind;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.GridLayoutManager;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.material.bottomnavigation.BottomNavigationView;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class ApprovedAdmin extends AppCompatActivity {\r\n    private FirebaseAuth auth;\r\n    BottomNavigationView nav;\r\n\r\n    ApprovedAdapterClass adapter;\r\n    List<ItemHelperClass> dataList;\r\n    DatabaseReference databaseReference;\r\n    ValueEventListener eventListener;\r\n    RecyclerView recyclerView;\r\n\r\n    private boolean doubleBackToExitPressedOnce;\r\n    private Handler mHandler = new Handler();\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_approvedadmin);\r\n\r\n        auth = FirebaseAuth.getInstance();\r\n        nav = findViewById(R.id.nav);\r\n        nav.setSelectedItemId(R.id.approved_);\r\n        Button mpostButton = findViewById(R.id.adminLostPost);\r\n\r\n        nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {\r\n            @Override\r\n            public boolean onNavigationItemSelected(@NonNull MenuItem item) {\r\n                switch (item.getItemId()) {\r\n                    case R.id.pending_:\r\n                        startActivity(new Intent(getApplicationContext(), pendingRequests.class));\r\n                        finish();\r\n                        overridePendingTransition(0,0);\r\n                        return true;\r\n                    case R.id.approved_:\r\n                        return true;\r\n                    case R.id.found_:\r\n                        startActivity(new Intent(getApplicationContext(), FoundAdmin.class));\r\n                        finish();\r\n                        overridePendingTransition(0,0);\r\n                        return true;\r\n                    case R.id.appre_:\r\n                        startActivity(new Intent(getApplicationContext(), AdminAppreciate.class));\r\n                        finish();\r\n                        overridePendingTransition(0,0);\r\n                        return true;\r\n                    case R.id.adminProfile:\r\n                        startActivity(new Intent(getApplicationContext(), AdminMain.class));\r\n                        finish();\r\n                        overridePendingTransition(0,0);\r\n                        return true;\r\n\r\n                }\r\n                return false;\r\n            }\r\n        });\r\n\r\n        mpostButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Toast.makeText(ApprovedAdmin.this, \"Upload Lost Items!\" , Toast.LENGTH_SHORT).show();\r\n                startActivity(new Intent(ApprovedAdmin.this, AdminPostLost.class));\r\n\r\n            }\r\n        });\r\n        RecyclerView recyclerView = findViewById(R.id.recyclerView);\r\n        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);\r\n\r\n        recyclerView.setLayoutManager(gridLayoutManager);\r\n\r\n        dataList = new ArrayList<>();\r\n        adapter = new ApprovedAdapterClass(this, dataList);\r\n        recyclerView.setAdapter(adapter);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));\r\n\r\n        databaseReference = FirebaseDatabase.getInstance().getReference(\"Approved\");\r\n        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {\r\n\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                dataList.clear();\r\n                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {\r\n                    ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);\r\n                    dataClass.setKey(itemSnapshot.getKey());\r\n                    dataList.add(dataClass);\r\n\r\n                }\r\n                adapter.notifyDataSetChanged();\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n                Toast.makeText(ApprovedAdmin.this, \"error\", Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n\r\n\r\n    }\r\n\r\n\r\n    private final Runnable mRunnable = new Runnable() {\r\n        @Override\r\n        public void run() {\r\n            doubleBackToExitPressedOnce = false;\r\n        }\r\n    };\r\n\r\n    @Override\r\n    protected void onDestroy()\r\n    {\r\n        super.onDestroy();\r\n\r\n        if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }\r\n    }\r\n\r\n    @Override\r\n    public void onBackPressed() {\r\n        if (doubleBackToExitPressedOnce) {\r\n            super.onBackPressed();\r\n            auth.signOut();\r\n            finishAffinity();\r\n            return;\r\n        }\r\n\r\n        this.doubleBackToExitPressedOnce = true;\r\n        Toast.makeText(this, \"Please click BACK again to exit\", Toast.LENGTH_SHORT).show();\r\n\r\n        mHandler.postDelayed(mRunnable, 2000);\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/ApprovedAdmin.java b/app/src/main/java/com/example/ifind/ApprovedAdmin.java
+--- a/app/src/main/java/com/example/ifind/ApprovedAdmin.java	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/java/com/example/ifind/ApprovedAdmin.java	(date 1684684413082)
+@@ -29,7 +29,7 @@
+     private FirebaseAuth auth;
+     BottomNavigationView nav;
+ 
+-    ApprovedAdapterClass adapter;
++    AdapterClass adapter;
+     List<ItemHelperClass> dataList;
+     DatabaseReference databaseReference;
+     ValueEventListener eventListener;
+@@ -94,7 +94,7 @@
+         recyclerView.setLayoutManager(gridLayoutManager);
+ 
+         dataList = new ArrayList<>();
+-        adapter = new ApprovedAdapterClass(this, dataList);
++        adapter = new AdapterClass(this, dataList, false, true, false, false, false);
+         recyclerView.setAdapter(adapter);
+         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
+ 
+Index: app/src/main/java/com/example/ifind/LostFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ifind;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.SearchView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.GridLayoutManager;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.google.android.material.bottomsheet.BottomSheetDialog;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class LostFragment extends Fragment {\r\n\r\n    RecyclerView recyclerView;\r\n    List<ItemHelperClass> dataList;\r\n    DatabaseReference databaseReference;\r\n    ValueEventListener eventListener;\r\n\r\n    SearchView searchView;\r\n    AdapterClass2 adapter;\r\n    Button button;\r\n\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        return inflater.inflate(R.layout.fragment_lost, container, false);\r\n    }\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n    }\r\n\r\n    @Override\r\n    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {\r\n        super.onViewCreated(view, savedInstanceState);\r\n\r\n        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);\r\n        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);\r\n        recyclerView.setLayoutManager(gridLayoutManager);\r\n\r\n\r\n        searchView = view.findViewById(R.id.search);\r\n        searchView.clearFocus();\r\n\r\n        button = view.findViewById(R.id.filter);\r\n\r\n        dataList = new ArrayList<>();\r\n        adapter = new AdapterClass2(getContext(), dataList);\r\n        recyclerView.setAdapter(adapter);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));\r\n\r\n        databaseReference = FirebaseDatabase.getInstance().getReference(\"Approved\");\r\n\r\n\r\n        //button.setOnClickListener(new View.OnClickListener() {\r\n         //   @Override\r\n        //    public void onClick(View v) {\r\n        //        BottomSheetDialog sheetDialog = new BottomSheetDialog(requireContext(), R.style.CustomBottomSheetDialog);\r\n//\r\n        //        View sheetView = LayoutInflater.from(requireContext())\r\n        //                .inflate(R.layout.bottom_dialog,null);\r\n         //       sheetView.findViewById(R.id.imageViewcancel).setOnClickListener(new View.OnClickListener() {\r\n        //            @Override\r\n         //           public void onClick(View v) {\r\n         //               sheetDialog.dismiss();\r\n         //           }\r\n         //       });\r\n\r\n          //      sheetDialog.setContentView(sheetView);\r\n          //      sheetDialog.show();\r\n          //  }\r\n        //});\r\n        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {\r\n\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                dataList.clear();\r\n                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {\r\n                    ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);\r\n                    dataClass.setKey(itemSnapshot.getKey());\r\n                    dataList.add(dataClass);\r\n                }\r\n                adapter.notifyDataSetChanged();\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n                Toast.makeText(getActivity(), \"error\", Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n\r\n        if (searchView != null) {\r\n            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {\r\n                @Override\r\n                public boolean onQueryTextSubmit(String query) {\r\n                    return false;\r\n                }\r\n\r\n                @Override\r\n                public boolean onQueryTextChange(String newText) {\r\n                    searchList(newText);\r\n                    return true;\r\n                }\r\n            });\r\n\r\n            searchView.setOnClickListener(new View.OnClickListener() {\r\n                @Override\r\n                public void onClick(View v) {\r\n                    searchView.onActionViewExpanded();\r\n                }\r\n            });\r\n        }\r\n    }\r\n    public void searchList (String text){\r\n        ArrayList<ItemHelperClass> searchList = new ArrayList<>();\r\n        for (ItemHelperClass itemHelperClass : dataList) {\r\n            if (itemHelperClass.getItemName().toLowerCase().contains(text.toLowerCase())) {\r\n                searchList.add(itemHelperClass);\r\n            }\r\n        }\r\n        adapter.searchDataList(searchList);\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/LostFragment.java b/app/src/main/java/com/example/ifind/LostFragment.java
+--- a/app/src/main/java/com/example/ifind/LostFragment.java	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/java/com/example/ifind/LostFragment.java	(date 1684684449375)
+@@ -32,7 +32,7 @@
+     ValueEventListener eventListener;
+ 
+     SearchView searchView;
+-    AdapterClass2 adapter;
++    AdapterClass adapter;
+     Button button;
+ 
+ 
+@@ -62,7 +62,7 @@
+         button = view.findViewById(R.id.filter);
+ 
+         dataList = new ArrayList<>();
+-        adapter = new AdapterClass2(getContext(), dataList);
++        adapter = new AdapterClass(getContext(), dataList, false, false, true, false, false);
+         recyclerView.setAdapter(adapter);
+         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+ 
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/logo_ifind\"\r\n        android:label=\"@string/app_name\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.IFind\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".ForgottenView\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".userlogview\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".AdminLogView\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".AppreciationAdminView\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".AdminAppreciate\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".AppreciationUserView\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".AdminPostAppreciate\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".recycler_appreciation\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".AdminPostLost\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".FoundActivityUSer\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".userviewlostdetails\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Founditems\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ApprovedItemDetails\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".FoundAdmin\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ApprovedAdmin\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".pendingRequests\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".PasswordUpdated\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".OTPVerification\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ResetPassword\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ForgotPassActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ProfileActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".SignUpActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".LoginActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".LostItemDetails\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".SubmittingItems\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"false\"\r\n            android:theme=\"@style/Theme.AppCompat.Light.NoActionBar\" />\r\n        <activity\r\n            android:name=\".AdminMain\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".SplashScreenActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/AndroidManifest.xml	(date 1684685077179)
+@@ -12,6 +12,9 @@
+         android:theme="@style/Theme.IFind"
+         tools:targetApi="31">
+         <activity
++            android:name=".ForgottenItemView"
++            android:exported="false" />
++        <activity
+             android:name=".ForgottenView"
+             android:exported="false" />
+         <activity
+Index: app/src/main/java/com/example/ifind/ForgottenItemView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/ForgottenItemView.java b/app/src/main/java/com/example/ifind/ForgottenItemView.java
+new file mode 100644
+--- /dev/null	(date 1684686522353)
++++ b/app/src/main/java/com/example/ifind/ForgottenItemView.java	(date 1684686522353)
+@@ -0,0 +1,264 @@
++package com.example.ifind;
++
++import static android.content.ContentValues.TAG;
++
++import android.content.DialogInterface;
++import android.content.Intent;
++import android.os.Bundle;
++import android.support.annotation.NonNull;
++import android.util.Log;
++import android.view.View;
++import android.widget.Button;
++import android.widget.ImageView;
++import android.widget.TextView;
++import android.widget.Toast;
++
++import androidx.appcompat.app.AlertDialog;
++import androidx.appcompat.app.AppCompatActivity;
++
++import com.google.android.gms.tasks.OnCompleteListener;
++import com.google.android.gms.tasks.OnFailureListener;
++import com.google.android.gms.tasks.OnSuccessListener;
++import com.google.android.gms.tasks.Task;
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
++import com.google.firebase.database.DataSnapshot;
++import com.google.firebase.database.DatabaseError;
++import com.google.firebase.database.DatabaseReference;
++import com.google.firebase.database.FirebaseDatabase;
++import com.google.firebase.database.ValueEventListener;
++import com.google.firebase.storage.FirebaseStorage;
++import com.google.firebase.storage.StorageReference;
++import com.squareup.picasso.Picasso;
++
++import java.text.SimpleDateFormat;
++import java.util.Calendar;
++import java.util.Date;
++import java.util.Locale;
++
++public class ForgottenItemView extends AppCompatActivity {
++    TextView item_name, item_desc, item_loc, item_date, item_time, userID;
++    ImageView image_full;
++    Button del_button, approve_button;
++    String imageUrl = "";
++    String key = "";
++    private DatabaseReference toFound, logref,toForgotten;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_forgotten_item_view);
++
++        item_name = findViewById(R.id.item_name);
++        item_desc = findViewById(R.id.item_desc);
++        item_loc = findViewById(R.id.item_loc);
++        item_date = findViewById(R.id.item_date);
++        item_time = findViewById(R.id.item_time);
++        image_full = findViewById(R.id.image_full);
++        del_button = findViewById(R.id.del_buttA);
++        approve_button = findViewById(R.id.approve_buttA);
++        userID = findViewById(R.id.item_foundName);
++
++        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Forgotten");
++        toFound = FirebaseDatabase.getInstance().getReference("Found");
++        logref = FirebaseDatabase.getInstance().getReference("AdminActivityLogs");
++
++
++
++
++        Bundle bundle = getIntent().getExtras();
++        String name = bundle.getString("Item Name");
++        String loc = bundle.getString("Location");
++        String desc = bundle.getString("Description");
++        String date = bundle.getString("Date");
++        String time = bundle.getString("Time");
++        String userID_ = bundle.getString("userID_");
++
++        if (bundle != null) {
++            item_name.setText(bundle.getString("Item Name"));
++            item_loc.setText(bundle.getString("Location"));
++            item_desc.setText(bundle.getString("Description"));
++            item_date.setText(bundle.getString("Date"));
++            item_time.setText(bundle.getString("Time"));
++            userID.setText(bundle.getString("userID_"));
++            key = bundle.getString("Key");
++            imageUrl = bundle.getString("Image");
++            Picasso.get().load(bundle.getString("Image")).into(image_full);
++        }
++        Calendar calendar = Calendar.getInstance();
++        Date currentDate = calendar.getTime();
++
++        // Format the date and time
++        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
++        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
++
++        String currentDateString = dateFormat.format(currentDate);
++        String currentTimeString = timeFormat.format(currentDate);
++
++        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
++        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
++        String AdminID = String.valueOf(currentUser.getDisplayName());
++        String postType = "Forgotten Item Claimed!";
++
++        String datePosted = currentDateString;
++        String timePosted = currentTimeString;
++
++
++        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, postType);
++        approve_button.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++
++                AlertDialog.Builder builder = new AlertDialog.Builder(ForgottenItemView.this);
++
++                builder.setTitle("Confirm");
++                builder.setMessage("Are you sure?");
++
++                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
++
++                    public void onClick(DialogInterface dialog, int which) {
++
++
++                        logref.addListenerForSingleValueEvent(new ValueEventListener() {
++                            @Override
++                            public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
++                                long uploadCount = dataSnapshot.getChildrenCount();
++                                if (uploadCount >= 20) {
++                                    // Remove the oldest key
++                                    String oldestKey = null;
++                                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
++                                        oldestKey = childSnapshot.getKey();
++                                        break; // Get the first key (oldest)
++                                    }
++                                    if (oldestKey != null) {
++                                        logref.child(oldestKey).removeValue();
++                                    }
++                                }
++
++                                toFound.child(bundle.getString("Key"))
++                                        .setValue( new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_)).addOnCompleteListener(new OnCompleteListener<Void>() {
++                                            @Override
++                                            public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
++                                                if (task.isSuccessful()) {
++                                                    logref.child(key).setValue(loghelperclass);
++                                                    Toast.makeText(ForgottenItemView.this, "Item Claimed!", Toast.LENGTH_LONG).show();
++                                                    //remove if you want to delete the copied record from the pending
++                                                    reference.child(key).removeValue();
++                                                    startActivity(new Intent(getApplicationContext(), ForgottenView.class));
++                                                }
++                                            }
++                                        }).addOnFailureListener(new OnFailureListener() {
++                                            @Override
++                                            public void onFailure(@androidx.annotation.NonNull Exception e) {
++                                                Toast.makeText(ForgottenItemView.this, e.getMessage(), Toast.LENGTH_SHORT).show();
++                                            }
++                                        });
++                            }
++
++                            @Override
++                            public void onCancelled(@androidx.annotation.NonNull DatabaseError databaseError) {
++                                Toast.makeText(ForgottenItemView.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();
++                            }
++                        });
++
++
++                    }
++                });
++
++                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
++
++                    @Override
++                    public void onClick(DialogInterface dialog, int which) {
++                        // Do nothing
++                        dialog.dismiss();
++                    }
++                });
++
++                AlertDialog alert = builder.create();
++                alert.show();
++
++
++            }
++        });
++
++        del_button.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++
++                AlertDialog.Builder builder = new AlertDialog.Builder(ForgottenItemView.this);
++
++                builder.setTitle("Confirm");
++                builder.setMessage("Are you sure?");
++
++                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
++
++                    public void onClick(DialogInterface dialog, int which) {
++                        FirebaseStorage storage = FirebaseStorage.getInstance();
++                        StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
++                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
++                            @Override
++                            public void onSuccess(Void aVoid) {
++
++                                logref.addListenerForSingleValueEvent(new ValueEventListener() {
++                                    @Override
++                                    public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
++                                        long uploadCount = dataSnapshot.getChildrenCount();
++                                        if (uploadCount >= 20) {
++                                            // Remove the oldest key
++                                            String oldestKey = null;
++                                            for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
++                                                oldestKey = childSnapshot.getKey();
++                                                break; // Get the first key (oldest)
++                                            }
++                                            if (oldestKey != null) {
++                                                logref.child(oldestKey).removeValue();
++                                            }
++                                        }
++
++                                        logref.child(key).setValue(new ItemHelperClass(datePosted, timePosted, AdminID, "Deleted a Forgotten Item"))
++                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
++                                            @Override
++                                            public void onSuccess(Void aVoid) {
++                                                reference.child(key).removeValue();
++                                                Toast.makeText(ForgottenItemView.this, "Forgotten Item Deleted", Toast.LENGTH_SHORT).show();
++                                                startActivity(new Intent(getApplicationContext(), ForgottenView.class));
++                                            }
++                                        });
++
++                                    }
++
++                                    @Override
++                                    public void onCancelled(@androidx.annotation.NonNull DatabaseError databaseError) {
++                                        Toast.makeText(ForgottenItemView.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();
++                                    }
++                                });
++
++                            }
++                        }).addOnFailureListener(new OnFailureListener() {
++                            @Override
++                            public void onFailure(@NonNull Exception e) {
++                                Log.e(TAG, "Error requesting connection", e);
++                            }
++
++                        });
++                    }
++                });
++
++                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
++
++                    @Override
++                    public void onClick(DialogInterface dialog, int which) {
++
++                        // Do nothing
++                        dialog.dismiss();
++                    }
++                });
++
++                AlertDialog alert = builder.create();
++                alert.show();
++
++            }
++        });
++
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/example/ifind/AdminLogView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ifind;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.GridLayoutManager;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.SearchView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.material.bottomnavigation.BottomNavigationView;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class AdminLogView extends AppCompatActivity {\r\n    List<LogHelperClass> dataList;\r\n    DatabaseReference databaseReference;\r\n    ValueEventListener eventListener;\r\n\r\n    adminlogadapter adapter;\r\n\r\n    Button mBack;\r\n    BottomNavigationView nav;\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_admin_log_view);\r\n\r\n        mBack = findViewById(R.id.back);\r\n        nav = findViewById(R.id.nav);\r\n        nav.setSelectedItemId(R.id.adminLogs);\r\n\r\n\r\n\r\n        RecyclerView recyclerView = findViewById(R.id.recyclerView1);\r\n        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);\r\n        recyclerView.setLayoutManager(gridLayoutManager);\r\n\r\n\r\n        dataList = new ArrayList<>();\r\n        adapter = new adminlogadapter(getApplicationContext(), dataList);\r\n        recyclerView.setAdapter(adapter);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));\r\n\r\n        databaseReference = FirebaseDatabase.getInstance().getReference(\"AdminActivityLogs\");\r\n        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {\r\n\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                dataList.clear();\r\n                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {\r\n                    LogHelperClass dataClass = itemSnapshot.getValue(LogHelperClass.class);\r\n                    dataClass.setKey(itemSnapshot.getKey());\r\n                    dataList.add(dataClass);\r\n\r\n\r\n                }\r\n                adapter.notifyDataSetChanged();\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n                Toast.makeText(getApplicationContext(), \"error\", Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n\r\n        mBack.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(AdminLogView.this, AdminMain.class));\r\n                finish();\r\n            }\r\n        });\r\n\r\n        nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {\r\n            @Override\r\n            public boolean onNavigationItemSelected(@NonNull MenuItem item) {\r\n                switch (item.getItemId()) {\r\n                    case R.id.adminLogs:\r\n                        return true;\r\n                    case R.id.userLogs:\r\n                        startActivity(new Intent(getApplicationContext(), userlogview.class));\r\n                        finish();\r\n                        overridePendingTransition(0,0);\r\n                        return true;\r\n\r\n                }\r\n                return false;\r\n            }\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/AdminLogView.java b/app/src/main/java/com/example/ifind/AdminLogView.java
+--- a/app/src/main/java/com/example/ifind/AdminLogView.java	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/java/com/example/ifind/AdminLogView.java	(date 1684683931696)
+@@ -8,6 +8,7 @@
+ 
+ import android.content.Intent;
+ import android.os.Bundle;
++import android.os.Handler;
+ import android.view.MenuItem;
+ import android.view.View;
+ import android.widget.Button;
+@@ -15,6 +16,7 @@
+ import android.widget.Toast;
+ 
+ import com.google.android.material.bottomnavigation.BottomNavigationView;
++import com.google.firebase.auth.FirebaseAuth;
+ import com.google.firebase.database.DataSnapshot;
+ import com.google.firebase.database.DatabaseError;
+ import com.google.firebase.database.DatabaseReference;
+@@ -33,7 +35,9 @@
+ 
+     Button mBack;
+     BottomNavigationView nav;
+-
++    private boolean doubleBackToExitPressedOnce;
++    private Handler mHandler = new Handler();
++    private FirebaseAuth auth;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -43,6 +47,7 @@
+         mBack = findViewById(R.id.back);
+         nav = findViewById(R.id.nav);
+         nav.setSelectedItemId(R.id.adminLogs);
++        auth = FirebaseAuth.getInstance();
+ 
+ 
+ 
+@@ -103,4 +108,33 @@
+             }
+         });
+     }
++    private final Runnable mRunnable = new Runnable() {
++        @Override
++        public void run() {
++            doubleBackToExitPressedOnce = false;
++        }
++    };
++
++    @Override
++    protected void onDestroy()
++    {
++        super.onDestroy();
++
++        if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }
++    }
++
++    @Override
++    public void onBackPressed() {
++        if (doubleBackToExitPressedOnce) {
++            super.onBackPressed();
++            auth.signOut();
++            finishAffinity();
++            return;
++        }
++
++        this.doubleBackToExitPressedOnce = true;
++        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
++
++        mHandler.postDelayed(mRunnable, 2000);
++    }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/ifind/FoundFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ifind;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.SearchView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.GridLayoutManager;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class FoundFragment extends Fragment {\r\n\r\n    RecyclerView recyclerView;\r\n    List<ItemHelperClass> dataList;\r\n    DatabaseReference databaseReference;\r\n    ValueEventListener eventListener;\r\n    SearchView searchView1;\r\n\r\n    AdapterClass2 adapter;\r\n\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        return inflater.inflate(R.layout.fragment_found, container, false);\r\n    }\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n    }\r\n\r\n    @Override\r\n    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {\r\n        super.onViewCreated(view, savedInstanceState);\r\n\r\n        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);\r\n        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);\r\n        recyclerView.setLayoutManager(gridLayoutManager);\r\n\r\n        dataList = new ArrayList<>();\r\n        adapter = new AdapterClass2(getContext(), dataList);\r\n\r\n        searchView1 = view.findViewById(R.id.search2);\r\n        searchView1.clearFocus();\r\n\r\n        recyclerView.setAdapter(adapter);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));\r\n\r\n        databaseReference = FirebaseDatabase.getInstance().getReference(\"Found\");\r\n        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                dataList.clear();\r\n                for (DataSnapshot itemSnapshot: snapshot.getChildren()){\r\n                    ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);\r\n                    dataClass.setKey(itemSnapshot.getKey());\r\n                    dataList.add(dataClass);\r\n                }\r\n                adapter.notifyDataSetChanged();\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n                Toast.makeText(getActivity(), \"error\", Toast.LENGTH_SHORT).show();\r\n            }\r\n\r\n        });\r\n\r\n        if (searchView1 != null) {\r\n            searchView1.setOnQueryTextListener(new SearchView.OnQueryTextListener() {\r\n                @Override\r\n                public boolean onQueryTextSubmit(String query) {\r\n                    return false;\r\n                }\r\n\r\n                @Override\r\n                public boolean onQueryTextChange(String newText) {\r\n                    searchList(newText);\r\n                    return true;\r\n                }\r\n            });\r\n\r\n            searchView1.setOnClickListener(new View.OnClickListener() {\r\n                @Override\r\n                public void onClick(View v) {\r\n                     searchView1.onActionViewExpanded();\r\n                }\r\n            });\r\n        }\r\n    }\r\n    public void searchList (String text){\r\n        ArrayList<ItemHelperClass> searchList = new ArrayList<>();\r\n        for (ItemHelperClass itemHelperClass : dataList) {\r\n            if (itemHelperClass.getItemName().toLowerCase().contains(text.toLowerCase())) {\r\n                searchList.add(itemHelperClass);\r\n            }\r\n        }\r\n        adapter.searchDataList(searchList);\r\n    }\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/FoundFragment.java b/app/src/main/java/com/example/ifind/FoundFragment.java
+--- a/app/src/main/java/com/example/ifind/FoundFragment.java	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/java/com/example/ifind/FoundFragment.java	(date 1684684404477)
+@@ -30,7 +30,7 @@
+     ValueEventListener eventListener;
+     SearchView searchView1;
+ 
+-    AdapterClass2 adapter;
++    AdapterClass adapter;
+ 
+ 
+     @Override
+@@ -53,7 +53,7 @@
+         recyclerView.setLayoutManager(gridLayoutManager);
+ 
+         dataList = new ArrayList<>();
+-        adapter = new AdapterClass2(getContext(), dataList);
++        adapter = new AdapterClass(getContext(), dataList,false, false,false, true, false);
+ 
+         searchView1 = view.findViewById(R.id.search2);
+         searchView1.clearFocus();
+Index: app/src/main/res/layout/activity_forgotten_view.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".ForgottenView\">\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_forgotten_view.xml b/app/src/main/res/layout/activity_forgotten_view.xml
+--- a/app/src/main/res/layout/activity_forgotten_view.xml	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/res/layout/activity_forgotten_view.xml	(date 1684681125691)
+@@ -1,9 +1,62 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<RelativeLayout
++    xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     tools:context=".ForgottenView">
+ 
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
++
++    <Button
++        android:id="@+id/back"
++        android:layout_width="40dp"
++        android:layout_height="40dp"
++        android:layout_alignParentTop="true"
++        android:layout_alignParentStart="true"
++        android:layout_gravity="center_horizontal"
++        android:layout_marginStart="10dp"
++        android:layout_marginTop="6dp"
++        android:layout_marginEnd="10dp"
++        android:layout_marginBottom="10dp"
++        android:backgroundTint="@android:color/white"
++        android:text="@string/bck"
++        android:textSize="15sp"
++        android:textColor="@color/black"/>
++
++    <TextView
++        android:id="@+id/hed"
++        android:layout_width="match_parent"
++        android:layout_height="50dp"
++        android:layout_alignParentTop="true"
++        android:background="@drawable/rectangle_blue" />
++
++    <TextView
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_centerHorizontal="true"
++        android:layout_marginStart="14dp"
++        android:layout_marginTop="14dp"
++        android:layout_marginEnd="14dp"
++        android:layout_marginBottom="14dp"
++        android:text="FORGOTTEN ITEMS"
++        android:textColor="#FFFFFF"
++        android:textSize="18sp"
++        android:textStyle="bold"
++        />
++
++
++    <androidx.recyclerview.widget.RecyclerView
++        android:id="@+id/recyclerView"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_below="@+id/hed"
++        android:layout_marginTop="16dp"
++        android:scrollbars="vertical"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/hed"
++        tools:ignore="MissingConstraints">
++
++    </androidx.recyclerview.widget.RecyclerView>
++
++</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_admin_log_view.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><RelativeLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".AdminLogView\">\r\n\r\n\r\n    <Button\r\n        android:id=\"@+id/back\"\r\n        android:layout_width=\"40dp\"\r\n        android:layout_height=\"40dp\"\r\n        android:layout_alignParentTop=\"true\"\r\n        android:layout_alignParentStart=\"true\"\r\n        android:layout_gravity=\"center_horizontal\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:layout_marginTop=\"6dp\"\r\n        android:layout_marginEnd=\"10dp\"\r\n        android:layout_marginBottom=\"10dp\"\r\n        android:backgroundTint=\"@android:color/white\"\r\n        android:text=\"@string/bck\"\r\n        android:textSize=\"15sp\"\r\n        android:textColor=\"@color/black\"/>\r\n\r\n    <TextView\r\n        android:id=\"@+id/hed\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"50dp\"\r\n        android:layout_alignParentTop=\"true\"\r\n        android:background=\"@drawable/rectangle_blue\" />\r\n\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_centerHorizontal=\"true\"\r\n        android:layout_marginStart=\"14dp\"\r\n        android:layout_marginTop=\"14dp\"\r\n        android:layout_marginEnd=\"14dp\"\r\n        android:layout_marginBottom=\"14dp\"\r\n        android:text=\"Admin Activity Log\"\r\n        android:textColor=\"#FFFFFF\"\r\n        android:textSize=\"18sp\"\r\n        android:textStyle=\"bold\"\r\n        />\r\n\r\n\r\n    <androidx.recyclerview.widget.RecyclerView\r\n        android:id=\"@+id/recyclerView1\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_below=\"@+id/hed\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:scrollbars=\"vertical\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/hed\"\r\n        tools:ignore=\"MissingConstraints\">\r\n\r\n    </androidx.recyclerview.widget.RecyclerView>\r\n    <com.google.android.material.bottomnavigation.BottomNavigationView\r\n        android:id=\"@+id/nav\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_alignParentBottom=\"true\"\r\n        app:itemTextColor=\"@drawable/admin_nav\"\r\n        app:itemIconTint=\"@drawable/admin_nav\"\r\n        android:background=\"#54b8ff\"\r\n        app:menu=\"@menu/logmenu\"\r\n        />\r\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_admin_log_view.xml b/app/src/main/res/layout/activity_admin_log_view.xml
+--- a/app/src/main/res/layout/activity_admin_log_view.xml	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/res/layout/activity_admin_log_view.xml	(date 1684684954542)
+@@ -49,10 +49,11 @@
+         android:id="@+id/recyclerView1"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
++        android:layout_above="@+id/nav"
+         android:layout_below="@+id/hed"
+         android:layout_marginTop="16dp"
+         android:scrollbars="vertical"
+-        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintEnd_toEndOf="@id/nav"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/hed"
+         tools:ignore="MissingConstraints">
+Index: app/src/main/java/com/example/ifind/pendingRequests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ifind;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.GridLayoutManager;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\nimport android.view.Menu;\r\nimport android.view.MenuItem;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.material.bottomnavigation.BottomNavigationView;\r\nimport com.google.android.material.navigation.NavigationBarView;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class pendingRequests extends AppCompatActivity {\r\n    private FirebaseAuth auth;\r\n    AdapterClass adapter;\r\n    List<ItemHelperClass> dataList;\r\n    DatabaseReference databaseReference;\r\n    ValueEventListener eventListener;\r\n    BottomNavigationView nav;\r\n    RecyclerView recyclerView;\r\n\r\n\r\n    private boolean doubleBackToExitPressedOnce;\r\n    private Handler mHandler = new Handler();\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_pending_requests);\r\n\r\n        auth = FirebaseAuth.getInstance();\r\n        nav = findViewById(R.id.nav);\r\n        nav.setSelectedItemId(R.id.pending_);\r\n\r\n        nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {\r\n            @Override\r\n            public boolean onNavigationItemSelected(@NonNull MenuItem item) {\r\n                switch (item.getItemId()) {\r\n                    case R.id.pending_:\r\n                        return true;\r\n                    case R.id.approved_:\r\n                        startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));\r\n                        finish();\r\n                        overridePendingTransition(0,0);\r\n                        return true;\r\n                    case R.id.found_:\r\n                        startActivity(new Intent(getApplicationContext(), FoundAdmin.class));\r\n                        finish();\r\n                        overridePendingTransition(0,0);\r\n                        return true;\r\n                    case R.id.appre_:\r\n                        startActivity(new Intent(getApplicationContext(), AdminAppreciate.class));\r\n                        finish();\r\n                        overridePendingTransition(0,0);\r\n                        return true;\r\n                    case R.id.adminProfile:\r\n                        startActivity(new Intent(getApplicationContext(), AdminMain.class));\r\n                        finish();\r\n                        overridePendingTransition(0,0);\r\n                        return true;\r\n\r\n                }\r\n                return false;\r\n            }\r\n        });\r\n\r\n        RecyclerView recyclerView = findViewById(R.id.recyclerView);\r\n        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);\r\n        recyclerView.setLayoutManager(gridLayoutManager);\r\n\r\n        dataList = new ArrayList<>();\r\n        adapter = new AdapterClass(this, dataList);\r\n        recyclerView.setAdapter(adapter);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));\r\n\r\n        databaseReference = FirebaseDatabase.getInstance().getReference(\"SubmitLostItem\");\r\n        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {\r\n\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                dataList.clear();\r\n                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {\r\n                    ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);\r\n                    dataClass.setKey(itemSnapshot.getKey());\r\n                    dataList.add(dataClass);\r\n\r\n                }\r\n                adapter.notifyDataSetChanged();\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n                Toast.makeText(pendingRequests.this, \"error\", Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n\r\n    private final Runnable mRunnable = new Runnable() {\r\n        @Override\r\n        public void run() {\r\n            doubleBackToExitPressedOnce = false;\r\n        }\r\n    };\r\n\r\n    @Override\r\n    protected void onDestroy()\r\n    {\r\n        super.onDestroy();\r\n\r\n        if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }\r\n    }\r\n\r\n    @Override\r\n    public void onBackPressed() {\r\n        if (doubleBackToExitPressedOnce) {\r\n            super.onBackPressed();\r\n            auth.signOut();\r\n            finishAffinity();\r\n            return;\r\n        }\r\n\r\n        this.doubleBackToExitPressedOnce = true;\r\n        Toast.makeText(this, \"Please click BACK again to exit\", Toast.LENGTH_SHORT).show();\r\n\r\n        mHandler.postDelayed(mRunnable, 2000);\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/pendingRequests.java b/app/src/main/java/com/example/ifind/pendingRequests.java
+--- a/app/src/main/java/com/example/ifind/pendingRequests.java	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/java/com/example/ifind/pendingRequests.java	(date 1684684449346)
+@@ -83,7 +83,7 @@
+         recyclerView.setLayoutManager(gridLayoutManager);
+ 
+         dataList = new ArrayList<>();
+-        adapter = new AdapterClass(this, dataList);
++        adapter = new AdapterClass(this, dataList, false, false, false, false, false);
+         recyclerView.setAdapter(adapter);
+         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+ 
+Index: app/src/main/res/layout/activity_approved_item_details.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".ApprovedItemDetails\"\r\n    android:background=\"@drawable/gradient_bg\" >\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\" >\r\n\r\n            <RelativeLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"vertical\">\r\n\r\n\r\n                <com.google.android.material.imageview.ShapeableImageView\r\n                    android:id=\"@+id/image_full\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"300dp\"\r\n                    android:layout_alignParentStart=\"true\"\r\n                    android:layout_alignParentTop=\"true\"\r\n                    android:layout_alignParentEnd=\"true\"\r\n                    android:layout_marginStart=\"25dp\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    android:layout_marginEnd=\"25dp\"\r\n                    android:background=\"@drawable/shape_for_post\"\r\n                    android:padding=\"0dp\"\r\n                    android:scaleType=\"centerCrop\"\r\n                    android:src=\"@drawable/image\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/shape\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"860dp\"\r\n                    android:layout_alignParentTop=\"true\"\r\n                    android:layout_alignParentEnd=\"true\"\r\n                    android:layout_marginTop=\"355dp\"\r\n                    android:layout_marginEnd=\"0dp\"\r\n                    android:background=\"@drawable/shape_for_post\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/shape_descrip\"\r\n                    android:layout_width=\"317dp\"\r\n                    android:layout_height=\"600dp\"\r\n                    android:layout_alignParentStart=\"true\"\r\n                    android:layout_alignParentTop=\"true\"\r\n                    android:layout_alignParentEnd=\"true\"\r\n                    android:layout_marginStart=\"43dp\"\r\n                    android:layout_marginTop=\"480dp\"\r\n                    android:layout_marginEnd=\"44dp\"\r\n                    android:layout_marginBottom=\"100dp\"\r\n                    android:background=\"@drawable/shape_descrip\"\r\n                    android:gravity=\"center\" />\r\n\r\n                <androidx.constraintlayout.widget.Group\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    app:constraint_referenced_ids=\"item_loc,item_time,item_date,item_desc,item_name\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/item_desc\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@+id/item_loc6\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_alignBottom=\"@+id/shape_descrip\"\r\n                    android:layout_marginStart=\"32dp\"\r\n                    android:layout_marginTop=\"15dp\"\r\n                    android:layout_marginEnd=\"23dp\"\r\n                    android:layout_marginBottom=\"130dp\"\r\n                    android:text=\"@string/item_description3\"\r\n                    android:textColor=\"#000000\"\r\n                    android:textSize=\"16sp\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/item_name\"\r\n                    android:layout_width=\"317dp\"\r\n                    android:layout_height=\"65dp\"\r\n                    android:layout_alignTop=\"@+id/shape\"\r\n                    android:layout_alignParentStart=\"true\"\r\n                    android:layout_alignParentEnd=\"true\"\r\n                    android:layout_marginStart=\"43dp\"\r\n                    android:layout_marginTop=\"33dp\"\r\n                    android:layout_marginEnd=\"43dp\"\r\n                    android:background=\"@drawable/shape_for_detail_post\"\r\n                    android:gravity=\"center\"\r\n                    android:text=\"@string/item_name1\"\r\n                    android:textColor=\"#FFFFFF\"\r\n                    android:textSize=\"20sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/item_loc\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@+id/item_loc2\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_marginStart=\"30dp\"\r\n                    android:layout_marginTop=\"16dp\"\r\n                    android:layout_marginEnd=\"25dp\"\r\n                    android:text=\"@string/location\"\r\n                    android:textSize=\"16sp\"\r\n                    android:textColor=\"#000000\"/>\r\n\r\n                <TextView\r\n                    android:id=\"@+id/item_loc2\"\r\n                    android:layout_width=\"298dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignTop=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:layout_marginEnd=\"8dp\"\r\n                    android:text=\"@string/last_seen_label\"\r\n                    android:textColor=\"#4C54F3\"\r\n                    android:textSize=\"20sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/item_loc4\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@+id/item_date\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginTop=\"16dp\"\r\n                    android:layout_marginEnd=\"23dp\"\r\n                    android:text=\"@string/item_found_time_label\"\r\n                    android:textColor=\"#4C54F3\"\r\n                    android:textSize=\"20sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/item_loc5\"\r\n                    android:layout_width=\"255dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@+id/item_loc\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginTop=\"16dp\"\r\n                    android:layout_marginEnd=\"54dp\"\r\n                    android:text=\"@string/item_found_date_label\"\r\n                    android:textColor=\"#4C54F3\"\r\n                    android:textSize=\"20sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/item_loc6\"\r\n                    android:layout_width=\"255dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@+id/item_time\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginTop=\"16dp\"\r\n                    android:layout_marginEnd=\"54dp\"\r\n                    android:text=\"Description\"\r\n                    android:textColor=\"#4C54F3\"\r\n                    android:textSize=\"20sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/item_loc3\"\r\n                    android:layout_width=\"255dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@+id/item_time\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginTop=\"16dp\"\r\n                    android:layout_marginEnd=\"54dp\"\r\n                    android:text=\"Description\"\r\n                    android:textColor=\"#4C54F3\"\r\n                    android:textSize=\"20sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/item_loc7\"\r\n                    android:layout_width=\"255dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@+id/item_time\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginTop=\"16dp\"\r\n                    android:layout_marginEnd=\"54dp\"\r\n                    android:text=\"Description\"\r\n                    android:textColor=\"#4C54F3\"\r\n                    android:textSize=\"20sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/item_loc9\"\r\n                    android:layout_width=\"255dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@+id/item_time\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_marginStart=\"16dp\"\r\n                    android:layout_marginTop=\"250dp\"\r\n                    android:layout_marginEnd=\"53dp\"\r\n                    android:text=\"Found By\"\r\n                    android:textColor=\"#4C54F3\"\r\n                    android:textSize=\"20sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/item_date\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@+id/item_loc5\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_marginStart=\"30dp\"\r\n                    android:layout_marginTop=\"16dp\"\r\n                    android:layout_marginEnd=\"25dp\"\r\n                    android:text=\"Date\"\r\n                    android:textSize=\"16sp\"\r\n                    android:textColor=\"#000000\"/>\r\n\r\n                <TextView\r\n                    android:id=\"@+id/item_time\"\r\n                    android:layout_width=\"276dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@+id/item_loc4\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_marginStart=\"30dp\"\r\n                    android:layout_marginTop=\"16dp\"\r\n                    android:layout_marginEnd=\"25dp\"\r\n                    android:text=\"Time:\"\r\n                    android:textSize=\"16sp\"\r\n                    android:textColor=\"#000000\"/>\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/item_foundName\"\r\n                    android:layout_width=\"276dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@+id/item_loc4\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_marginStart=\"25dp\"\r\n                    android:layout_marginTop=\"332dp\"\r\n                    android:layout_marginEnd=\"30dp\"\r\n                    android:text=\"Full Name\"\r\n                    android:textColor=\"#000000\"\r\n                    android:textSize=\"16sp\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/approve_buttA\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@+id/shape_descrip\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_alignParentTop=\"true\"\r\n                    android:layout_marginStart=\"9dp\"\r\n                    android:layout_marginTop=\"1108dp\"\r\n                    android:layout_marginEnd=\"-2dp\"\r\n                    android:backgroundTint=\"#44FF00\"\r\n                    android:onClick=\"copyRecord\"\r\n                    android:text=\"CLAIMED\"\r\n                    app:icon=\"@drawable/approved_ic\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/del_buttA\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@+id/shape_descrip\"\r\n                    android:layout_alignStart=\"@+id/shape_descrip\"\r\n                    android:layout_alignEnd=\"@+id/shape_descrip\"\r\n                    android:layout_alignParentTop=\"true\"\r\n                    android:layout_marginStart=\"31dp\"\r\n                    android:layout_marginTop=\"1162dp\"\r\n                    android:layout_marginEnd=\"19dp\"\r\n                    android:backgroundTint=\"#FF0000\"\r\n                    android:text=\"FORGOTTEN\"\r\n                    app:icon=\"@drawable/baseline_storage_24\" />\r\n\r\n\r\n            </RelativeLayout>\r\n\r\n        </LinearLayout>\r\n\r\n    </ScrollView>\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_approved_item_details.xml b/app/src/main/res/layout/activity_approved_item_details.xml
+--- a/app/src/main/res/layout/activity_approved_item_details.xml	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/res/layout/activity_approved_item_details.xml	(date 1684685235882)
+@@ -271,9 +271,8 @@
+                     android:layout_alignStart="@+id/shape_descrip"
+                     android:layout_alignEnd="@+id/shape_descrip"
+                     android:layout_alignParentTop="true"
+-                    android:layout_marginStart="9dp"
+                     android:layout_marginTop="1108dp"
+-                    android:layout_marginEnd="-2dp"
++                    android:layout_centerHorizontal="true"
+                     android:backgroundTint="#44FF00"
+                     android:onClick="copyRecord"
+                     android:text="CLAIMED"
+@@ -287,9 +286,8 @@
+                     android:layout_alignStart="@+id/shape_descrip"
+                     android:layout_alignEnd="@+id/shape_descrip"
+                     android:layout_alignParentTop="true"
+-                    android:layout_marginStart="31dp"
+                     android:layout_marginTop="1162dp"
+-                    android:layout_marginEnd="19dp"
++                    android:layout_centerHorizontal="true"
+                     android:backgroundTint="#FF0000"
+                     android:text="FORGOTTEN"
+                     app:icon="@drawable/baseline_storage_24" />
+Index: app/src/main/res/layout/activity_forgotten_item_view.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_forgotten_item_view.xml b/app/src/main/res/layout/activity_forgotten_item_view.xml
+new file mode 100644
+--- /dev/null	(date 1684685861988)
++++ b/app/src/main/res/layout/activity_forgotten_item_view.xml	(date 1684685861988)
+@@ -0,0 +1,302 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical"
++    tools:context=".ForgottenItemView"
++    android:background="@drawable/gradient_bg" >
++
++    <ScrollView
++        android:layout_width="match_parent"
++        android:layout_height="match_parent">
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="vertical" >
++
++            <RelativeLayout
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                android:orientation="vertical">
++
++
++                <com.google.android.material.imageview.ShapeableImageView
++                    android:id="@+id/image_full"
++                    android:layout_width="match_parent"
++                    android:layout_height="300dp"
++                    android:layout_alignParentStart="true"
++                    android:layout_alignParentTop="true"
++                    android:layout_alignParentEnd="true"
++                    android:layout_marginStart="25dp"
++                    android:layout_marginTop="25dp"
++                    android:layout_marginEnd="25dp"
++                    android:background="@drawable/shape_for_post"
++                    android:padding="0dp"
++                    android:scaleType="centerCrop"
++                    android:src="@drawable/image" />
++
++                <TextView
++                    android:id="@+id/shape"
++                    android:layout_width="match_parent"
++                    android:layout_height="860dp"
++                    android:layout_alignParentTop="true"
++                    android:layout_alignParentEnd="true"
++                    android:layout_marginTop="355dp"
++                    android:layout_marginEnd="0dp"
++                    android:background="@drawable/shape_for_post" />
++
++                <TextView
++                    android:id="@+id/shape_descrip"
++                    android:layout_width="317dp"
++                    android:layout_height="600dp"
++                    android:layout_alignParentStart="true"
++                    android:layout_alignParentTop="true"
++                    android:layout_alignParentEnd="true"
++                    android:layout_marginStart="43dp"
++                    android:layout_marginTop="480dp"
++                    android:layout_marginEnd="44dp"
++                    android:layout_marginBottom="100dp"
++                    android:background="@drawable/shape_descrip"
++                    android:gravity="center" />
++
++                <androidx.constraintlayout.widget.Group
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    app:constraint_referenced_ids="item_loc,item_time,item_date,item_desc,item_name" />
++
++                <TextView
++                    android:id="@+id/item_desc"
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@+id/item_loc6"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_alignBottom="@+id/shape_descrip"
++                    android:layout_marginStart="32dp"
++                    android:layout_marginTop="15dp"
++                    android:layout_marginEnd="23dp"
++                    android:layout_marginBottom="130dp"
++                    android:text="@string/item_description3"
++                    android:textColor="#000000"
++                    android:textSize="16sp" />
++
++                <TextView
++                    android:id="@+id/item_name"
++                    android:layout_width="317dp"
++                    android:layout_height="65dp"
++                    android:layout_alignTop="@+id/shape"
++                    android:layout_alignParentStart="true"
++                    android:layout_alignParentEnd="true"
++                    android:layout_marginStart="43dp"
++                    android:layout_marginTop="33dp"
++                    android:layout_marginEnd="43dp"
++                    android:background="@drawable/shape_for_detail_post"
++                    android:gravity="center"
++                    android:text="@string/item_name1"
++                    android:textColor="#FFFFFF"
++                    android:textSize="20sp"
++                    android:textStyle="bold" />
++
++                <TextView
++                    android:id="@+id/item_loc"
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@+id/item_loc2"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_marginStart="30dp"
++                    android:layout_marginTop="16dp"
++                    android:layout_marginEnd="25dp"
++                    android:text="@string/location"
++                    android:textSize="16sp"
++                    android:textColor="#000000"/>
++
++                <TextView
++                    android:id="@+id/item_loc2"
++                    android:layout_width="298dp"
++                    android:layout_height="wrap_content"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignTop="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_marginStart="15dp"
++                    android:layout_marginTop="8dp"
++                    android:layout_marginEnd="8dp"
++                    android:text="@string/last_seen_label"
++                    android:textColor="#4C54F3"
++                    android:textSize="20sp"
++                    android:textStyle="bold" />
++
++                <TextView
++                    android:id="@+id/item_loc4"
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@+id/item_date"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_marginStart="15dp"
++                    android:layout_marginTop="16dp"
++                    android:layout_marginEnd="23dp"
++                    android:text="@string/item_found_time_label"
++                    android:textColor="#4C54F3"
++                    android:textSize="20sp"
++                    android:textStyle="bold" />
++
++                <TextView
++                    android:id="@+id/item_loc5"
++                    android:layout_width="255dp"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@+id/item_loc"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_marginStart="15dp"
++                    android:layout_marginTop="16dp"
++                    android:layout_marginEnd="54dp"
++                    android:text="@string/item_found_date_label"
++                    android:textColor="#4C54F3"
++                    android:textSize="20sp"
++                    android:textStyle="bold" />
++
++
++                <TextView
++                    android:id="@+id/item_loc6"
++                    android:layout_width="255dp"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@+id/item_time"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_marginStart="15dp"
++                    android:layout_marginTop="16dp"
++                    android:layout_marginEnd="54dp"
++                    android:text="Description"
++                    android:textColor="#4C54F3"
++                    android:textSize="20sp"
++                    android:textStyle="bold" />
++
++                <TextView
++                    android:id="@+id/item_loc3"
++                    android:layout_width="255dp"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@+id/item_time"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_marginStart="15dp"
++                    android:layout_marginTop="16dp"
++                    android:layout_marginEnd="54dp"
++                    android:text="Description"
++                    android:textColor="#4C54F3"
++                    android:textSize="20sp"
++                    android:textStyle="bold" />
++
++                <TextView
++                    android:id="@+id/item_loc7"
++                    android:layout_width="255dp"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@+id/item_time"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_marginStart="15dp"
++                    android:layout_marginTop="16dp"
++                    android:layout_marginEnd="54dp"
++                    android:text="Description"
++                    android:textColor="#4C54F3"
++                    android:textSize="20sp"
++                    android:textStyle="bold" />
++
++                <TextView
++                    android:id="@+id/item_loc9"
++                    android:layout_width="255dp"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@+id/item_time"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_marginStart="16dp"
++                    android:layout_marginTop="250dp"
++                    android:layout_marginEnd="53dp"
++                    android:text="Found By"
++                    android:textColor="#4C54F3"
++                    android:textSize="20sp"
++                    android:textStyle="bold" />
++
++                <TextView
++                    android:id="@+id/item_date"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@+id/item_loc5"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_marginStart="30dp"
++                    android:layout_marginTop="16dp"
++                    android:layout_marginEnd="25dp"
++                    android:text="Date"
++                    android:textSize="16sp"
++                    android:textColor="#000000"/>
++
++                <TextView
++                    android:id="@+id/item_time"
++                    android:layout_width="276dp"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@+id/item_loc4"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_marginStart="30dp"
++                    android:layout_marginTop="16dp"
++                    android:layout_marginEnd="25dp"
++                    android:text="Time:"
++                    android:textSize="16sp"
++                    android:textColor="#000000"/>
++
++
++                <TextView
++                    android:id="@+id/item_foundName"
++                    android:layout_width="276dp"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@+id/item_loc4"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_marginStart="25dp"
++                    android:layout_marginTop="332dp"
++                    android:layout_marginEnd="30dp"
++                    android:text="Full Name"
++                    android:textColor="#000000"
++                    android:textSize="16sp" />
++
++                <Button
++                    android:id="@+id/approve_buttA"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@+id/shape_descrip"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_alignParentTop="true"
++                    android:layout_marginTop="1108dp"
++                    android:layout_centerHorizontal="true"
++                    android:backgroundTint="#44FF00"
++                    android:onClick="copyRecord"
++                    android:text="CLAIMED"
++                    app:icon="@drawable/approved_ic" />
++
++                <Button
++                    android:id="@+id/del_buttA"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@+id/shape_descrip"
++                    android:layout_alignStart="@+id/shape_descrip"
++                    android:layout_alignEnd="@+id/shape_descrip"
++                    android:layout_alignParentTop="true"
++                    android:layout_marginTop="1162dp"
++                    android:layout_centerHorizontal="true"
++                    android:backgroundTint="#FF0000"
++                    android:text="@string/delete"
++                    app:icon="@drawable/baseline_delete_24" />
++
++
++            </RelativeLayout>
++
++        </LinearLayout>
++
++    </ScrollView>
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/ifind/ApprovedItemDetails.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ifind;\r\n\r\nimport static android.content.ContentValues.TAG;\r\n\r\nimport android.content.DialogInterface;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.support.annotation.NonNull;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.appcompat.app.AlertDialog;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport com.google.firebase.storage.StorageReference;\r\nimport com.squareup.picasso.Picasso;\r\n\r\nimport java.text.SimpleDateFormat;\r\nimport java.util.Calendar;\r\nimport java.util.Date;\r\nimport java.util.Locale;\r\n\r\npublic class ApprovedItemDetails extends AppCompatActivity {\r\n    TextView item_name, item_desc, item_loc, item_date, item_time, userID;\r\n    ImageView image_full;\r\n    Button del_button, approve_button;\r\n    String imageUrl = \"\";\r\n    String key = \"\";\r\n    private DatabaseReference toFound, logref,toForgotten;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_approved_item_details);\r\n\r\n        item_name = findViewById(R.id.item_name);\r\n        item_desc = findViewById(R.id.item_desc);\r\n        item_loc = findViewById(R.id.item_loc);\r\n        item_date = findViewById(R.id.item_date);\r\n        item_time = findViewById(R.id.item_time);\r\n        image_full = findViewById(R.id.image_full);\r\n        del_button = findViewById(R.id.del_buttA);\r\n        approve_button = findViewById(R.id.approve_buttA);\r\n        userID = findViewById(R.id.item_foundName);\r\n\r\n        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(\"Approved\");\r\n        toFound = FirebaseDatabase.getInstance().getReference(\"Found\");\r\n        toForgotten = FirebaseDatabase.getInstance().getReference(\"Forgotten\");\r\n        logref = FirebaseDatabase.getInstance().getReference(\"AdminActivityLogs\");\r\n\r\n\r\n\r\n\r\n        Bundle bundle = getIntent().getExtras();\r\n        String name = bundle.getString(\"Item Name\");\r\n        String loc = bundle.getString(\"Location\");\r\n        String desc = bundle.getString(\"Description\");\r\n        String date = bundle.getString(\"Date\");\r\n        String time = bundle.getString(\"Time\");\r\n        String userID_ = bundle.getString(\"userID_\");\r\n\r\n        if (bundle != null) {\r\n            item_name.setText(bundle.getString(\"Item Name\"));\r\n            item_loc.setText(bundle.getString(\"Location\"));\r\n            item_desc.setText(bundle.getString(\"Description\"));\r\n            item_date.setText(bundle.getString(\"Date\"));\r\n            item_time.setText(bundle.getString(\"Time\"));\r\n            userID.setText(bundle.getString(\"userID_\"));\r\n            key = bundle.getString(\"Key\");\r\n            imageUrl = bundle.getString(\"Image\");\r\n            Picasso.get().load(bundle.getString(\"Image\")).into(image_full);\r\n        }\r\n        Calendar calendar = Calendar.getInstance();\r\n        Date currentDate = calendar.getTime();\r\n\r\n        // Format the date and time\r\n        SimpleDateFormat dateFormat = new SimpleDateFormat(\"dd/MM/yyyy\", Locale.getDefault());\r\n        SimpleDateFormat timeFormat = new SimpleDateFormat(\"hh:mm aa\", Locale.getDefault());\r\n\r\n        String currentDateString = dateFormat.format(currentDate);\r\n        String currentTimeString = timeFormat.format(currentDate);\r\n\r\n        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();\r\n        FirebaseUser currentUser = firebaseAuth.getCurrentUser();\r\n        String AdminID = String.valueOf(currentUser.getDisplayName());\r\n        String postType = \"Owner claimed an item\";\r\n\r\n        String datePosted = currentDateString;\r\n        String timePosted = currentTimeString;\r\n\r\n\r\n        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, postType);\r\n        approve_button.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                AlertDialog.Builder builder = new AlertDialog.Builder(ApprovedItemDetails.this);\r\n\r\n                builder.setTitle(\"Confirm\");\r\n                builder.setMessage(\"Are you sure?\");\r\n\r\n                builder.setPositiveButton(\"YES\", new DialogInterface.OnClickListener() {\r\n\r\n                    public void onClick(DialogInterface dialog, int which) {\r\n\r\n\r\n                        logref.addListenerForSingleValueEvent(new ValueEventListener() {\r\n                            @Override\r\n                            public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {\r\n                                long uploadCount = dataSnapshot.getChildrenCount();\r\n                                if (uploadCount >= 20) {\r\n                                    // Remove the oldest key\r\n                                    String oldestKey = null;\r\n                                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {\r\n                                        oldestKey = childSnapshot.getKey();\r\n                                        break; // Get the first key (oldest)\r\n                                    }\r\n                                    if (oldestKey != null) {\r\n                                        logref.child(oldestKey).removeValue();\r\n                                    }\r\n                                }\r\n\r\n                                toFound.child(bundle.getString(\"Key\"))\r\n                                        .setValue( new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_)).addOnCompleteListener(new OnCompleteListener<Void>() {\r\n                                            @Override\r\n                                            public void onComplete(@androidx.annotation.NonNull Task<Void> task) {\r\n                                                if (task.isSuccessful()) {\r\n                                                    logref.child(key).setValue(loghelperclass);\r\n                                                    Toast.makeText(ApprovedItemDetails.this, \"Approved! Displayed in Lost Items!\", Toast.LENGTH_LONG).show();\r\n                                                    //remove if you want to delete the copied record from the pending\r\n\r\n                                                    reference.child(key).removeValue();\r\n                                                    startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));\r\n                                                }\r\n                                            }\r\n                                        }).addOnFailureListener(new OnFailureListener() {\r\n                                            @Override\r\n                                            public void onFailure(@androidx.annotation.NonNull Exception e) {\r\n                                                Toast.makeText(ApprovedItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();\r\n                                            }\r\n                                        });\r\n                            }\r\n\r\n                            @Override\r\n                            public void onCancelled(@androidx.annotation.NonNull DatabaseError databaseError) {\r\n                                Toast.makeText(ApprovedItemDetails.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();\r\n                            }\r\n                        });\r\n\r\n\r\n                    }\r\n                });\r\n\r\n                builder.setNegativeButton(\"NO\", new DialogInterface.OnClickListener() {\r\n\r\n                    @Override\r\n                    public void onClick(DialogInterface dialog, int which) {\r\n                        // Do nothing\r\n                        dialog.dismiss();\r\n                    }\r\n                });\r\n\r\n                AlertDialog alert = builder.create();\r\n                alert.show();\r\n\r\n\r\n            }\r\n        });\r\n\r\n        del_button.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                AlertDialog.Builder builder = new AlertDialog.Builder(ApprovedItemDetails.this);\r\n\r\n                builder.setTitle(\"Confirm\");\r\n                builder.setMessage(\"Are you sure?\");\r\n\r\n                builder.setPositiveButton(\"YES\", new DialogInterface.OnClickListener() {\r\n\r\n                    public void onClick(DialogInterface dialog, int which) {\r\n                        FirebaseStorage storage = FirebaseStorage.getInstance();\r\n                        StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);\r\n                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {\r\n                            @Override\r\n                            public void onSuccess(Void aVoid) {\r\n\r\n                                logref.addListenerForSingleValueEvent(new ValueEventListener() {\r\n                                    @Override\r\n                                    public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {\r\n                                        long uploadCount = dataSnapshot.getChildrenCount();\r\n                                        if (uploadCount >= 20) {\r\n                                            // Remove the oldest key\r\n                                            String oldestKey = null;\r\n                                            for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {\r\n                                                oldestKey = childSnapshot.getKey();\r\n                                                break; // Get the first key (oldest)\r\n                                            }\r\n                                            if (oldestKey != null) {\r\n                                                logref.child(oldestKey).removeValue();\r\n                                            }\r\n                                        }\r\n\r\n                                        logref.child(key).setValue(new ItemHelperClass(datePosted, timePosted, AdminID, \"Moved an Item to Forgotten\"));\r\n                                        toForgotten.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_)).addOnSuccessListener(new OnSuccessListener<Void>() {\r\n                                            @Override\r\n                                            public void onSuccess(Void aVoid) {\r\n                                                reference.child(key).removeValue();\r\n                                                Toast.makeText(ApprovedItemDetails.this, \"Item Moved to Forgotten\", Toast.LENGTH_SHORT).show();\r\n                                                startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));\r\n                                            }\r\n                                        });\r\n\r\n                                    }\r\n\r\n                                    @Override\r\n                                    public void onCancelled(@androidx.annotation.NonNull DatabaseError databaseError) {\r\n                                        Toast.makeText(ApprovedItemDetails.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();\r\n                                    }\r\n                                });\r\n\r\n                            }\r\n                        }).addOnFailureListener(new OnFailureListener() {\r\n                            @Override\r\n                            public void onFailure(@NonNull Exception e) {\r\n                                Log.e(TAG, \"Error requesting connection\", e);\r\n                            }\r\n\r\n                        });\r\n                    }\r\n                });\r\n\r\n                builder.setNegativeButton(\"NO\", new DialogInterface.OnClickListener() {\r\n\r\n                    @Override\r\n                    public void onClick(DialogInterface dialog, int which) {\r\n\r\n                        // Do nothing\r\n                        dialog.dismiss();\r\n                    }\r\n                });\r\n\r\n                AlertDialog alert = builder.create();\r\n                alert.show();\r\n\r\n            }\r\n        });\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/ApprovedItemDetails.java b/app/src/main/java/com/example/ifind/ApprovedItemDetails.java
+--- a/app/src/main/java/com/example/ifind/ApprovedItemDetails.java	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/java/com/example/ifind/ApprovedItemDetails.java	(date 1684686394293)
+@@ -195,54 +195,51 @@
+                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+ 
+                     public void onClick(DialogInterface dialog, int which) {
+-                        FirebaseStorage storage = FirebaseStorage.getInstance();
+-                        StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
+-                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+-                            @Override
+-                            public void onSuccess(Void aVoid) {
++
+ 
+-                                logref.addListenerForSingleValueEvent(new ValueEventListener() {
+-                                    @Override
+-                                    public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
+-                                        long uploadCount = dataSnapshot.getChildrenCount();
+-                                        if (uploadCount >= 20) {
+-                                            // Remove the oldest key
+-                                            String oldestKey = null;
+-                                            for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+-                                                oldestKey = childSnapshot.getKey();
+-                                                break; // Get the first key (oldest)
+-                                            }
+-                                            if (oldestKey != null) {
+-                                                logref.child(oldestKey).removeValue();
+-                                            }
+-                                        }
++                        logref.addListenerForSingleValueEvent(new ValueEventListener() {
++                            @Override
++                            public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
++                                long uploadCount = dataSnapshot.getChildrenCount();
++                                if (uploadCount >= 20) {
++                                    // Remove the oldest key
++                                    String oldestKey = null;
++                                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
++                                        oldestKey = childSnapshot.getKey();
++                                        break; // Get the first key (oldest)
++                                    }
++                                    if (oldestKey != null) {
++                                        logref.child(oldestKey).removeValue();
++                                    }
++                                }
+ 
+-                                        logref.child(key).setValue(new ItemHelperClass(datePosted, timePosted, AdminID, "Moved an Item to Forgotten"));
+-                                        toForgotten.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_)).addOnSuccessListener(new OnSuccessListener<Void>() {
++                                toForgotten.child(bundle.getString("Key"))
++                                        .setValue( new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                             @Override
+-                                            public void onSuccess(Void aVoid) {
+-                                                reference.child(key).removeValue();
+-                                                Toast.makeText(ApprovedItemDetails.this, "Item Moved to Forgotten", Toast.LENGTH_SHORT).show();
+-                                                startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
+-                                            }
+-                                        });
+-
+-                                    }
+-
+-                                    @Override
+-                                    public void onCancelled(@androidx.annotation.NonNull DatabaseError databaseError) {
+-                                        Toast.makeText(ApprovedItemDetails.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+-                                    }
+-                                });
++                                            public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
++                                                if (task.isSuccessful()) {
++                                                    logref.child(key).setValue(new ItemHelperClass(datePosted, timePosted, AdminID, "Transferred a Lost item to Forgotten Box"));
++                                                    Toast.makeText(ApprovedItemDetails.this, "Item Moved to Forgotten Box!", Toast.LENGTH_LONG).show();
++                                                    //remove if you want to delete the copied record from the pending
++                                                    reference.child(key).removeValue();
++                                                    startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
++                                                }
++                                            }
++                                        }).addOnFailureListener(new OnFailureListener() {
++                                            @Override
++                                            public void onFailure(@androidx.annotation.NonNull Exception e) {
++                                                Toast.makeText(ApprovedItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
++                                            }
++                                        });
++                            }
++
++                            @Override
++                            public void onCancelled(@androidx.annotation.NonNull DatabaseError databaseError) {
++                                Toast.makeText(ApprovedItemDetails.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();
++                            }
++                        });
+ 
+-                            }
+-                        }).addOnFailureListener(new OnFailureListener() {
+-                            @Override
+-                            public void onFailure(@NonNull Exception e) {
+-                                Log.e(TAG, "Error requesting connection", e);
+-                            }
+ 
+-                        });
+                     }
+                 });
+ 
+@@ -250,7 +247,6 @@
+ 
+                     @Override
+                     public void onClick(DialogInterface dialog, int which) {
+-
+                         // Do nothing
+                         dialog.dismiss();
+                     }
+@@ -259,6 +255,7 @@
+                 AlertDialog alert = builder.create();
+                 alert.show();
+ 
++
+             }
+         });
+ 
+Index: app/src/main/java/com/example/ifind/FoundActivityUSer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ifind;\r\n\r\nimport static android.content.ContentValues.TAG;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.support.annotation.NonNull;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport com.google.firebase.storage.StorageReference;\r\nimport com.squareup.picasso.Picasso;\r\n\r\npublic class FoundActivityUSer extends AppCompatActivity {\r\n    TextView item_name, item_desc, item_loc, item_date, item_time;\r\n    ImageView image_full;\r\n\r\n    String key = \"\";\r\n    String imageUrl = \"\";\r\n    private DatabaseReference toPath;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_userviewlostdetails);\r\n\r\n        item_name = findViewById(R.id.item_name);\r\n        item_desc = findViewById(R.id.item_desc);\r\n        item_loc = findViewById(R.id.item_loc);\r\n        item_date = findViewById(R.id.item_date);\r\n        item_time = findViewById(R.id.item_time);\r\n        image_full = findViewById(R.id.image_full);\r\n\r\n        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(\"SubmitLostItem\");\r\n\r\n\r\n        Bundle bundle = getIntent().getExtras();\r\n        String name = bundle.getString(\"Item Name\");\r\n        String loc = bundle.getString(\"Location\");\r\n        String desc = bundle.getString(\"Description\");\r\n        String date = bundle.getString(\"Date\");\r\n        String time = bundle.getString(\"Time\");\r\n\r\n        if (bundle != null) {\r\n            item_name.setText(bundle.getString(\"Item Name\"));\r\n            item_loc.setText(bundle.getString(\"Location\"));\r\n            item_desc.setText(bundle.getString(\"Description\"));\r\n            item_date.setText(bundle.getString(\"Date\"));\r\n            item_time.setText(bundle.getString(\"Time\"));\r\n            key = bundle.getString(\"Key\");\r\n            imageUrl = bundle.getString(\"Image\");\r\n            Picasso.get().load(bundle.getString(\"Image\")).into(image_full);\r\n\r\n        }\r\n\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/FoundActivityUSer.java b/app/src/main/java/com/example/ifind/FoundActivityUSer.java
+--- a/app/src/main/java/com/example/ifind/FoundActivityUSer.java	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/java/com/example/ifind/FoundActivityUSer.java	(date 1684683284998)
+@@ -47,7 +47,6 @@
+         item_time = findViewById(R.id.item_time);
+         image_full = findViewById(R.id.image_full);
+ 
+-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
+ 
+ 
+         Bundle bundle = getIntent().getExtras();
+Index: app/src/main/java/com/example/ifind/FoundAdmin.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ifind;\r\n\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.GridLayoutManager;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\nimport android.view.MenuItem;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.material.bottomnavigation.BottomNavigationView;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class FoundAdmin extends AppCompatActivity {\r\n    private FirebaseAuth auth;\r\n    BottomNavigationView nav;\r\n    FoundAdapterClass adapter;\r\n    List<ItemHelperClass> dataList;\r\n    DatabaseReference databaseReference;\r\n    ValueEventListener eventListener;\r\n    RecyclerView recyclerView;\r\n\r\n    private boolean doubleBackToExitPressedOnce;\r\n    private Handler mHandler = new Handler();\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_foundadmin);\r\n        nav = findViewById(R.id.nav);\r\n        nav.setSelectedItemId(R.id.found_);\r\n\r\n        databaseReference = FirebaseDatabase.getInstance().getReference(\"Found\");\r\n\r\n        nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {\r\n            @Override\r\n            public boolean onNavigationItemSelected(@NonNull MenuItem item) {\r\n                switch (item.getItemId()) {\r\n                    case R.id.pending_:\r\n                        startActivity(new Intent(getApplicationContext(), pendingRequests.class));\r\n                        finish();\r\n                        overridePendingTransition(0,0);\r\n                        return true;\r\n                    case R.id.approved_:\r\n                        startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));\r\n                        finish();\r\n                        overridePendingTransition(0,0);\r\n                        return true;\r\n                    case R.id.found_:\r\n                        return true;\r\n                    case R.id.appre_:\r\n                        startActivity(new Intent(getApplicationContext(), AdminAppreciate.class));\r\n                        finish();\r\n                        overridePendingTransition(0,0);\r\n                        return true;\r\n                    case R.id.adminProfile:\r\n                        startActivity(new Intent(getApplicationContext(), AdminMain.class));\r\n                        finish();\r\n                        overridePendingTransition(0,0);\r\n                        return true;\r\n                }\r\n                return false;\r\n            }\r\n        });\r\n\r\n        RecyclerView recyclerView = findViewById(R.id.recyclerView);\r\n        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);\r\n        recyclerView.setLayoutManager(gridLayoutManager);\r\n\r\n        dataList = new ArrayList<>();\r\n\r\n        adapter = new FoundAdapterClass(this, dataList);\r\n        recyclerView.setAdapter(adapter);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));\r\n        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                dataList.clear();\r\n                for (DataSnapshot itemSnapshot: snapshot.getChildren()){\r\n                    ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);\r\n                    dataClass.setKey(itemSnapshot.getKey());\r\n                    dataList.add(dataClass);\r\n                }\r\n                adapter.notifyDataSetChanged();\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n                Toast.makeText(FoundAdmin.this, \"error\", Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n\r\n\r\n    }\r\n\r\n\r\n    private final Runnable mRunnable = new Runnable() {\r\n        @Override\r\n        public void run() {\r\n            doubleBackToExitPressedOnce = false;\r\n        }\r\n    };\r\n\r\n    @Override\r\n    protected void onDestroy()\r\n    {\r\n        super.onDestroy();\r\n\r\n        if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }\r\n    }\r\n\r\n    @Override\r\n    public void onBackPressed() {\r\n        if (doubleBackToExitPressedOnce) {\r\n            super.onBackPressed();\r\n            auth.signOut();\r\n            finishAffinity();\r\n            return;\r\n        }\r\n\r\n        this.doubleBackToExitPressedOnce = true;\r\n        Toast.makeText(this, \"Please click BACK again to exit\", Toast.LENGTH_SHORT).show();\r\n\r\n        mHandler.postDelayed(mRunnable, 2000);\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/ifind/FoundAdmin.java b/app/src/main/java/com/example/ifind/FoundAdmin.java
+--- a/app/src/main/java/com/example/ifind/FoundAdmin.java	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/java/com/example/ifind/FoundAdmin.java	(date 1684684449356)
+@@ -27,7 +27,7 @@
+ public class FoundAdmin extends AppCompatActivity {
+     private FirebaseAuth auth;
+     BottomNavigationView nav;
+-    FoundAdapterClass adapter;
++    AdapterClass adapter;
+     List<ItemHelperClass> dataList;
+     DatabaseReference databaseReference;
+     ValueEventListener eventListener;
+@@ -81,7 +81,7 @@
+ 
+         dataList = new ArrayList<>();
+ 
+-        adapter = new FoundAdapterClass(this, dataList);
++        adapter = new AdapterClass(this, dataList, false, false, false, false, true);
+         recyclerView.setAdapter(adapter);
+         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+Index: app/src/main/res/layout/activity_userlogview.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><RelativeLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".userlogview\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/hed\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"50dp\"\r\n        android:background=\"@drawable/rectangle_blue\"\r\n        android:layout_alignParentTop=\"true\"\r\n        />\r\n\r\n\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_centerHorizontal=\"true\"\r\n        android:layout_marginStart=\"15dp\"\r\n        android:layout_marginTop=\"15dp\"\r\n        android:layout_marginEnd=\"15dp\"\r\n        android:layout_marginBottom=\"15dp\"\r\n        android:text=\"User Activity Log\"\r\n        android:textColor=\"#FFFFFF\"\r\n        android:textSize=\"18sp\"\r\n        android:textStyle=\"bold\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/back\"\r\n        android:layout_width=\"40dp\"\r\n        android:layout_height=\"40dp\"\r\n        android:layout_alignParentTop=\"true\"\r\n        android:layout_alignParentStart=\"true\"\r\n        android:layout_gravity=\"center_horizontal\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:layout_marginTop=\"6dp\"\r\n        android:layout_marginEnd=\"10dp\"\r\n        android:layout_marginBottom=\"10dp\"\r\n        android:backgroundTint=\"@android:color/white\"\r\n        android:text=\"@string/bck\"\r\n        android:textSize=\"15sp\"\r\n        android:textColor=\"@color/black\"/>\r\n\r\n    <androidx.recyclerview.widget.RecyclerView\r\n        android:id=\"@+id/recyclerView1\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_below=\"@+id/hed\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:scrollbars=\"vertical\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/hed\"\r\n        tools:ignore=\"MissingConstraints\">\r\n\r\n    </androidx.recyclerview.widget.RecyclerView>\r\n    <com.google.android.material.bottomnavigation.BottomNavigationView\r\n        android:id=\"@+id/nav\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_alignParentBottom=\"true\"\r\n        app:itemTextColor=\"@drawable/admin_nav\"\r\n        app:itemIconTint=\"@drawable/admin_nav\"\r\n        android:background=\"#54b8ff\"\r\n        app:menu=\"@menu/logmenu\"\r\n        />\r\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_userlogview.xml b/app/src/main/res/layout/activity_userlogview.xml
+--- a/app/src/main/res/layout/activity_userlogview.xml	(revision 842f2c262fbd8936f41aec5f464e87786e1d2ff0)
++++ b/app/src/main/res/layout/activity_userlogview.xml	(date 1684684966103)
+@@ -48,10 +48,11 @@
+         android:id="@+id/recyclerView1"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
++        android:layout_above="@+id/nav"
+         android:layout_below="@+id/hed"
+         android:layout_marginTop="16dp"
+         android:scrollbars="vertical"
+-        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintEnd_toEndOf="@id/nav"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/hed"
+         tools:ignore="MissingConstraints">
