@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +33,7 @@ public class LostFragment extends Fragment {
 
     SearchView searchView;
     AdapterClass2 adapter;
+    Button button;
 
 
     @Override
@@ -57,12 +59,34 @@ public class LostFragment extends Fragment {
         searchView = view.findViewById(R.id.search);
         searchView.clearFocus();
 
+        button = view.findViewById(R.id.filter);
+
         dataList = new ArrayList<>();
         adapter = new AdapterClass2(getContext(), dataList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Approved");
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialog sheetDialog = new BottomSheetDialog(requireContext(), R.style.CustomBottomSheetDialog);
+
+                View sheetView = LayoutInflater.from(requireContext())
+                        .inflate(R.layout.bottom_dialog,null);
+                sheetView.findViewById(R.id.imageViewcancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sheetDialog.dismiss();
+                    }
+                });
+
+                sheetDialog.setContentView(sheetView);
+                sheetDialog.show();
+            }
+        });
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -72,8 +96,6 @@ public class LostFragment extends Fragment {
                     ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);
                     dataClass.setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
-
-
                 }
                 adapter.notifyDataSetChanged();
             }
