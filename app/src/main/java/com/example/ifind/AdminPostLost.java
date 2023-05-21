@@ -29,6 +29,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -318,6 +319,10 @@ public class AdminPostLost extends AppCompatActivity {
             return;
         }
 
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        String AdminID = String.valueOf(currentUser.getDisplayName()); //get the name of the admin
+
         //get the values from the fields
         String itemName = itemname.getEditText().getText().toString();
         String itemDescription = description.getEditText().getText().toString();
@@ -329,7 +334,7 @@ public class AdminPostLost extends AppCompatActivity {
 
         //call the class UserHelperClass to use and store values to the database
         ItemHelperClass ItemhelperClass = new ItemHelperClass(itemName, itemDescription, itemLocation, datePosted,timePosted, imageURL, foundName);
-        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, foundName, postType);
+        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, postType);
 
         String uploadID = databaseRef.push().getKey();
 
@@ -337,7 +342,7 @@ public class AdminPostLost extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 long uploadCount = dataSnapshot.getChildrenCount();
-                if (uploadCount >= 10) {
+                if (uploadCount >= 20) {
                     // Remove the oldest key
                     String oldestKey = null;
                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {

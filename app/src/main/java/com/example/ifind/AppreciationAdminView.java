@@ -20,6 +20,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +31,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class AppreciationAdminView extends AppCompatActivity {
     TextView personName, itemName, Department, DateTime, Caption;
@@ -52,6 +57,7 @@ public class AppreciationAdminView extends AppCompatActivity {
         del_button = findViewById(R.id.deleteButt);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("AppreciationPost");
+        DatabaseReference logref = FirebaseDatabase.getInstance().getReference("AdminActivityLogs");
         Bundle bundle = getIntent().getExtras();
 
 
@@ -68,6 +74,21 @@ public class AppreciationAdminView extends AppCompatActivity {
             Picasso.get().load(bundle.getString("Image")).into(image_full);
 
         }
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // Format the date and time
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
+
+        String currentDateString = dateFormat.format(currentDate);
+        String currentTimeString = timeFormat.format(currentDate);
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        String AdminID = String.valueOf(currentUser.getDisplayName());
+        String postType = "Delete an Appreciation Post";
+
 
         del_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,22 +102,51 @@ public class AppreciationAdminView extends AppCompatActivity {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        FirebaseStorage storage = FirebaseStorage.getInstance();
-                        StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
-                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                        logref.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onSuccess(Void aVoid) {
-                                reference.child(key).removeValue();
-                                Toast.makeText(AppreciationAdminView.this, "Post Deleted", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(AppreciationAdminView.this, AdminAppreciate.class));
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.e(TAG, "Error requesting connection", e);
+                            public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
+                                long uploadCount = dataSnapshot.getChildrenCount();
+                                if (uploadCount >= 20) {
+                                    // Remove the oldest key
+                                    String oldestKey = null;
+                                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                                        oldestKey = childSnapshot.getKey();
+                                        break; // Get the first key (oldest)
+                                    }
+                                    if (oldestKey != null) {
+                                        logref.child(oldestKey).removeValue();
+                                    }
+                                }
+                                FirebaseStorage storage = FirebaseStorage.getInstance();
+                                StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
+                                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        ItemHelperClass loghelperclass = new ItemHelperClass(currentDateString, currentTimeString, AdminID, postType);
+                                        logref.child(key).setValue(loghelperclass);
+                                        reference.child(key).removeValue();
+                                        Toast.makeText(AppreciationAdminView.this, "Post Deleted!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(AppreciationAdminView.this, AdminAppreciate.class));
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.e(TAG, "Error requesting connection", e);
+                                    }
+
+                                });
+
                             }
 
+                            @Override
+                            public void onCancelled(@androidx.annotation.NonNull DatabaseError error) {
+                                Toast.makeText(AppreciationAdminView.this, "Error", Toast.LENGTH_SHORT).show();
+
+
+                            }
                         });
+
                     }
                 });
 

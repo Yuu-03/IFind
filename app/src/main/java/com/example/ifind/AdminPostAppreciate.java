@@ -306,7 +306,7 @@ public class AdminPostAppreciate extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 long uploadCount = dataSnapshot.getChildrenCount();
-                if (uploadCount >= 10) {
+                if (uploadCount >= 20) {
                     // Remove the oldest key
                     String oldestKey = null;
                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
