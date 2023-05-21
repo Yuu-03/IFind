@@ -49,10 +49,11 @@
         android:id="@+id/recyclerView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/nav"
         android:layout_below="@+id/hed"
         android:layout_marginTop="16dp"
         android:scrollbars="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/nav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hed"
         tools:ignore="MissingConstraints">

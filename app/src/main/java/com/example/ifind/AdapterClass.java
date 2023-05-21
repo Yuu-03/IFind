@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -24,10 +25,15 @@ import java.util.List;
 public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
     private Context context;
     private List<ItemHelperClass> datalist;
-
-    public AdapterClass(Context context, List<ItemHelperClass> datalist) {
+    private boolean isForgotten, isApprove, isUserLostView,isFound,isFoundAdmin;
+    public AdapterClass(Context context, List<ItemHelperClass> datalist, boolean isForgotten, boolean  isApprove, boolean isUserLostView,boolean isFound, boolean isFoundAdmin) {
         this.context = context;
         this.datalist = datalist;
+        this.isForgotten = isForgotten;
+        this.isApprove = isApprove;
+        this.isUserLostView = isUserLostView;
+        this.isFound = isFound;
+        this.isFoundAdmin = isFoundAdmin;
     }
 
     @NonNull
@@ -57,19 +63,106 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
         holder.textItemTime.setText(item.getDate());
         holder.textItemDate.setText(item.getTime());
 
-        holder.recCard.setOnClickListener(view -> {
-            Intent intent = new Intent(context, LostItemDetails.class);
-            intent.putExtra("Image", item.getImageURL());
-            intent.putExtra("Item Name", item.getItemName());
-            intent.putExtra("Location", item.getLocation());
-            intent.putExtra("Date", item.getDate());
-            intent.putExtra("Time", item.getTime());
-            intent.putExtra("Description", item.getDescription());
-            intent.putExtra("userID_", item.getUserID());
+        if (isForgotten) {
+            holder.recCard.setOnClickListener(view -> {
+                Intent intent = new Intent(context, ForgottenItemView.class);
+                intent.putExtra("Image", item.getImageURL());
+                intent.putExtra("Item Name", item.getItemName());
+                intent.putExtra("Location", item.getLocation());
+                intent.putExtra("Date", item.getDate());
+                intent.putExtra("Time", item.getTime());
+                intent.putExtra("Description", item.getDescription());
+                intent.putExtra("userID_", item.getUserID());
 
-            intent.putExtra("Key", item.getKey());
-            context.startActivity(intent);
-        });
+                intent.putExtra("Key", item.getKey());
+                Toast.makeText(context.getApplicationContext(), "FORGOTTEN", Toast.LENGTH_SHORT).show();
+
+                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+            });
+        } else if (isApprove) {
+            holder.recCard.setOnClickListener(view -> {
+                Intent intent = new Intent(context, ApprovedItemDetails.class);
+                intent.putExtra("Image", item.getImageURL());
+                intent.putExtra("Item Name", item.getItemName());
+                intent.putExtra("Location", item.getLocation());
+                intent.putExtra("Date", item.getDate());
+                intent.putExtra("Time", item.getTime());
+                intent.putExtra("Description", item.getDescription());
+                intent.putExtra("userID_", item.getUserID());
+
+                intent.putExtra("Key", item.getKey());
+                Toast.makeText(context.getApplicationContext(), "APPROVED", Toast.LENGTH_SHORT).show();
+
+                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+            });
+            
+        }else if (isUserLostView) {
+            holder.recCard.setOnClickListener(view -> {
+                Intent intent = new Intent(context, userviewlostdetails.class);
+                intent.putExtra("Image", item.getImageURL());
+                intent.putExtra("Item Name", item.getItemName());
+                intent.putExtra("Location", item.getLocation());
+                intent.putExtra("Date", item.getDate());
+                intent.putExtra("Time", item.getTime());
+                intent.putExtra("Description", item.getDescription());
+                intent.putExtra("userID_", item.getUserID());
+
+                intent.putExtra("Key", item.getKey());
+                Toast.makeText(context.getApplicationContext(), "USER LOST VIEW", Toast.LENGTH_SHORT).show();
+
+                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            });
+        }else if (isFound){
+            holder.recCard.setOnClickListener(view -> {
+                Intent intent = new Intent(context, FoundActivityUSer.class);
+                intent.putExtra("Image", item.getImageURL());
+                intent.putExtra("Item Name", item.getItemName());
+                intent.putExtra("Location", item.getLocation());
+                intent.putExtra("Date", item.getDate());
+                intent.putExtra("Time", item.getTime());
+                intent.putExtra("Description", item.getDescription());
+                intent.putExtra("userID_", item.getUserID());
+
+                intent.putExtra("Key", item.getKey());
+                Toast.makeText(context.getApplicationContext(), "FOUND USER VIEW", Toast.LENGTH_SHORT).show();
+
+                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            });
+        }else if (isFoundAdmin) {
+            holder.recCard.setOnClickListener(view -> {
+                Intent intent = new Intent(context, Founditems.class);
+                intent.putExtra("Image", item.getImageURL());
+                intent.putExtra("Item Name", item.getItemName());
+                intent.putExtra("Location", item.getLocation());
+                intent.putExtra("Date", item.getDate());
+                intent.putExtra("Time", item.getTime());
+                intent.putExtra("Description", item.getDescription());
+                intent.putExtra("userID_", item.getUserID());
+
+                intent.putExtra("Key", item.getKey());
+                Toast.makeText(context.getApplicationContext(), "FOUND ADMIN VIEW", Toast.LENGTH_SHORT).show();
+
+                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            });
+        }else{
+            holder.recCard.setOnClickListener(view -> {
+                Intent intent = new Intent(context, LostItemDetails.class);
+                intent.putExtra("Image", item.getImageURL());
+                intent.putExtra("Item Name", item.getItemName());
+                intent.putExtra("Location", item.getLocation());
+                intent.putExtra("Date", item.getDate());
+                intent.putExtra("Time", item.getTime());
+                intent.putExtra("Description", item.getDescription());
+                intent.putExtra("userID_", item.getUserID());
+
+                intent.putExtra("Key", item.getKey());
+                Toast.makeText(context.getApplicationContext(), "LostItemDetails", Toast.LENGTH_SHORT).show();
+
+                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            });
+        }
     }
 }
 

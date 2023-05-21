@@ -27,7 +27,7 @@ import java.util.List;
 public class FoundAdmin extends AppCompatActivity {
     private FirebaseAuth auth;
     BottomNavigationView nav;
-    FoundAdapterClass adapter;
+    AdapterClass adapter;
     List<ItemHelperClass> dataList;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
@@ -81,7 +81,7 @@ public class FoundAdmin extends AppCompatActivity {
 
         dataList = new ArrayList<>();
 
-        adapter = new FoundAdapterClass(this, dataList);
+        adapter = new AdapterClass(this, dataList, false, false, false, false, true);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {

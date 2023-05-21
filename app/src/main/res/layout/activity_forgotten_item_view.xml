@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ApprovedItemDetails"
+    tools:context=".ForgottenItemView"
     android:background="@drawable/gradient_bg" >
 
     <ScrollView
@@ -289,8 +289,8 @@
                     android:layout_marginTop="1162dp"
                     android:layout_centerHorizontal="true"
                     android:backgroundTint="#FF0000"
-                    android:text="FORGOTTEN"
-                    app:icon="@drawable/baseline_storage_24" />
+                    android:text="@string/delete"
+                    app:icon="@drawable/baseline_delete_24" />
 
 
             </RelativeLayout>

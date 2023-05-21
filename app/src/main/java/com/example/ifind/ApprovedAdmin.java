@@ -29,7 +29,7 @@ public class ApprovedAdmin extends AppCompatActivity {
     private FirebaseAuth auth;
     BottomNavigationView nav;
 
-    ApprovedAdapterClass adapter;
+    AdapterClass adapter;
     List<ItemHelperClass> dataList;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
@@ -94,7 +94,7 @@ public class ApprovedAdmin extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         dataList = new ArrayList<>();
-        adapter = new ApprovedAdapterClass(this, dataList);
+        adapter = new AdapterClass(this, dataList, false, true, false, false, false);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
 

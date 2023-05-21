@@ -83,7 +83,7 @@ public class pendingRequests extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         dataList = new ArrayList<>();
-        adapter = new AdapterClass(this, dataList);
+        adapter = new AdapterClass(this, dataList, false, false, false, false, false);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 

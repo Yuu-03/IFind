@@ -30,7 +30,7 @@ public class FoundFragment extends Fragment {
     ValueEventListener eventListener;
     SearchView searchView1;
 
-    AdapterClass2 adapter;
+    AdapterClass adapter;
 
 
     @Override
@@ -53,7 +53,7 @@ public class FoundFragment extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         dataList = new ArrayList<>();
-        adapter = new AdapterClass2(getContext(), dataList);
+        adapter = new AdapterClass(getContext(), dataList,false, false,false, true, false);
 
         searchView1 = view.findViewById(R.id.search2);
         searchView1.clearFocus();

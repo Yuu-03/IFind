@@ -47,7 +47,6 @@ public class FoundActivityUSer extends AppCompatActivity {
         item_time = findViewById(R.id.item_time);
         image_full = findViewById(R.id.image_full);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
 
 
         Bundle bundle = getIntent().getExtras();

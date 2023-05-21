@@ -12,6 +12,9 @@
         android:theme="@style/Theme.IFind"
         tools:targetApi="31">
         <activity
+            android:name=".ForgottenItemView"
+            android:exported="false" />
+        <activity
             android:name=".ForgottenView"
             android:exported="false" />
         <activity

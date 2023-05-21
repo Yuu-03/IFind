@@ -32,7 +32,7 @@ public class LostFragment extends Fragment {
     ValueEventListener eventListener;
 
     SearchView searchView;
-    AdapterClass2 adapter;
+    AdapterClass adapter;
     Button button;
 
 
@@ -62,7 +62,7 @@ public class LostFragment extends Fragment {
         button = view.findViewById(R.id.filter);
 
         dataList = new ArrayList<>();
-        adapter = new AdapterClass2(getContext(), dataList);
+        adapter = new AdapterClass(getContext(), dataList, false, false, true, false, false);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 

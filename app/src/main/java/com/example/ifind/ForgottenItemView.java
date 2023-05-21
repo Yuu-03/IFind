@@ -36,7 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class ApprovedItemDetails extends AppCompatActivity {
+public class ForgottenItemView extends AppCompatActivity {
     TextView item_name, item_desc, item_loc, item_date, item_time, userID;
     ImageView image_full;
     Button del_button, approve_button;
@@ -47,7 +47,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_approved_item_details);
+        setContentView(R.layout.activity_forgotten_item_view);
 
         item_name = findViewById(R.id.item_name);
         item_desc = findViewById(R.id.item_desc);
@@ -59,9 +59,8 @@ public class ApprovedItemDetails extends AppCompatActivity {
         approve_button = findViewById(R.id.approve_buttA);
         userID = findViewById(R.id.item_foundName);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Approved");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Forgotten");
         toFound = FirebaseDatabase.getInstance().getReference("Found");
-        toForgotten = FirebaseDatabase.getInstance().getReference("Forgotten");
         logref = FirebaseDatabase.getInstance().getReference("AdminActivityLogs");
 
 
@@ -99,7 +98,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         String AdminID = String.valueOf(currentUser.getDisplayName());
-        String postType = "Owner claimed an item";
+        String postType = "Forgotten Item Claimed!";
 
         String datePosted = currentDateString;
         String timePosted = currentTimeString;
@@ -110,7 +109,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(ApprovedItemDetails.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ForgottenItemView.this);
 
                 builder.setTitle("Confirm");
                 builder.setMessage("Are you sure?");
@@ -142,24 +141,23 @@ public class ApprovedItemDetails extends AppCompatActivity {
                                             public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     logref.child(key).setValue(loghelperclass);
-                                                    Toast.makeText(ApprovedItemDetails.this, "Approved! Displayed in Lost Items!", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(ForgottenItemView.this, "Item Claimed!", Toast.LENGTH_LONG).show();
                                                     //remove if you want to delete the copied record from the pending
-
                                                     reference.child(key).removeValue();
-                                                    startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
+                                                    startActivity(new Intent(getApplicationContext(), ForgottenView.class));
                                                 }
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@androidx.annotation.NonNull Exception e) {
-                                                Toast.makeText(ApprovedItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ForgottenItemView.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             }
 
                             @Override
                             public void onCancelled(@androidx.annotation.NonNull DatabaseError databaseError) {
-                                Toast.makeText(ApprovedItemDetails.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ForgottenItemView.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -187,7 +185,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(ApprovedItemDetails.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ForgottenItemView.this);
 
                 builder.setTitle("Confirm");
                 builder.setMessage("Are you sure?");
@@ -195,51 +193,54 @@ public class ApprovedItemDetails extends AppCompatActivity {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-
-
-                        logref.addListenerForSingleValueEvent(new ValueEventListener() {
+                        FirebaseStorage storage = FirebaseStorage.getInstance();
+                        StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
+                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
-                                long uploadCount = dataSnapshot.getChildrenCount();
-                                if (uploadCount >= 20) {
-                                    // Remove the oldest key
-                                    String oldestKey = null;
-                                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                                        oldestKey = childSnapshot.getKey();
-                                        break; // Get the first key (oldest)
-                                    }
-                                    if (oldestKey != null) {
-                                        logref.child(oldestKey).removeValue();
-                                    }
-                                }
+                            public void onSuccess(Void aVoid) {
 
-                                toForgotten.child(bundle.getString("Key"))
-                                        .setValue( new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    logref.child(key).setValue(new ItemHelperClass(datePosted, timePosted, AdminID, "Transferred a Lost item to Forgotten Box"));
-                                                    Toast.makeText(ApprovedItemDetails.this, "Item Moved to Forgotten Box!", Toast.LENGTH_LONG).show();
-                                                    //remove if you want to delete the copied record from the pending
-                                                    reference.child(key).removeValue();
-                                                    startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
-                                                }
+                                logref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
+                                        long uploadCount = dataSnapshot.getChildrenCount();
+                                        if (uploadCount >= 20) {
+                                            // Remove the oldest key
+                                            String oldestKey = null;
+                                            for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                                                oldestKey = childSnapshot.getKey();
+                                                break; // Get the first key (oldest)
                                             }
-                                        }).addOnFailureListener(new OnFailureListener() {
+                                            if (oldestKey != null) {
+                                                logref.child(oldestKey).removeValue();
+                                            }
+                                        }
+
+                                        logref.child(key).setValue(new ItemHelperClass(datePosted, timePosted, AdminID, "Deleted a Forgotten Item"))
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
-                                            public void onFailure(@androidx.annotation.NonNull Exception e) {
-                                                Toast.makeText(ApprovedItemDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            public void onSuccess(Void aVoid) {
+                                                reference.child(key).removeValue();
+                                                Toast.makeText(ForgottenItemView.this, "Forgotten Item Deleted", Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(getApplicationContext(), ForgottenView.class));
                                             }
                                         });
-                            }
 
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@androidx.annotation.NonNull DatabaseError databaseError) {
+                                        Toast.makeText(ForgottenItemView.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
                             @Override
-                            public void onCancelled(@androidx.annotation.NonNull DatabaseError databaseError) {
-                                Toast.makeText(ApprovedItemDetails.this, databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e(TAG, "Error requesting connection", e);
                             }
+
                         });
-
-
                     }
                 });
 
@@ -247,6 +248,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         // Do nothing
                         dialog.dismiss();
                     }
@@ -254,7 +256,6 @@ public class ApprovedItemDetails extends AppCompatActivity {
 
                 AlertDialog alert = builder.create();
                 alert.show();
-
 
             }
         });
