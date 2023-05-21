@@ -69,24 +69,24 @@ public class LostFragment extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference("Approved");
 
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheetDialog sheetDialog = new BottomSheetDialog(requireContext(), R.style.CustomBottomSheetDialog);
+        //button.setOnClickListener(new View.OnClickListener() {
+         //   @Override
+        //    public void onClick(View v) {
+        //        BottomSheetDialog sheetDialog = new BottomSheetDialog(requireContext(), R.style.CustomBottomSheetDialog);
+//
+        //        View sheetView = LayoutInflater.from(requireContext())
+        //                .inflate(R.layout.bottom_dialog,null);
+         //       sheetView.findViewById(R.id.imageViewcancel).setOnClickListener(new View.OnClickListener() {
+        //            @Override
+         //           public void onClick(View v) {
+         //               sheetDialog.dismiss();
+         //           }
+         //       });
 
-                View sheetView = LayoutInflater.from(requireContext())
-                        .inflate(R.layout.bottom_dialog,null);
-                sheetView.findViewById(R.id.imageViewcancel).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        sheetDialog.dismiss();
-                    }
-                });
-
-                sheetDialog.setContentView(sheetView);
-                sheetDialog.show();
-            }
-        });
+          //      sheetDialog.setContentView(sheetView);
+          //      sheetDialog.show();
+          //  }
+        //});
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override

@@ -108,7 +108,7 @@ public class LostItemDetails extends AppCompatActivity {
 
         String datePosted = currentDateString;
         String timePosted = currentTimeString;
-        String postType = "Approved a Lost Item";
+        String postType = "Verified and Approved a Lost Item";
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
@@ -158,7 +158,7 @@ public class LostItemDetails extends AppCompatActivity {
 
                                                     toPath1.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_));
                                                     logref.child(key).setValue(loghelperclass);
-                                                    Toast.makeText(LostItemDetails.this, "Approved! Displayed in Lost Items!", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(LostItemDetails.this, "Item Approved!", Toast.LENGTH_LONG).show();
                                                     //remove if you want to delete the copied record from the pending
                                                     reference.child(key).removeValue();
                                                     startActivity(new Intent(getApplicationContext(), pendingRequests.class));
@@ -237,7 +237,7 @@ public class LostItemDetails extends AppCompatActivity {
 
                                         logref.child(key).setValue(loghelperclass);
                                         reference.child(key).removeValue();
-                                        Toast.makeText(LostItemDetails.this, "Request Deleted", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LostItemDetails.this, "Item Delested", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(getApplicationContext(), pendingRequests.class));
 
                                     }

@@ -42,7 +42,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
     Button del_button, approve_button;
     String imageUrl = "";
     String key = "";
-    private DatabaseReference toFound, logref;
+    private DatabaseReference toFound, logref,toForgotten;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Approved");
         toFound = FirebaseDatabase.getInstance().getReference("Found");
+        toForgotten = FirebaseDatabase.getInstance().getReference("Forgotten");
         logref = FirebaseDatabase.getInstance().getReference("AdminActivityLogs");
 
 
@@ -98,7 +99,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         String AdminID = String.valueOf(currentUser.getDisplayName());
-        String postType = "Lost Item Claimed By Owner";
+        String postType = "Owner claimed an item";
 
         String datePosted = currentDateString;
         String timePosted = currentTimeString;
@@ -217,10 +218,16 @@ public class ApprovedItemDetails extends AppCompatActivity {
                                             }
                                         }
 
-                                        logref.child(key).setValue(new ItemHelperClass(datePosted, timePosted, AdminID, "Deleted an item from Approved"));
-                                        reference.child(key).removeValue();
-                                        Toast.makeText(ApprovedItemDetails.this, "Record Deleted", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
+                                        logref.child(key).setValue(new ItemHelperClass(datePosted, timePosted, AdminID, "Moved an Item to Forgotten"));
+                                        toForgotten.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                reference.child(key).removeValue();
+                                                Toast.makeText(ApprovedItemDetails.this, "Item Moved to Forgotten", Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
+                                            }
+                                        });
+
                                     }
 
                                     @Override

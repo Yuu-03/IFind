@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:backgroundTint="#26318A"
-            android:text="@string/filter"
+            android:text="filter"
             android:textColor="#FEFEFE"
             app:icon="@drawable/baseline_filter_alt_24"
             app:layout_constraintEnd_toEndOf="parent"
