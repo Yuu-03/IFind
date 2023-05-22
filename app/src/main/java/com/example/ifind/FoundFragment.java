@@ -138,6 +138,12 @@ public class FoundFragment extends Fragment {
         for (ItemHelperClass itemHelperClass : dataList) {
             if (itemHelperClass.getItemName().toLowerCase().contains(text.toLowerCase())) {
                 searchList.add(itemHelperClass);
+            }else if(itemHelperClass.getDate().toLowerCase().contains(text.toLowerCase())) {
+                searchList.add(itemHelperClass);
+            }else if(itemHelperClass.getLocation().toLowerCase().contains(text.toLowerCase())) {
+                searchList.add(itemHelperClass);
+            }else if(itemHelperClass.getUserID().toLowerCase().contains(text.toLowerCase())) {
+                searchList.add(itemHelperClass);
             }
         }
         adapter.searchDataList(searchList);

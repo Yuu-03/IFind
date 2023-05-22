@@ -143,6 +143,12 @@ public class LostFragment extends Fragment {
         for (ItemHelperClass itemHelperClass : dataList) {
             if (itemHelperClass.getItemName().toLowerCase().contains(text.toLowerCase())) {
                 searchList.add(itemHelperClass);
+            }else if(itemHelperClass.getDate().toLowerCase().contains(text.toLowerCase())) {
+                searchList.add(itemHelperClass);
+            }else if(itemHelperClass.getLocation().toLowerCase().contains(text.toLowerCase())) {
+                searchList.add(itemHelperClass);
+            }else if(itemHelperClass.getUserID().toLowerCase().contains(text.toLowerCase())) {
+                searchList.add(itemHelperClass);
             }
         }
         adapter.searchDataList(searchList);
@@ -339,6 +345,7 @@ public class LostFragment extends Fragment {
                         ItemHelperClass dataClass = itemSnapshot.getValue(ItemHelperClass.class);
                         dataClass.setKey(itemSnapshot.getKey());
                         dataList.add(dataClass);
+                        Collections.reverse(dataList);
                     }
                     adapter.notifyDataSetChanged();
                 }

@@ -96,6 +96,7 @@ public class HomeFragment extends Fragment {
                     LostImageHelperClass dataClass = itemSnapshot.getValue(LostImageHelperClass.class);
                     Collections.reverse(dataList);
                     dataList.add(dataClass);
+                    Collections.reverse(dataList);
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -126,6 +127,7 @@ public class HomeFragment extends Fragment {
                     FoundImageHelperClass dataClass2 = itemSnapshot.getValue(FoundImageHelperClass.class);
                     Collections.reverse(dataList2);
                     dataList2.add(dataClass2);
+                    Collections.reverse(dataList);
                 }
                 adapter2.notifyDataSetChanged();
             }

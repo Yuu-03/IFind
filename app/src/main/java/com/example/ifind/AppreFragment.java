@@ -83,7 +83,7 @@ public class AppreFragment extends Fragment {
                     AppreciationItemHelperClass dataClass = itemSnapshot.getValue(AppreciationItemHelperClass.class);
                     dataClass.setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
-
+                    Collections.reverse(dataList);
 
                 }
                 adapter.notifyDataSetChanged();
@@ -337,6 +337,7 @@ public class AppreFragment extends Fragment {
                         AppreciationItemHelperClass dataClass = itemSnapshot.getValue(AppreciationItemHelperClass.class);
                         dataClass.setKey(itemSnapshot.getKey());
                         dataList.add(dataClass);
+                        Collections.reverse(dataList);
                     }
                     adapter.notifyDataSetChanged();
                 }
