@@ -14,7 +14,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:background="#293ce1">
+        android:background="@color/bg_light">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/recImage"
@@ -40,6 +40,7 @@
             android:layout_marginTop="45dp"
             android:layout_marginEnd="17dp"
             android:layout_toEndOf="@+id/recImage"
+            android:textStyle="bold"
             android:text="Item Name:"
             android:textColor="@color/white"
             android:textSize="15sp"/>

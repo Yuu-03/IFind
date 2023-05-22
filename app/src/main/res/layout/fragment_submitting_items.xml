@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="20dp"
+            android:textAlignment="center"
             android:fontFamily="sans-serif-medium"
             android:text="@string/report_lost_item"
             android:textColor="#3F51B5"

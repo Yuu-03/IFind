@@ -26,6 +26,9 @@
             android:name=".ForgottenItemView"
             android:exported="false" />
         <activity
+            android:name=".UpdateProfile"
+            android:exported="false" />
+        <activity
             android:name=".ForgottenView"
             android:exported="false" />
         <activity

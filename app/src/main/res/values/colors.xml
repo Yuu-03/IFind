@@ -10,4 +10,15 @@
     <color name="green">#02e61d</color>
     <color name="blue">#3700ff</color>
     <color name="white">#FFFFFF</color>
+    <color name="navy">#293ce1</color>
+    <color name="bg_main">#1A25A7</color>
+    <color name="bg_primary">#212877</color>
+    <color name="bg_secondary">#F4F4FB</color>
+    <color name="btn_accent">#39AFEA</color>
+    <color name="btn_main">#184358</color>
+    <color name="card_appre">#F4F4FB</color>
+    <color name="bg_dark">#132C33</color>
+    <color name="bg_green">#126E82</color>
+    <color name="bg_light">#51C4D3</color>
+    <color name="bg_white">#D8E3E7</color>
 </resources>
