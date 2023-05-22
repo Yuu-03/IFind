@@ -13,11 +13,18 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class Founditems extends AppCompatActivity {
     TextView item_name, item_desc, item_loc, item_date, item_time, userID;
@@ -40,6 +47,7 @@ public class Founditems extends AppCompatActivity {
         userID = findViewById(R.id.pendingFoundName_);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Found");
+        DatabaseReference logref = FirebaseDatabase.getInstance().getReference("AdminActivityLogs");
 
         Bundle bundle = getIntent().getExtras();
 
@@ -54,6 +62,25 @@ public class Founditems extends AppCompatActivity {
             key = bundle.getString("Key");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
         }
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // Format the date and time
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
+
+        String currentDateString = dateFormat.format(currentDate);
+        String currentTimeString = timeFormat.format(currentDate);
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        String AdminID = String.valueOf(currentUser.getDisplayName());
+
+        String datePosted = currentDateString;
+        String timePosted = currentTimeString;
+
+        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID,"Deleted a an item in found");
+
 
         del_button.setOnClickListener(v -> {
 
@@ -66,7 +93,10 @@ public class Founditems extends AppCompatActivity {
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
 
-                reference.child(key).removeValue().addOnSuccessListener(aVoid -> {storageReference.delete();
+                reference.child(key).removeValue().addOnSuccessListener(aVoid -> {
+                    logref.child(key).setValue(loghelperclass);
+                    storageReference.delete();
+
                     Toast.makeText(Founditems.this, "Post Deleted", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Founditems.this, FoundAdmin.class));
                 }).addOnFailureListener(e -> Log.e(TAG, "Error requesting connection", e));

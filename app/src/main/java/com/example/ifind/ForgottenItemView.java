@@ -104,7 +104,9 @@ public class ForgottenItemView extends AppCompatActivity {
         String timePosted = currentTimeString;
 
 
-        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, postType);
+        ItemHelperClass loghelperclass1 = new ItemHelperClass(datePosted, timePosted, AdminID,"An owner claimed a forgotten item");
+        ItemHelperClass loghelperclass2 = new ItemHelperClass(datePosted, timePosted, AdminID,"Deleted an item from forgotten box");
+
         approve_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +130,7 @@ public class ForgottenItemView extends AppCompatActivity {
                                     String oldestKey = null;
                                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                                         oldestKey = childSnapshot.getKey();
-                                        break; // Get the first key (oldest)
+                                        break;
                                     }
                                     if (oldestKey != null) {
                                         logref.child(oldestKey).removeValue();
@@ -140,7 +142,7 @@ public class ForgottenItemView extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    logref.child(key).setValue(loghelperclass);
+                                                    logref.child(key).setValue(loghelperclass1);
                                                     Toast.makeText(ForgottenItemView.this, "Item Claimed!", Toast.LENGTH_LONG).show();
                                                     //remove if you want to delete the copied record from the pending
                                                     reference.child(key).removeValue();
@@ -215,7 +217,7 @@ public class ForgottenItemView extends AppCompatActivity {
                                             }
                                         }
 
-                                        logref.child(key).setValue(new ItemHelperClass(datePosted, timePosted, AdminID, "Deleted a Forgotten Item"))
+                                        logref.child(key).setValue(loghelperclass2)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {

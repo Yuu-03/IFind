@@ -13,4 +13,11 @@
         <item>STAFF</item>
         <item>GUARD</item>
     </string-array>
+
+
+    <string-array name="filter_options">
+        <item>Week</item>
+        <item>Month</item>
+        <item>Year</item>
+    </string-array>
 </resources>

@@ -105,13 +105,14 @@ public class ApprovedItemDetails extends AppCompatActivity {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         String AdminID = String.valueOf(currentUser.getDisplayName());
-        String postType = "Owner claimed an item";
 
         String datePosted = currentDateString;
         String timePosted = currentTimeString;
 
 
-        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, postType);
+        ItemHelperClass loghelperclass1 = new ItemHelperClass(datePosted, timePosted, AdminID,"An owner claimed an item");
+        ItemHelperClass loghelperclass2 = new ItemHelperClass(datePosted, timePosted, AdminID,"Moved a lost item from forgotten box");
+
         approve_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +131,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
                             @Override
                             public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
                                 long uploadCount = dataSnapshot.getChildrenCount();
-                                if (uploadCount >= 20) {
+                                if (uploadCount >= 50) {
                                     // Remove the oldest key
                                     String oldestKey = null;
                                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
@@ -148,7 +149,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
                                             public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     // Notification
-                                                    logref.child(key).setValue(loghelperclass);
+                                                    logref.child(key).setValue(loghelperclass1);
                                                     Toast.makeText(ApprovedItemDetails.this, "Approved! Displayed in Lost Items!", Toast.LENGTH_LONG).show();
                                                     //remove if you want to delete the copied record from the pending
                                                     reference.child(key).removeValue();
@@ -207,7 +208,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
                             @Override
                             public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
                                 long uploadCount = dataSnapshot.getChildrenCount();
-                                if (uploadCount >= 20) {
+                                if (uploadCount >= 50) {
                                     // Remove the oldest key
                                     String oldestKey = null;
                                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
@@ -224,8 +225,8 @@ public class ApprovedItemDetails extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    logref.child(key).setValue(new ItemHelperClass(datePosted, timePosted, AdminID, "Transferred a Lost item to Forgotten Box"));
                                                     Toast.makeText(ApprovedItemDetails.this, "Item Moved to Forgotten Box!", Toast.LENGTH_LONG).show();
+                                                    logref.child(key).setValue(loghelperclass2);
                                                     //remove if you want to delete the copied record from the pending
                                                     reference.child(key).removeValue();
                                                     startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));

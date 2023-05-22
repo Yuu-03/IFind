@@ -9,20 +9,22 @@
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
-        android:layout_height="89dp"
+        android:layout_height="60dp"
         android:background="#293ce1"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints">
 
         <android.widget.SearchView
             android:id="@+id/search"
             android:layout_width="200dp"
             android:layout_height="38dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/searchbar"
+            android:backgroundTint="@color/white"
             android:focusable="false"
             app:closeIcon="@drawable/clear_icon"
             app:iconifiedByDefault="false"
@@ -33,17 +35,16 @@
             app:searchIcon="@drawable/search_icon"
             tools:ignore="MissingConstraints" />
 
-        <Button
-            android:id="@+id/filter"
-            android:layout_width="157dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:backgroundTint="#26318A"
-            android:text="filter"
-            android:textColor="#FEFEFE"
-            app:icon="@drawable/baseline_filter_alt_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <Spinner
+            android:id="@+id/filter_spinner"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:prompt="@string/filter_prompt"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/rectangleradius"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 
@@ -53,7 +54,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linear"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
+        android:clipToPadding="false"
+        android:padding="4dp"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

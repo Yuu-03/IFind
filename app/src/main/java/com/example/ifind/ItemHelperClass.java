@@ -1,9 +1,5 @@
 package com.example.ifind;
 
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 public class ItemHelperClass {
 
     String itemname;
@@ -13,10 +9,11 @@ public class ItemHelperClass {
     String time;
     String imageURL;
 
-    String key, userID, name, postType, datePosted, timePosted;
+    String key, userID, name, postType;
 
 
     //empty constructor to avoid errors in the database
+
 
     //these are the constructors to cal for the variables
     public ItemHelperClass(String itemname, String description, String location, String date, String time, String imageURL) {
@@ -123,10 +120,7 @@ public class ItemHelperClass {
         return postType;
     }
     public void setPostType(String postType){
-        this.postType = postType;
-
-    }
-
+        this.postType = postType;}
 
     public ItemHelperClass(){
 
