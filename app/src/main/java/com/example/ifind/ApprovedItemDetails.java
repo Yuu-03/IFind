@@ -1,12 +1,8 @@
 package com.example.ifind;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,8 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -36,12 +29,25 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+
 public class ApprovedItemDetails extends AppCompatActivity {
     TextView item_name, item_desc, item_loc, item_date, item_time, userID;
     ImageView image_full;
     Button del_button, approve_button;
     String imageUrl = "";
     String key = "";
+    String NotifTitle, NotifMessage;
     private DatabaseReference toFound, logref,toForgotten;
 
     @Override
@@ -58,6 +64,9 @@ public class ApprovedItemDetails extends AppCompatActivity {
         del_button = findViewById(R.id.del_buttA);
         approve_button = findViewById(R.id.approve_buttA);
         userID = findViewById(R.id.item_foundName);
+
+        NotifTitle = "Announcement!";
+        NotifMessage = "New lost items! Check them out.";
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Approved");
         toFound = FirebaseDatabase.getInstance().getReference("Found");
@@ -141,10 +150,13 @@ public class ApprovedItemDetails extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
+                                                    // Notification
+                                                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/All",NotifTitle, NotifMessage, getApplicationContext(), ApprovedItemDetails.this);
+                                                    notificationsSender.SendNotifications();
+
                                                     logref.child(key).setValue(loghelperclass);
                                                     Toast.makeText(ApprovedItemDetails.this, "Approved! Displayed in Lost Items!", Toast.LENGTH_LONG).show();
                                                     //remove if you want to delete the copied record from the pending
-
                                                     reference.child(key).removeValue();
                                                     startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
                                                 }
