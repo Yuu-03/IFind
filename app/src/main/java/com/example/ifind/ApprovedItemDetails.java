@@ -47,7 +47,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
     Button del_button, approve_button;
     String imageUrl = "";
     String key = "";
-    String NotifTitle, NotifMessage;
+
     private DatabaseReference toFound, logref,toForgotten;
 
     @Override
@@ -64,9 +64,6 @@ public class ApprovedItemDetails extends AppCompatActivity {
         del_button = findViewById(R.id.del_buttA);
         approve_button = findViewById(R.id.approve_buttA);
         userID = findViewById(R.id.item_foundName);
-
-        NotifTitle = "Announcement!";
-        NotifMessage = "New lost items! Check them out.";
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Approved");
         toFound = FirebaseDatabase.getInstance().getReference("Found");
@@ -151,9 +148,6 @@ public class ApprovedItemDetails extends AppCompatActivity {
                                             public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     // Notification
-                                                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/All",NotifTitle, NotifMessage, getApplicationContext(), ApprovedItemDetails.this);
-                                                    notificationsSender.SendNotifications();
-
                                                     logref.child(key).setValue(loghelperclass);
                                                     Toast.makeText(ApprovedItemDetails.this, "Approved! Displayed in Lost Items!", Toast.LENGTH_LONG).show();
                                                     //remove if you want to delete the copied record from the pending

@@ -46,6 +46,7 @@ public class LostItemDetails extends AppCompatActivity {
     String key = "";
     String imageUrl = "";
     private DatabaseReference toPath1,logref;
+    String NotifTitle, NotifMessage;
     private ItemHelperClass itemHelperClass;
 
     @Override
@@ -63,6 +64,8 @@ public class LostItemDetails extends AppCompatActivity {
         approve_button = findViewById(R.id.approve_butt);
         userID = findViewById(R.id.pendingFoundName);
 
+        NotifTitle = "Announcement!";
+        NotifMessage = "New lost items! Check them out.";
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
@@ -158,6 +161,9 @@ public class LostItemDetails extends AppCompatActivity {
 
                                                     toPath1.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_));
                                                     logref.child(key).setValue(loghelperclass);
+                                                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/All",NotifTitle, NotifMessage, getApplicationContext(), LostItemDetails.this);
+                                                    notificationsSender.SendNotifications();
+
                                                     Toast.makeText(LostItemDetails.this, "Item Approved!", Toast.LENGTH_LONG).show();
                                                     //remove if you want to delete the copied record from the pending
                                                     reference.child(key).removeValue();

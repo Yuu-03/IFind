@@ -49,7 +49,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         v.vibrate(pattern, -1);
 
 
-        int resourceImage = getResources().getIdentifier(remoteMessage.getNotification().getIcon(), "drawable", getPackageName());
 
 
 
@@ -64,8 +63,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
 
 
-        Intent resultIntent = new Intent(this, LoginActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent resultIntent = new Intent(this, LostFragment.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, resultIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
 
 
         builder.setContentTitle(remoteMessage.getNotification().getTitle());
