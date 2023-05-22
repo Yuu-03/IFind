@@ -25,7 +25,7 @@ public class AdminMain extends AppCompatActivity {
 
     private FirebaseAuth auth;
     BottomNavigationView nav;
-    private Button mLogbutt, AdminLogs, mForgotten;
+    private Button mLogbutt, AdminLogs, mForgotten, mUser;
 
     private boolean doubleBackToExitPressedOnce;
     private Handler mHandler = new Handler();
@@ -37,6 +37,7 @@ public class AdminMain extends AppCompatActivity {
         mLogbutt = findViewById(R.id.adminLogoutButt);
         AdminLogs = findViewById(R.id.LogView);
         mForgotten = findViewById(R.id.ForgottenBox);
+        mUser = findViewById(R.id.UserDetail);
 
         auth = FirebaseAuth.getInstance();
         nav = findViewById(R.id.nav);
@@ -93,6 +94,13 @@ public class AdminMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AdminMain.this, ForgottenView.class));
+                finish();
+            }
+        });
+        mUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminMain.this, UserDetailView.class));
                 finish();
             }
         });

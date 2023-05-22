@@ -41,8 +41,6 @@ public class AdminLogView extends AppCompatActivity {
 
     Button mBack;
     BottomNavigationView nav;
-    private boolean doubleBackToExitPressedOnce;
-    private Handler mHandler = new Handler();
     private FirebaseAuth auth;
 
     @Override
@@ -54,8 +52,6 @@ public class AdminLogView extends AppCompatActivity {
         nav = findViewById(R.id.nav);
         nav.setSelectedItemId(R.id.adminLogs);
         auth = FirebaseAuth.getInstance();
-
-
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView1);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
@@ -162,33 +158,5 @@ public class AdminLogView extends AppCompatActivity {
             }
         });
     }
-    private final Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-            doubleBackToExitPressedOnce = false;
-        }
-    };
 
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-
-        if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            auth.signOut();
-            finishAffinity();
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
-
-        mHandler.postDelayed(mRunnable, 2000);
-    }
 }
