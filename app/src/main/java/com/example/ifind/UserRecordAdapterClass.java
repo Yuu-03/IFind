@@ -60,21 +60,11 @@ public class UserRecordAdapterClass extends RecyclerView.Adapter<UserViewHolder>
             public void onClick(View v) {
                 // Get the phone number of the user
                 String phoneNumber = item.getPhone();
-                if (phoneNumber != null && !phoneNumber.isEmpty()) {
-                    // Create the intent to dial the phone number
-                    Intent dialIntent = new Intent(Intent.ACTION_DIAL);
-                    dialIntent.setData(Uri.parse("tel:" + phoneNumber));
 
-                    // Check if the device has a dialer app to handle the intent
-                    if (dialIntent.resolveActivity(context.getPackageManager()) != null) {
-                        // Start the dialer app
-                        context.startActivity(dialIntent);
-                    } else {
-                        Toast.makeText(context, "No dialer app found", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(context, "No phone number available", Toast.LENGTH_SHORT).show();
-                }
+                // Create an intent with the ACTION_DIAL action and the phone number
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + phoneNumber));
+                context.startActivity(intent);
             }
         });
     }
