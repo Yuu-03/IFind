@@ -1,39 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ContactFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="0dp"
-        android:background="@drawable/rectangle_blue"
-        android:textSize="30sp"
-        android:text="Contact"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="90dp"
-        android:background="@drawable/header"
-        android:textSize="20sp"
-        android:text="Number"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:background="@drawable/rectangle_blue"
+            android:text="Contact"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginStart="10dp"
+            android:text="@string/get_in_touch"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="30dp"
+            android:justificationMode="inter_word"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/little_descrip"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/subject_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:hint="@string/subject"
+            android:textColorHint="@color/black"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/bg_rounded"
+            android:inputType="textPersonName"
+            android:paddingStart="10dp"  >
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/inquiry"
+            android:layout_width="300dp"
+            android:layout_height="350dp"
+            android:layout_marginBottom="15dp"
+            android:hint="@string/type_your_inquiry_here"
+            android:textColorHint="@color/black"
+            android:inputType="textMultiLine"
+            android:lines="20"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="false"
+            android:background="@drawable/bg_rounded"
+            android:paddingStart="10dp"  >
+        </EditText>
+
+        <Button
+            android:id="@+id/submit_inquiry"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:backgroundTint="@color/bg_green"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:text="@string/submit_lost_item"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            app:cornerRadius="30dp" />
+    </LinearLayout>
+</ScrollView>

@@ -158,4 +158,8 @@
     <string name="how_to_report_lost_items">How to report Lost Items?</string>
     <string name="faqs">FAQs</string>
     <string name="about_title">About</string>
+    <string name="type_your_inquiry_here">Type your inquiry here..</string>
+    <string name="subject">Subject</string>
+    <string name="get_in_touch">Get in Touch</string>
+    <string name="little_descrip">Contact us for any inquiries, feedback, or assistance. We are here to help! Fill out the form below or reach us via email.</string>
 </resources>
