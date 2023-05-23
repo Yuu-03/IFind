@@ -14,7 +14,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:background="#293ce1">
+        android:background="#51C4D3">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/recImage1"
@@ -41,7 +41,7 @@
             android:layout_marginEnd="17dp"
             android:layout_toEndOf="@+id/recImage1"
             android:text="@string/found_by"
-            android:textColor="@color/white"
+            android:textColor="@color/bg_secondary"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
             android:layout_marginTop="12dp"
             android:layout_toEndOf="@+id/recImage1"
             android:text="@string/person_type"
-            android:textColor="@color/white"
+            android:textColor="@color/bg_secondary"
             android:textSize="15sp" />
 
         <TextView
@@ -66,7 +66,7 @@
             android:layout_marginTop="12dp"
             android:layout_toEndOf="@+id/recImage1"
             android:text="@string/date_found"
-            android:textColor="@color/white"
+            android:textColor="@color/bg_secondary"
             android:textSize="15sp" />
 
         <TextView
@@ -80,7 +80,7 @@
             android:layout_marginBottom="37dp"
             android:layout_toEndOf="@+id/recImage1"
             android:text="@string/time_found"
-            android:textColor="@color/white"
+            android:textColor="@color/bg_secondary"
             android:textSize="15sp" />
 
 

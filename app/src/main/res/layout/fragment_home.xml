@@ -17,26 +17,40 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="130dp"
             android:background="@drawable/rectangle_blue"
             tools:ignore="MissingConstraints" />
 
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="292dp"
-            android:layout_height="40dp"
-            android:layout_alignBottom="@+id/textView"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/searchbar"
-            android:backgroundTint="#F1EEEE"
-            android:outlineProvider="paddedBounds"
-            app:cornerRadius="20dp"
-            app:queryHint="Search"
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/navigationHomeText"
+            android:textAlignment="center"
+            android:textColor="#F6F6F6"
+            android:textStyle="italic|bold"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.366" />
+
+        <Button
+            android:id="@+id/submitlostbutton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/white"
+            android:text="@string/submit_a_lost_item"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -53,48 +67,7 @@
             android:gravity="center">
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/lostbuttons"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="10dp" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="21dp"
-                    android:fontFamily="sans-serif"
-                    android:text="@string/navigationHomeText"
-                    android:textAlignment="center"
-                    android:textColor="#F6F6F6"
-                    android:textStyle="italic|bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.179"
-                    tools:layout_editor_absoluteX="0dp" />
-
-                <Button
-                    android:id="@+id/submitlostbutton"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:backgroundTint="@color/white"
-                    android:text="@string/submit_a_lost_item"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,11 +81,12 @@
                     android:background="@drawable/header"
                     android:fontFamily="sans-serif"
                     android:text="@string/featured"
+                    android:paddingTop="2dp"
                     android:textAlignment="center"
                     android:textColor="#F6F6F6"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="40dp" />
+                    android:layout_marginTop="5dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/lostitemsrecycler"
@@ -134,7 +108,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/rectangle_blue"
+                android:paddingTop="2dp"
+                android:background="@drawable/header"
                 android:fontFamily="sans-serif"
                 android:text="@string/featured"
                 android:textAlignment="center"

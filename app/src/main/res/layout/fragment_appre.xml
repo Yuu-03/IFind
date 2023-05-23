@@ -4,38 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_secondary"
     tools:context=".AppreFragment">
 
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@color/bg_green"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="1dp">
 
-    <android.widget.SearchView
+        <android.widget.SearchView
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/searchbar"
         android:focusable="false"
         app:closeIcon="@drawable/clear_icon"
-
+        android:backgroundTint="#F1EEEE"
         app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:queryHint="Search..."
         app:searchHintIcon="@null"
         app:searchIcon="@drawable/search_icon"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints" /></LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/search"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="124dp"
+        android:padding="5dp"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search"
+        app:layout_constraintTop_toTopOf="@+id/linear"
         tools:ignore="MissingConstraints">
 
     </androidx.recyclerview.widget.RecyclerView>
