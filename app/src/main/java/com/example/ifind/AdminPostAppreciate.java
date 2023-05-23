@@ -159,13 +159,13 @@ public class AdminPostAppreciate extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null)
-            ;
-        imageUri = data.getData();
-
-        Picasso.get().load(imageUri).into(image_preview);
-        image_preview.setImageURI(imageUri);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imageUri = data.getData();
+            Picasso.get().load(imageUri).into(image_preview);
+            image_preview.setImageURI(imageUri);
+        }
     }
+
 
     private String getFileExtension(Uri uri) {
         ContentResolver conres = getContentResolver();
