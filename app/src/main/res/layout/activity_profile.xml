@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_green"
+    android:background="@drawable/main_bgd"
     tools:context=".ProfileActivity">
 
     <ImageView
@@ -204,6 +204,7 @@
         android:layout_height="60dp"
         android:id="@+id/logout"
         android:gravity="center"
+        android:backgroundTint="@color/bg_light"
         android:text="@string/logout_btn"
         android:textSize="18sp"
         app:cornerRadius = "20dp"

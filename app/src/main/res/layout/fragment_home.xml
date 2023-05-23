@@ -8,9 +8,10 @@
     android:layout_marginTop="0dp"
     android:layout_marginBottom="20dp"
     android:gravity="center"
-    android:background="#EBEBEB"
+    android:background="@drawable/main_bgd"
     tools:context=".HomeFragment"
     app:layoutManager="android.support.v7.widget.LinearLayoutManager">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

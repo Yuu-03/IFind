@@ -17,8 +17,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="@color/bg_dark"
             android:elevation="4dp"
+            android:background="@drawable/gradient"
             android:layout_gravity="center"/>
 
         <FrameLayout
@@ -36,7 +36,7 @@
         app:headerLayout="@layout/nav_header"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        android:backgroundTint="@color/bg_dark"
+        android:background="@drawable/gradient"
         app:menu="@menu/nav_menu" />
 
 
