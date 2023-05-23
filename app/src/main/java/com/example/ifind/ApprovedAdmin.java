@@ -101,7 +101,6 @@ public class ApprovedAdmin extends AppCompatActivity {
         mpostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ApprovedAdmin.this, "Upload Lost Items!" , Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(ApprovedAdmin.this, AdminPostLost.class));
 
             }

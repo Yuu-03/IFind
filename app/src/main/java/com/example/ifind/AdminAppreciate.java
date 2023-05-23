@@ -99,7 +99,6 @@ public class AdminAppreciate extends AppCompatActivity {
         mpostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AdminAppreciate.this, "Upload Appreciation!" , Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(AdminAppreciate.this, AdminPostAppreciate.class));
 
             }
