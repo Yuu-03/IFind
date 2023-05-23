@@ -13,7 +13,7 @@
         android:id="@+id/img_logo"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/logo_2"
+        android:src="@drawable/new_logo_icon"
         android:layout_gravity="center"
         android:transitionName="imageLogo"/>
 

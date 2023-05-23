@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:layout_marginTop="0dp"
+    android:background="@drawable/main_bgd"
     tools:context=".AboutFragment">
 
     <TextView
@@ -17,12 +18,24 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:background="@drawable/gradient_bg"
+        android:textSize="30sp"
         android:text="@string/about_title"
-        android:padding="20dp"
+        android:padding="10dp"
         android:textStyle="bold"
         android:textAlignment="center" />
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        android:background="@drawable/home_layout"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints"
+        android:elevation="50dp"
+        android:layout_marginTop="80dp"
+       >
     <!--expandable card views faq-->
     <ScrollView
         android:layout_width="match_parent"
@@ -40,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="@string/faqs"
+                android:textAlignment="center"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:textColor="#0A4D68"
@@ -310,4 +324,5 @@
                 android:textColor="#000000"/>
         </LinearLayout>
     </ScrollView>
+    </LinearLayout>
 </RelativeLayout>

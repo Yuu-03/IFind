@@ -69,7 +69,7 @@
 
     <!--ben's login interface-->
 
-    <string name="tagln">Lost something? Find it here.</string>
+    <string name="tagln">I-FIND \n LOST AND FOUND</string>
     <string name="homescreen">Home Screen</string>
     <string name="greet">Sign In</string>
     <string name="sign_in">Sign In</string>
