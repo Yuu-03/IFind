@@ -1,39 +1,32 @@
 package com.example.ifind;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.SearchView;
+import android.widget.Toast;
+import android.window.SplashScreen;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.SearchView;
-import android.widget.Spinner;
-import android.widget.Toast;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 public class UserDetailView extends AppCompatActivity {
@@ -47,8 +40,6 @@ public class UserDetailView extends AppCompatActivity {
 
     SearchView searchView1;
 
-    private boolean doubleBackToExitPressedOnce;
-    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,43 +107,19 @@ public class UserDetailView extends AppCompatActivity {
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserDetailView.this, AdminMain.class));
-                finish();
+                goToPreviousActivity(); // Go back to the previous activity
             }
         });
 
-    }
 
-
-    private final Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-            doubleBackToExitPressedOnce = false;
-        }
-    };
-
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-
-        if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }
     }
 
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            auth.signOut();
-            finishAffinity();
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
-
-        mHandler.postDelayed(mRunnable, 2000);
+        goToPreviousActivity(); // Go back to the previous activity
     }
+
+
 
     public void searchList (String text){
         ArrayList<UserRecordHelperClass> searchList = new ArrayList<>();
@@ -166,6 +133,30 @@ public class UserDetailView extends AppCompatActivity {
             }
         }
         adapter.searchDataList(searchList);
+    }
+
+    private void goToPreviousActivity() {
+        Class<?> previousActivity;
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> runningTasks = activityManager.getRunningTasks(1);
+        if (runningTasks != null && runningTasks.size() > 0) {
+            ActivityManager.RunningTaskInfo taskInfo = runningTasks.get(0);
+            ComponentName componentName = taskInfo.topActivity;
+            String topActivityName = componentName.getClassName();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (topActivityName.equals(SplashScreen.class.getName())) {
+                    previousActivity = AdminMain.class; // Replace with the appropriate activity you want to navigate to instead of the splash screen
+                } else {
+                    previousActivity = AdminMain.class; // The previous activity you want to go back to
+                }
+            }
+        } else {
+            previousActivity = AdminMain.class; // Default to AdminMain if unable to determine the top activity
+        }
+
+        Intent intent = new Intent(UserDetailView.this, AdminMain.class);
+        startActivity(intent);
+        finish(); // Optional: Call finish() to remove the current activity from the stack
     }
 
 

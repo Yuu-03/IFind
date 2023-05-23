@@ -4,15 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.window.SplashScreen;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,6 +27,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
@@ -28,7 +36,10 @@ public class LoginActivity extends AppCompatActivity {
     ImageView logo;
     TextView signUpText;
     TextInputLayout logEmail,logPassword;
-    private static final String ADMIN = "s1Olp2MGwRVpuj2UiJh9zcnpu4j1";
+    private static final String ADMIN1 = "s1Olp2MGwRVpuj2UiJh9zcnpu4j1";
+    private static final String ADMIN2 = "gVmKG7rMShfy1iedS1HY2WdfJUs2";
+    private boolean doubleBackToExitPressedOnce;
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +79,14 @@ public class LoginActivity extends AppCompatActivity {
                                         //check if email is verified before user can access their profile
                                         if (firebaseUser.isEmailVerified()) {
 
-                                            if (firebaseUser.getUid().equals(ADMIN)) {
-                                                Toast.makeText(LoginActivity.this, "You are now logged in Admin Ifind.", Toast.LENGTH_SHORT).show();
+                                            if (firebaseUser.getUid().equals(ADMIN1)) {
+                                                Toast.makeText(LoginActivity.this, "You are now logged as Admin.", Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(LoginActivity.this, pendingRequests.class));
-                                            } else {
-                                                Toast.makeText(LoginActivity.this, "You are now logged in.", Toast.LENGTH_SHORT).show();
+                                            } else if (firebaseUser.getUid().equals(ADMIN2)) {
+                                                Toast.makeText(LoginActivity.this, "You are now logged as Admin.", Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(LoginActivity.this, pendingRequests.class));
+                                            }else {
+                                                Toast.makeText(LoginActivity.this, "Welcome" + " " + auth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                             }
 
@@ -119,6 +133,36 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    private final Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            doubleBackToExitPressedOnce = false;
+        }
+    };
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            finishAffinity();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+
+        mHandler.postDelayed(mRunnable, 2000);
+    }
+
     /*
     private void checkIfEmailVerified(FirebaseUser firebaseUser) {
         if (!firebaseUser.isEmailVerified()){
@@ -158,12 +202,16 @@ public class LoginActivity extends AppCompatActivity {
         String email = logEmail.getEditText().getText().toString();
         if (auth.getCurrentUser() != null) {
             if (firebaseUser.isEmailVerified()){
-                if (firebaseUser.getUid().equals(ADMIN)) {
-                    Toast.makeText(LoginActivity.this, "Already logged in Master!", Toast.LENGTH_SHORT).show();
+                if (firebaseUser.getUid().equals(ADMIN1)) {
+                    Toast.makeText(LoginActivity.this, "Already logged in as Admin!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, pendingRequests.class));
                     finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Already logged in!", Toast.LENGTH_SHORT).show();
+                } if (firebaseUser.getUid().equals(ADMIN2)) {
+                    Toast.makeText(LoginActivity.this, "Already logged in as Admin!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, pendingRequests.class));
+                    finish();
+                }else {
+                    Toast.makeText(LoginActivity.this, "Welcome" + " " + auth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();//sign out user if not verified
                 }

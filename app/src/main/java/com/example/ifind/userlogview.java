@@ -6,13 +6,18 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
+import android.window.SplashScreen;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -133,10 +138,10 @@ public class userlogview extends AppCompatActivity {
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(userlogview.this, AdminMain.class));
-                finish();
+                goToPreviousActivity(); // Go back to the previous activity
             }
         });
+
 
         nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -155,5 +160,33 @@ public class userlogview extends AppCompatActivity {
                 return false;
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        goToPreviousActivity(); // Go back to the previous activity
+    }
+
+    private void goToPreviousActivity() {
+        Class<?> previousActivity;
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> runningTasks = activityManager.getRunningTasks(1);
+        if (runningTasks != null && runningTasks.size() > 0) {
+            ActivityManager.RunningTaskInfo taskInfo = runningTasks.get(0);
+            ComponentName componentName = taskInfo.topActivity;
+            String topActivityName = componentName.getClassName();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (topActivityName.equals(SplashScreen.class.getName())) {
+                    previousActivity = AdminMain.class; // Replace with the appropriate activity you want to navigate to instead of the splash screen
+                } else {
+                    previousActivity = AdminMain.class; // The previous activity you want to go back to
+                }
+            }
+        } else {
+            previousActivity = AdminMain.class; // Default to AdminMain if unable to determine the top activity
+        }
+
+        Intent intent = new Intent(userlogview.this, AdminMain.class);
+        startActivity(intent);
+        finish(); // Optional: Call finish() to remove the current activity from the stack
     }
 }

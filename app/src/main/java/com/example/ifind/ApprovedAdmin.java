@@ -198,7 +198,6 @@ public class ApprovedAdmin extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
-            auth.signOut();
             finishAffinity();
             return;
         }

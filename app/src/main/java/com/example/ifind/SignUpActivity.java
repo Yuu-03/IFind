@@ -61,7 +61,6 @@ public class SignUpActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SignUpActivity.this, "Log in", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
 
             }
@@ -241,32 +240,23 @@ public class SignUpActivity extends AppCompatActivity {
             return true;
         }
     }
-    private Boolean regPassword()  {
-        String value  = regPassword.getEditText().getText().toString();
-        String passwordVal = "^" +
-                "(?=.*[0-9])" +         //at least 1 digit
-                "(?=.*[a-z])" +         //at least 1 lower case letter
-                "(?=.*[A-Z])" +         //at least 1 upper case letter
-                "(?=.*[a-zA-Z])" +      //any letter
-                "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                "(?=\\S+$)" +           //no white spaces
-                ".{4,}" +               //at least 4 characters
-                "$";
+    private Boolean regPassword() {
+        String value = regPassword.getEditText().getText().toString();
+        String passwordVal = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
 
         if (value.isEmpty()) {
             regPassword.setError("Field cannot be empty");
             return false;
-        }
-        else if (!value.matches(passwordVal)) {
-            regPassword.setError("Password too weak");
+        } else if (!value.matches(passwordVal)) {
+            regPassword.setError("Password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, and be at least 4 characters long");
             return false;
-        }
-        else {
+        } else {
             regPassword.setError(null);
             regPhoneNum.setErrorEnabled(false);
             return true;
         }
     }
+
     private Boolean regConfirmPass()  {
         String pass  = regPassword.getEditText().getText().toString();
         String confirmPass  = regConfirmPass.getEditText().getText().toString();

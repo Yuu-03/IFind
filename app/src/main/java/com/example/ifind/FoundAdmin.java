@@ -380,7 +380,6 @@ public class FoundAdmin extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
-            auth.signOut();
             finishAffinity();
             return;
         }

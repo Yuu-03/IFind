@@ -121,7 +121,6 @@ public class AdminMain extends AppCompatActivity {
     protected void onDestroy()
     {
         super.onDestroy();
-
         if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }
     }
 
@@ -129,13 +128,12 @@ public class AdminMain extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
-            auth.signOut();
             finishAffinity();
             return;
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
 
         mHandler.postDelayed(mRunnable, 2000);
     }
