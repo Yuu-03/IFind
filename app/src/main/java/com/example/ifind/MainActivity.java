@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.window.SplashScreen;
 
 import androidx.annotation.NonNull;
@@ -28,15 +30,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawerLayout;
     //move to main screen after splashscreen
-    private static int SPLASH_SCREEN = 6000;
+    private static int SPLASH_SCREEN = 3000;
 
     //Variables for splashscreen animation
-    Animation topAnim, botAnim;
-
-    ImageView logo;
-    TextView tagline;
     private FirebaseAuth auth;
-
+    private boolean doubleBackToExitPressedOnce;
+    private Handler mHandler = new Handler();
 
 
     @Override
@@ -103,41 +102,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    private final Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            doubleBackToExitPressedOnce = false;
+        }
+    };
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }
+    }
+
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
+            // Do nothing to prevent going back to the splash screen
+        }
+
+        if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
-            goToPreviousActivity();
+            finishAffinity();
+            return;
         }
 
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+
+        mHandler.postDelayed(mRunnable, 2000);
     }
 
 
-    private void goToPreviousActivity() {
-        Class<?> previousActivity;
-        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningTaskInfo> runningTasks = activityManager.getRunningTasks(1);
-        if (runningTasks != null && runningTasks.size() > 0) {
-            ActivityManager.RunningTaskInfo taskInfo = runningTasks.get(0);
-            ComponentName componentName = taskInfo.topActivity;
-            String topActivityName = componentName.getClassName();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (topActivityName.equals(SplashScreen.class.getName())) {
-                    previousActivity = AdminMain.class; // Replace with the appropriate activity you want to navigate to instead of the splash screen
-                } else {
-                    previousActivity = AdminMain.class; // The previous activity you want to go back to
-                }
-            }
-        } else {
-            previousActivity = AdminMain.class; // Default to AdminMain if unable to determine the top activity
-        }
 
-        Intent intent = new Intent(MainActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish(); // Optional: Call finish() to remove the current activity from the stack
-    }
 
 
 }
