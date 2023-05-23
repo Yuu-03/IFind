@@ -75,7 +75,6 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("userID_", item.getUserID());
 
                 intent.putExtra("Key", item.getKey());
-                Toast.makeText(context.getApplicationContext(), "FORGOTTEN", Toast.LENGTH_SHORT).show();
 
                 context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
@@ -92,7 +91,6 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("userID_", item.getUserID());
 
                 intent.putExtra("Key", item.getKey());
-                Toast.makeText(context.getApplicationContext(), "APPROVED", Toast.LENGTH_SHORT).show();
 
                 context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
@@ -110,7 +108,6 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("userID_", item.getUserID());
 
                 intent.putExtra("Key", item.getKey());
-                Toast.makeText(context.getApplicationContext(), "USER LOST VIEW", Toast.LENGTH_SHORT).show();
 
                 context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             });
@@ -126,7 +123,6 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("userID_", item.getUserID());
 
                 intent.putExtra("Key", item.getKey());
-                Toast.makeText(context.getApplicationContext(), "FOUND USER VIEW", Toast.LENGTH_SHORT).show();
 
                 context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             });
@@ -142,7 +138,6 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("userID_", item.getUserID());
 
                 intent.putExtra("Key", item.getKey());
-                Toast.makeText(context.getApplicationContext(), "FOUND ADMIN VIEW", Toast.LENGTH_SHORT).show();
 
                 context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             });
@@ -158,7 +153,6 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("userID_", item.getUserID());
 
                 intent.putExtra("Key", item.getKey());
-                Toast.makeText(context.getApplicationContext(), "LostItemDetails", Toast.LENGTH_SHORT).show();
 
                 context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             });
