@@ -330,7 +330,7 @@ public class SubmittingItems extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             long uploadCount = dataSnapshot.getChildrenCount();
-                            if (uploadCount >= 10) {
+                            if (uploadCount >= 50) {
                                 // Remove the oldest key
                                 String oldestKey = null;
                                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
@@ -344,10 +344,17 @@ public class SubmittingItems extends AppCompatActivity {
 
                 databaseRef.child(uploadID)
                         .setValue(ItemhelperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            String NotifTitle = "Hi Admin";
+                            String NotifMessage = "New Pending Items";
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()){
                                     logref.child(uploadID).setValue(loghelperclass);
+
+                                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/Admin",NotifTitle, NotifMessage, getApplicationContext(), SubmittingItems.this);
+                                    notificationsSender.SendNotifications();
+
+
                                     Toast.makeText(SubmittingItems.this,"Item Information Uploaded",Toast.LENGTH_SHORT).show();
                                     finish();
                                 }

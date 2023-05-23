@@ -2,22 +2,36 @@ package com.example.ifind;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class Founditems extends AppCompatActivity {
     TextView item_name, item_desc, item_loc, item_date, item_time, userID;
@@ -40,6 +54,7 @@ public class Founditems extends AppCompatActivity {
         userID = findViewById(R.id.pendingFoundName_);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Found");
+        DatabaseReference logref = FirebaseDatabase.getInstance().getReference("AdminActivityLogs");
 
         Bundle bundle = getIntent().getExtras();
 
@@ -54,34 +69,93 @@ public class Founditems extends AppCompatActivity {
             key = bundle.getString("Key");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
         }
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
 
-        del_button.setOnClickListener(v -> {
+        // Format the date and time
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(Founditems.this);
+        String currentDateString = dateFormat.format(currentDate);
+        String currentTimeString = timeFormat.format(currentDate);
 
-            builder.setTitle("Confirm");
-            builder.setMessage("Are you sure?");
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        String AdminID = String.valueOf(currentUser.getDisplayName());
 
-            builder.setPositiveButton("YES", (dialog, which) -> {
-                FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
+        String datePosted = currentDateString;
+        String timePosted = currentTimeString;
 
-                reference.child(key).removeValue().addOnSuccessListener(aVoid -> {storageReference.delete();
-                    Toast.makeText(Founditems.this, "Post Deleted", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Founditems.this, FoundAdmin.class));
-                }).addOnFailureListener(e -> Log.e(TAG, "Error requesting connection", e));
-            });
+        del_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            builder.setNegativeButton("NO", (dialog, which) -> {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Founditems.this);
 
-                // Do nothing
-                dialog.dismiss();
-            });
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
 
-            AlertDialog alert = builder.create();
-            alert.show();
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseStorage storage = FirebaseStorage.getInstance();
+                        StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
+                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                                logref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
+                                        long uploadCount = dataSnapshot.getChildrenCount();
+                                        if (uploadCount >= 50) {
+                                            // Remove the oldest key
+                                            String oldestKey = null;
+                                            for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                                                oldestKey = childSnapshot.getKey();
+                                                break; // Get the first key (oldest)
+                                            }
+                                            if (oldestKey != null) {
+                                                logref.child(oldestKey).removeValue();
+
+                                            }
+                                        }
+                                        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, "Deleted a Found Item");
+
+                                        logref.child(key).setValue(loghelperclass);
+                                        reference.child(key).removeValue();
+                                        Toast.makeText(Founditems.this, "Item Deleted", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getApplicationContext(), pendingRequests.class));
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Toast.makeText(Founditems.this, "Request Cancelled", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
+            }
         });
-
     }
 }

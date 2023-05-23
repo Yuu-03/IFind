@@ -1,5 +1,6 @@
 package com.example.ifind;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -342,7 +343,7 @@ public class AdminPostLost extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 long uploadCount = dataSnapshot.getChildrenCount();
-                if (uploadCount >= 20) {
+                if (uploadCount >= 50) {
                     // Remove the oldest key
                     String oldestKey = null;
                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
@@ -359,7 +360,13 @@ public class AdminPostLost extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()){
+                                    String NotifTitle = "Announcement";
+                                    String NotifMessage = "New Lost Item Uploads! Check them out!";
+
                                     logref.child(uploadID).setValue(loghelperclass);
+                                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/All",NotifTitle, NotifMessage, getApplicationContext(),AdminPostLost.this);
+                                    notificationsSender.SendNotifications();
+
                                     Toast.makeText(AdminPostLost.this,"Item Information Uploaded",Toast.LENGTH_SHORT).show();
                                     finish();
                                 }

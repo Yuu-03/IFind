@@ -141,7 +141,7 @@ public class LostItemDetails extends AppCompatActivity {
                             @Override
                             public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
                                 long uploadCount = dataSnapshot.getChildrenCount();
-                                if (uploadCount >= 20) {
+                                if (uploadCount >= 50) {
                                     // Remove the oldest key
                                     String oldestKey = null;
                                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
@@ -227,7 +227,7 @@ public class LostItemDetails extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
                                         long uploadCount = dataSnapshot.getChildrenCount();
-                                        if (uploadCount >= 20) {
+                                        if (uploadCount >= 50) {
                                             // Remove the oldest key
                                             String oldestKey = null;
                                             for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {

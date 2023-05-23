@@ -306,7 +306,7 @@ public class AdminPostAppreciate extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 long uploadCount = dataSnapshot.getChildrenCount();
-                if (uploadCount >= 20) {
+                if (uploadCount >= 50) {
                     // Remove the oldest key
                     String oldestKey = null;
                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
@@ -323,7 +323,11 @@ public class AdminPostAppreciate extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()){
+                                    String NotifTitle = "Announcement";
+                                    String NotifMessage = "New Appreciation Uploads! Check them out!";
                                     logref.child(uploadID).setValue(loghelperclass);
+                                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/All",NotifTitle, NotifMessage, getApplicationContext(),AdminPostAppreciate.this);
+                                    notificationsSender.SendNotifications();
                                     Toast.makeText(getApplicationContext(),"Uploaded",Toast.LENGTH_SHORT).show();
                                     finish();
                                 }

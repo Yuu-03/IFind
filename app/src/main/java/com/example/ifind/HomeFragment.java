@@ -28,6 +28,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -87,13 +88,15 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Approved");
-        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+        eventListener = databaseReference.limitToFirst(3).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     LostImageHelperClass dataClass = itemSnapshot.getValue(LostImageHelperClass.class);
+                    Collections.reverse(dataList);
                     dataList.add(dataClass);
+                    Collections.reverse(dataList);
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -115,14 +118,16 @@ public class HomeFragment extends Fragment {
         recyclerView2.setAdapter(adapter2);
         recyclerView2.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("FoundItems");
-        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("Found");
+        eventListener = databaseReference.limitToFirst(3).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList2.clear();
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     FoundImageHelperClass dataClass2 = itemSnapshot.getValue(FoundImageHelperClass.class);
+                    Collections.reverse(dataList2);
                     dataList2.add(dataClass2);
+                    Collections.reverse(dataList);
                 }
                 adapter2.notifyDataSetChanged();
             }
