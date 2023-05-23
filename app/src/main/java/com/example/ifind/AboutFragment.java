@@ -1,23 +1,20 @@
 package com.example.ifind;
 
 import android.animation.LayoutTransition;
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 public class AboutFragment extends Fragment {
     ImageView fblogo;
@@ -33,8 +30,6 @@ public class AboutFragment extends Fragment {
         linlayout1.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         linlayout2 = root.findViewById(R.id.linlayout2);
         linlayout2.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
-        linlayout3 = root.findViewById(R.id.linlayout3);
-        linlayout3.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         linlayout4 = root.findViewById(R.id.linlayout4);
         linlayout4.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         linlayout5 = root.findViewById(R.id.linlayout5);
@@ -44,7 +39,6 @@ public class AboutFragment extends Fragment {
 
         txtdetail1 = root.findViewById(R.id.faqdets1);
         txtdetail2 = root.findViewById(R.id.faqdets2);
-        txtdetail3 = root.findViewById(R.id.faqdets3);
         txtdetail4 = root.findViewById(R.id.faqdets4);
         txtdetail5 = root.findViewById(R.id.faqdets5);
         txtdetail6 = root.findViewById(R.id.faqdets6);
@@ -77,17 +71,6 @@ public class AboutFragment extends Fragment {
                 txtdetail2.setVisibility(v);
             }
         });
-
-        linlayout3.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                int v = (txtdetail3.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
-
-                TransitionManager.beginDelayedTransition(linlayout3, new AutoTransition());
-                txtdetail3.setVisibility(v);
-            }
-        });
-
         linlayout4.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -105,7 +88,7 @@ public class AboutFragment extends Fragment {
 
                 TransitionManager.beginDelayedTransition(linlayout5, new AutoTransition());
                 txtdetail5.setVisibility(v);
-                fblogo.setVisibility(v);
+
             }
         });
 
@@ -116,6 +99,7 @@ public class AboutFragment extends Fragment {
 
                 TransitionManager.beginDelayedTransition(linlayout6, new AutoTransition());
                 txtdetail6.setVisibility(v);
+                fblogo.setVisibility(v);
             }
         });
 

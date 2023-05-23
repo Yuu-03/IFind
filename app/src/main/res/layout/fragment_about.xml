@@ -19,7 +19,7 @@
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:background="@drawable/rectangle_blue"
-        android:text="About"
+        android:text="@string/about_title"
         android:padding="20dp"
         android:textStyle="bold"
         android:textAlignment="center" />
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="FAQs"
+                android:text="@string/faqs"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:textColor="#0A4D68"
@@ -72,13 +72,14 @@
                         />
                     <TextView
                         android:id="@+id/faqdets1"
+                        android:justificationMode="inter_word"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
-                        android:text="@string/faqdetail1"
+                        android:text="@string/UseApp1"
                         android:textSize="12sp"
                         android:textColor="#000000"
                         android:visibility="gone"/>
@@ -105,65 +106,27 @@
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
-                        android:text="@string/CardViewFAQ1"
+                        android:text="@string/how_to_report_lost_items"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         android:textColor="#088395"
                         />
                     <TextView
                         android:id="@+id/faqdets2"
+                        android:justificationMode="inter_word"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
-                        android:text="@string/faqdetail1"
+                        android:text="@string/ReportItem"
                         android:textSize="12sp"
                         android:textColor="#000000"
                         android:visibility="gone"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
-                app:contentPadding="20dp">
-                <LinearLayout
-                    android:id="@+id/linlayout3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:animateLayoutChanges="true">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginBottom="0dp"
-                        android:text="@string/CardViewFAQ3"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:textColor="#088395"
-                        />
-                    <TextView
-                        android:id="@+id/faqdets3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginBottom="0dp"
-                        android:text="@string/faqdetail1"
-                        android:textSize="12sp"
-                        android:textColor="#000000"
-                        android:visibility="gone"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -191,6 +154,7 @@
                         android:textColor="#088395"
                         />
                     <TextView
+                        android:justificationMode="inter_word"
                         android:id="@+id/faqdets4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -198,7 +162,7 @@
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
-                        android:text="@string/faqdetail1"
+                        android:text="@string/to_include"
                         android:textSize="12sp"
                         android:textColor="#000000"
                         android:visibility="gone"/>
@@ -232,22 +196,18 @@
                         />
                     <TextView
                         android:id="@+id/faqdets5"
+                        android:justificationMode="inter_word"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="0dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="20dp"
-                        android:text="@string/devpage"
+                        android:text="@string/contact_admin"
                         android:textSize="12sp"
                         android:textColor="#000000"
                         android:visibility="gone"/>
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:id="@+id/fblogo"
-                        android:src="@drawable/fblogo"
-                        android:visibility="gone"/>
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -278,15 +238,22 @@
                         />
                     <TextView
                         android:id="@+id/faqdets6"
+                        android:justificationMode="inter_word"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="0dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="0dp"
-                        android:layout_marginBottom="0dp"
-                        android:text="@string/CardViewFAQ6"
+                        android:layout_marginBottom="20dp"
+                        android:text="@string/devpage"
                         android:textSize="12sp"
                         android:textColor="#000000"
+                        android:visibility="gone"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:id="@+id/fblogo"
+                        android:src="@drawable/fblogo"
                         android:visibility="gone"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -298,6 +265,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="0dp"
+                android:justificationMode="inter_word"
                 android:text="@string/MissionIFIND"
                 android:padding="5dp"
                 android:textStyle="bold"
@@ -306,6 +274,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:justificationMode="inter_word"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
@@ -334,6 +303,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="0dp"
+                android:justificationMode="inter_word"
                 android:text="@string/secParag"
                 android:padding="5dp"
                 android:textSize="15sp"

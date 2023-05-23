@@ -36,13 +36,36 @@
     <!--About Fragment-->
     <string name="WOW">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor velit ut dignissim tristique. Proin egestas sapien nulla, at suscipit ipsum varius sed. Vivamus commodo efficitur ex. Nunc id erat nec nibh elementum consectetur. Fusce blandit nisl sapien. Duis ut porta dolor. Aliquam eget ipsum quis urna lacinia imperdiet ac ut lorem. Suspendisse ullamcorper nisi orci. In hac habitasse platea dictumst. Pellentesque ac magna aliquam turpis blandit ornare `ut ut turpis. Praesent vel eros et ex aliquet tincidunt. Quisque elementum vitae tellus vel bibendum. Aenean aliquam ex neque, convallis consequat ipsum consectetur ut. Duis arcu quam, mattis et molestie quis, lacinia at magna. Nunc enim ex, auctor quis bibendum quis, fringilla vitae lacus. In fringilla justo ex, dignissim ornare ipsum pharetra in. Quisque in mattis felis, ut feugiat eros. Nam tempus odio quis vulputate hendrerit. Aliquam erat volutpat. Vivamus eleifend tincidunt commodo. Suspendisse purus eros, faucibus nec odio sed, dignissim maximus neque. Aenean sit amet ultrices tortor. Quisque et posuere ligula. Integer aliquet eleifend odio, quis porta erat viverra at. Suspendisse a vestibulum turpis. Mauris at quam bibendum, convallis ligula non, varius arcu. Maecenas vestibulum nulla sit amet mi lobortis ullamcorper. Nullam sit amet gravida erat. Nulla hendrerit efficitur arcu dapibus pretium. Fusce diam ipsum, rhoncus ac ultricies nec, vestibulum et ligula. Aliquam eu urna tempus nibh faucibus tempus vel sed enim. In at lectus at erat rhoncus sodales a ac enim. Donec finibus sit amet velit id tempor. Donec aliquam felis libero, fringilla tempus dolor maximus non. Integer malesuada risus in odio rhoncus placerat a a ex. Mauris vel mauris vitae ipsum vulputate mattis quis sit amet purus. Vivamus pretium sed orci et auctor. Nam dui neque, congue eget nunc eget, blandit pharetra justo. Sed sit amet ligula non tellus convallis feugiat eu at risus. Mauris dignissim, maur</string>
     <string name="CardViewFAQ1">How to use the App?</string>
+    <string name="UseApp1">\nSubmit a report for a lost item.\n\nLook for lost items that match your description.\n\nCheck the appreciation posts for individuals who have submitted found items.\n\nContact the administrators for item retrieval assistance.\n\n
+</string>
+
+    <string name="ReportItem">\n
+    <b>Report a Found Item</b>\n\nOn the home page of the IFIND app, you will find a "Submit" button. Tap on this button to report a found item. Provide the necessary details for your report, including an image of the item (if available), the item name, location where it was found, date and time of discovery, and a description of the item. \n\n
+    <b>Submit the Report</b>\n\nAfter filling in all the required information, click the "Submit" button to send your report. The report will be forwarded to the admin for verification.\n\n
+    <b>Await Verification</b>\n\nOnce the admin receives your report, they will review and verify the information provided. This step ensures the accuracy and legitimacy of the found item report.\n\n
+</string>
     <string name="CardViewFAQ2">How to send lost item details?</string>
     <string name="CardViewFAQ3">How to send an inquiry?</string>
     <string name="CardViewFAQ4">What information to include when submitting a lost item?</string>
-    <string name="CardViewFAQ5">How to contact the developers?</string>
-    <string name="CardViewFAQ6">Where are the social platforms?</string>
-    <string name="firstParag">  In rhoncus magna at nunc laoreet semper eget vitae lorem. Ut non pulvinar enim. Fusce sagittis massa sed nunc vehicula, a consequat augue ullamcorper. Mauris consequat venenatis diam vitae egestas. Proin laoreet nulla ut condimentum gravida. Morbi ornare pharetra hendrerit. Pellentesque quis justo quis lacus eleifend molestie. Fusce non feugiat ante. Aliquam tempus massa eu mi sagittis, sit amet rhoncus sapien vestibulum. \n \n Aenean pharetra velit id convallis molestie. Aenean cursus nisl elit, vel tempor dui gravida at. Morbi posuere diam vitae neque laoreet pellentesque.Etiam rhoncus sollicitudin nibh, id blandit ipsum placerat id. Donec dignissim auctor lectus et ullamcorper. Mauris semper feugiat enim id dignissim. Nulla et magna et elit placerat hendrerit. Suspendisse laoreet sem euismod ullamcorper consequat. Etiam mattis eu velit quis volutpat. Curabitur fringilla blandit leo eget dictum. Vestibulum at vestibulum metus, eu maximus lacus. Suspendisse porta felis eu est consectetur laoreet.</string>
-    <string name="secParag">In rhoncus magna at nunc laoreet semper eget vitae lorem. Ut non pulvinar enim. Fusce sagittis massa sed nunc vehicula, a consequat augue ullamcorper. Mauris consequat venenatis diam vitae egestas. Proin laoreet nulla ut condimentum gravida. Morbi ornare pharetra hendrerit. Pellentesque quis justo quis lacus eleifend molestie. Fusce non feugiat ante. Aliquam tempus massa eu mi sagittis, sit amet rhoncus sapien vestibulum. \n \n Aenean pharetra velit id convallis molestie. Aenean cursus nisl elit, vel tempor dui gravida at. Morbi posuere diam vitae neque laoreet pellentesque.Etiam rhoncus sollicitudin nibh, id blandit ipsum placerat id. Donec dignissim auctor lectus et ullamcorper. Mauris semper feugiat enim id dignissim. Nulla et magna et elit placerat hendrerit. Suspendisse laoreet sem euismod ullamcorper consequat. Etiam mattis eu velit quis volutpat. Curabitur fringilla blandit leo eget dictum. Vestibulum at vestibulum metus, eu maximus lacus. Suspendisse porta felis eu est consectetur laoreet.</string>
+    <string name="CardViewFAQ5">Where to contact the administration for lost item retrieval?</string>
+    <string name="CardViewFAQ6">Where can I find the social media accounts of the developers?</string>
+    <string name="firstParag">The mission of CNSC-IFIND is to provide a user-friendly and efficient application for locating lost items within the Camarines Norte State College campus. It aims to streamline the process of reporting and recovering lost items, promoting a sense of security and convenience for students, faculty, and visitors. By leveraging advanced technology and real-time updates, IFIND facilitates seamless communication and collaboration between individuals who have lost their belongings and those who may have found them. Through its features such as geolocation services and intelligent search algorithms, IFIND increases the chances of successfully locating and reuniting lost items with their owners. Ultimately, CNSC IFIND contributes to creating a campus environment where the stress and inconvenience associated with lost items are minimized</string>
+    <string name="secParag">The CNSC IFIND application holds significant importance within the Camarines Norte State College campus for several reasons: \n\n
+        1. <b>Enhanced Convenience</b>\n\nIFIND simplifies the process of reporting and finding lost items, offering a convenient and efficient solution for students, faculty, and visitors. It eliminates the need for time-consuming manual procedures and reduces the frustration associated with lost belongings.\n\n
+        2. <b>Promoting Security</b>\n\nBy providing a reliable system for reporting and recovering lost items, IFIND contributes to enhancing the overall security of the campus. It instills confidence among the community by offering a platform that actively addresses the issue of lost items.\n\n
+        3. <b>Efficient Resource Utilization</b>\n\nThe application optimizes resource allocation by centralizing the reporting and retrieval process. It enables campus staff and security personnel to manage lost item inquiries and facilitates quicker item reunions, reducing the burden on administrative departments.\n\n
+        4. <b>Community Engagement</b>\n\nIFIND fosters a sense of community and collaboration by encouraging individuals who find lost items to actively participate in the recovery process. It promotes a culture of honesty and responsibility, strengthening social bonds within the campus community. \n\n
+        5. <b>Timely Notifications and Updates</b>\n\nThrough real-time notifications and updates, IFIND keeps users informed about the progress of their lost item inquiries. This feature enables swift actions and increases the chances of successful item recovery. \n\n\n
+
+        Overall, the significance of CNSC IFIND lies in its ability to simplify and streamline the process of reporting and recovering lost items within the Camarines Norte State College campus. By providing a user-friendly and efficient solution, it contributes to the convenience, security, and community engagement within the campus environment.\n\n\n
+    </string>
+    <string name="to_include">When reporting a lost item in the CNSC IFIND application, provide essential details such as a photo of the item, its name, the location where it was last seen, the date and time when it was found, and the description. </string>
+    <string name="contact_admin">
+        1. Open the left menu. \n\n
+        2. Find and tap on <b>Contact</b>.\n\n
+        3. Fill in the required details.\n\n
+        4. Send an email to the admin.\n\n
+    </string>
 
     <!--ben's login interface-->
 
@@ -132,4 +155,7 @@
 
 
     <string name="filter_prompt">All</string>
+    <string name="how_to_report_lost_items">How to report Lost Items?</string>
+    <string name="faqs">FAQs</string>
+    <string name="about_title">About</string>
 </resources>
