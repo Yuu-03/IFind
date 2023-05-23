@@ -1,6 +1,5 @@
 package com.example.ifind;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -9,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -79,7 +77,8 @@ public class AdminPostLost extends AppCompatActivity {
         Button submit_post = findViewById(R.id.submit_post);
         image_preview = findViewById(R.id.image_preview);
         foundname = findViewById(R.id.foundname);
-
+        date_picker.setKeyListener(null);
+        time_picker.setKeyListener(null);
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
