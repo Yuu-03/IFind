@@ -76,7 +76,8 @@ public class SubmittingItems extends AppCompatActivity {
         description = findViewById(R.id.description);
         Button submit_post = findViewById(R.id.submit_post);
         image_preview = findViewById(R.id.image_preview);
-
+        date_picker.setKeyListener(null);
+        time_picker.setKeyListener(null);
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
@@ -132,6 +133,7 @@ public class SubmittingItems extends AppCompatActivity {
         });
         date_picker.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
                 @Override
                 public void onDateSet(DatePicker view1, int year1, int month1, int dayOfMonth) {
                     month1 = month1 + 1;
