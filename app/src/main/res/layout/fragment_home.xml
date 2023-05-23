@@ -19,55 +19,66 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:background="@drawable/rectangle_blue"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="25dp"
             android:fontFamily="sans-serif"
             android:text="@string/navigationHomeText"
             android:textAlignment="center"
             android:textColor="#F6F6F6"
+            android:textSize="12sp"
             android:textStyle="italic|bold"
-            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.871"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.366" />
+            app:layout_constraintVertical_bias="0.504" />
 
         <Button
             android:id="@+id/submitlostbutton"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/bg_light"
             android:text="@string/submit_a_lost_item"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.868"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:background="@drawable/home_layout"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/linear">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="600dp"
         android:layout_marginTop="0dp"
-        android:padding="5dp">
+        android:padding="20dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="20dp"
             android:gravity="center">
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -79,7 +90,8 @@
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="@drawable/header"
+                    android:background="@drawable/spinner_layout"
+                    android:backgroundTint="@color/bg_main"
                     android:fontFamily="sans-serif"
                     android:text="@string/featured"
                     android:paddingTop="2dp"
@@ -110,7 +122,8 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="24dp"
                 android:paddingTop="2dp"
-                android:background="@drawable/header"
+                android:background="@drawable/spinner_layout"
+                android:backgroundTint="@color/bg_main"
                 android:fontFamily="sans-serif"
                 android:text="@string/featured"
                 android:textAlignment="center"
@@ -131,4 +144,5 @@
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
     </ScrollView>
+    </LinearLayout>
 </LinearLayout>
