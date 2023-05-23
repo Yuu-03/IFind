@@ -34,15 +34,19 @@
         android:layout_alignParentBottom="true"
         app:itemTextColor="@drawable/admin_nav"
         app:itemIconTint="@drawable/admin_nav"
-        android:background="#54b8ff"
+        android:background="@color/bg_green"
         app:menu="@menu/menu_bar"
         />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+
         android:orientation="vertical"
-        android:layout_below="@+id/hed">
+        android:layout_below="@+id/hed"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="50dp">
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +59,7 @@
                 android:rowCount="2">
                 <Button
                     android:id="@+id/LogView"
-                    android:layout_width="150dp"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/teal_700"
                     android:text="View Activity"
@@ -66,19 +70,22 @@
                     android:textSize="11sp"/>
                 <Button
                     android:id="@+id/ForgottenBox"
-                    android:layout_width="150dp"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/teal_700"
                     android:text="Forgotten Box"
                     android:textColor="@color/white"
-                    android:layout_margin="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="14dp"
                     android:layout_gravity="center_horizontal"
                     android:textStyle="bold"
                     android:textSize="11sp"/>
 
                 <Button
                     android:id="@+id/UserDetail"
-                    android:layout_width="150dp"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/teal_700"
                     android:text="User Contacts"
@@ -88,11 +95,15 @@
                     android:textStyle="bold"
                     android:textSize="11sp"/>
 
+
             </GridLayout>
 
 
 
+
+
         </androidx.cardview.widget.CardView>
+
 
         <Button
             android:id="@+id/adminLogoutButt"

@@ -53,14 +53,14 @@
         android:layout_alignParentBottom="true"
         app:itemTextColor="@drawable/admin_nav"
         app:itemIconTint="@drawable/admin_nav"
-        android:background="#54b8ff"
+        android:background="@color/bg_green"
         app:menu="@menu/menu_bar"
         />
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#293ce1"
+        android:background="@color/bg_light"
         android:layout_below="@+id/hed"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="1dp"
@@ -89,12 +89,12 @@
         <Spinner
             android:id="@+id/filter_spinner"
             android:layout_width="100dp"
-            android:layout_height="35dp"
+            android:layout_height="38dp"
             android:prompt="@string/filter_prompt"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="15dp"
             android:backgroundTint="@color/white"
-            android:background="@drawable/rectangleradius"
+            android:background="@drawable/spinner_layout"
             android:textAlignment="center"/>
 
     </LinearLayout>

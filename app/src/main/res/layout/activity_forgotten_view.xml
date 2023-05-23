@@ -49,7 +49,7 @@
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#293ce1"
+        android:background="@color/bg_light"
         android:layout_below="@+id/hed"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="1dp"
