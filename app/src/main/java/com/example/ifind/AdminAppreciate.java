@@ -44,7 +44,6 @@ public class AdminAppreciate extends AppCompatActivity {
     List<AppreciationItemHelperClass> dataList;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
-    RecyclerView recyclerView;
     Spinner filterSpinner;
     SearchView searchView1;
 

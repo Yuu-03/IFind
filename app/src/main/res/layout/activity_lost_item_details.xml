@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     app:constraint_referenced_ids="item_loc,item_time,item_date,item_desc,item_name" />
 
-                <TextView
+                <EditText
                     android:id="@+id/item_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -78,11 +78,10 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="130dp"
-                    android:text="@string/item_description3"
-                    android:textSize="16sp"
-                    android:textColor="#000000"/>
+                    android:hint="@string/item_description3"
+                    android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/item_name"
                     android:layout_width="317dp"
                     android:layout_height="65dp"
@@ -94,12 +93,12 @@
                     android:layout_marginEnd="43dp"
                     android:background="@drawable/shape_for_detail_post"
                     android:gravity="center"
-                    android:text="@string/item_name1"
+                    android:hint="@string/item_name1"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <EditText
                     android:id="@+id/item_loc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -109,9 +108,8 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="25dp"
-                    android:text="@string/location"
-                    android:textSize="16sp"
-                    android:textColor="#000000"/>
+                    android:hint="@string/location"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/item_loc2"
@@ -123,7 +121,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:text="@string/last_seen_label"
+                    android:text="Location"
                     android:textColor="#4C54F3"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -182,14 +180,14 @@
                     android:layout_alignStart="@+id/shape_descrip"
                     android:layout_alignEnd="@+id/shape_descrip"
                     android:layout_marginStart="13dp"
-                    android:layout_marginTop="201dp"
+                    android:layout_marginTop="137dp"
                     android:layout_marginEnd="56dp"
                     android:text="Found By"
                     android:textColor="#4C54F3"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <EditText
                     android:id="@+id/item_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -199,11 +197,10 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="25dp"
-                    android:text="Date"
-                    android:textSize="16sp"
-                    android:textColor="#000000"/>
+                    android:hint="Date"
+                    android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/item_time"
                     android:layout_width="276dp"
                     android:layout_height="wrap_content"
@@ -213,22 +210,20 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="25dp"
-                    android:text="Time:"
-                    android:textSize="16sp"
-                    android:textColor="#000000"/>
+                    android:hint="Time:"
+                    android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/pendingFoundName"
                     android:layout_width="276dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/item_loc4"
                     android:layout_alignStart="@+id/shape_descrip"
                     android:layout_alignEnd="@+id/shape_descrip"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="285dp"
-                    android:layout_marginEnd="27dp"
-                    android:text="Name"
-                    android:textColor="#000000"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="243dp"
+                    android:layout_marginEnd="26dp"
+                    android:hint="Name"
                     android:textSize="16sp" />
 
                 <Button
@@ -243,7 +238,6 @@
                     android:layout_marginTop="1042dp"
                     android:layout_marginEnd="24dp"
                     android:backgroundTint="#44FF00"
-                    android:onClick="copyRecord"
                     android:text="APPROVE"
                     app:icon="@drawable/approved_ic" />
 

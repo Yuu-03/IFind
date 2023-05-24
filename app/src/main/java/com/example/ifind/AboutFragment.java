@@ -18,8 +18,16 @@ import androidx.fragment.app.Fragment;
 
 public class AboutFragment extends Fragment {
     ImageView fblogo;
-    LinearLayout linlayout1, linlayout2, linlayout3, linlayout4, linlayout5, linlayout6;
-    TextView txtdetail1, txtdetail2, txtdetail3, txtdetail4, txtdetail5, txtdetail6;
+    LinearLayout linlayout1;
+    LinearLayout linlayout2;
+    LinearLayout linlayout4;
+    LinearLayout linlayout5;
+    LinearLayout linlayout6;
+    TextView txtdetail1;
+    TextView txtdetail2;
+    TextView txtdetail4;
+    TextView txtdetail5;
+    TextView txtdetail6;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,9 +114,9 @@ public class AboutFragment extends Fragment {
         fblogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sAppLink = "https://www.facebook.com/rozvisuals/";
+                String sAppLink = "https://www.facebook.com/cnscifind/";
                 String sPackage = "com.facebook.katana";
-                String sWeblink = "https://www.facebook.com/rozvisuals/";
+                String sWeblink = "https://www.facebook.com/cnscifind/";
 
                 openLink(sAppLink, sPackage, sWeblink);
             }

@@ -1,34 +1,34 @@
 package com.example.ifind;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class AdminMain extends AppCompatActivity {
 
-    private FirebaseAuth auth;
     BottomNavigationView nav;
+    private FirebaseAuth auth;
     private Button mLogbutt, AdminLogs, mForgotten, mUser;
 
     private boolean doubleBackToExitPressedOnce;
-    private Handler mHandler = new Handler();
+    private final Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            doubleBackToExitPressedOnce = false;
+        }
+    };
+    private final Handler mHandler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,22 +50,22 @@ public class AdminMain extends AppCompatActivity {
                     case R.id.pending_:
                         startActivity(new Intent(getApplicationContext(), pendingRequests.class));
                         finish();
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.approved_:
                         startActivity(new Intent(getApplicationContext(), ApprovedAdmin.class));
                         finish();
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.found_:
                         startActivity(new Intent(getApplicationContext(), FoundAdmin.class));
                         finish();
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.appre_:
                         startActivity(new Intent(getApplicationContext(), AdminAppreciate.class));
                         finish();
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.adminProfile:
                         return true;
@@ -106,22 +106,14 @@ public class AdminMain extends AppCompatActivity {
         });
 
 
-
     }
 
-
-    private final Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-            doubleBackToExitPressedOnce = false;
-        }
-    };
-
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
-        if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }
+        if (mHandler != null) {
+            mHandler.removeCallbacks(mRunnable);
+        }
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.example.ifind;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -9,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -28,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -73,9 +78,8 @@ public class ApprovedItemDetails extends AppCompatActivity {
         toFound = FirebaseDatabase.getInstance().getReference("Found");
         toForgotten = FirebaseDatabase.getInstance().getReference("Forgotten");
         logref = FirebaseDatabase.getInstance().getReference("AdminActivityLogs");
-
-
-
+        item_time.setKeyListener(null);
+        item_date.setKeyListener(null);
 
         Bundle bundle = getIntent().getExtras();
         String name = bundle.getString("Item Name");
@@ -290,4 +294,5 @@ public class ApprovedItemDetails extends AppCompatActivity {
 
         dialog.show();
     }
+
 }
