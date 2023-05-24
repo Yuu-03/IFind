@@ -85,27 +85,19 @@ public class ForgottenItemView extends AppCompatActivity {
             imageUrl = bundle.getString("Image");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
         }
-        Calendar calendar = Calendar.getInstance();
-        Date currentDate = calendar.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String timestamp = sdf.format(new Date());
 
-        // Format the date and time
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
-
-        String currentDateString = dateFormat.format(currentDate);
-        String currentTimeString = timeFormat.format(currentDate);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         String AdminID = String.valueOf(currentUser.getDisplayName());
-        String postType = "Forgotten Item Claimed!";
-
-        String datePosted = currentDateString;
-        String timePosted = currentTimeString;
 
 
-        ItemHelperClass loghelperclass1 = new ItemHelperClass(datePosted, timePosted, AdminID,"An owner claimed a forgotten item");
-        ItemHelperClass loghelperclass2 = new ItemHelperClass(datePosted, timePosted, AdminID,"Deleted an item from forgotten box");
+
+
+        ItemHelperClass loghelperclass1 = new ItemHelperClass(timestamp, AdminID,"An owner claimed a forgotten item");
+        ItemHelperClass loghelperclass2 = new ItemHelperClass(timestamp, AdminID,"Deleted an item from forgotten box");
 
         approve_button.setOnClickListener(new View.OnClickListener() {
             @Override

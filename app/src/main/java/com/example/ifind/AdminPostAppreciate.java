@@ -269,6 +269,8 @@ public class AdminPostAppreciate extends AppCompatActivity {
         // Format the date and time
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String timestamp = sdf.format(new Date());
 
         String currentDateString = dateFormat.format(currentDate);
         String currentTimeString = timeFormat.format(currentDate);
@@ -299,7 +301,7 @@ public class AdminPostAppreciate extends AppCompatActivity {
         String uploadID = databaseRef.push().getKey();
 
 
-        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, postType);
+        ItemHelperClass loghelperclass = new ItemHelperClass(timestamp, AdminID, postType);
         //assign an Id to add more users
 
         logref.addListenerForSingleValueEvent(new ValueEventListener() {

@@ -74,15 +74,9 @@ public class AppreciationAdminView extends AppCompatActivity {
             Picasso.get().load(bundle.getString("Image")).into(image_full);
 
         }
-        Calendar calendar = Calendar.getInstance();
-        Date currentDate = calendar.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String timestamp = sdf.format(new Date());
 
-        // Format the date and time
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
-
-        String currentDateString = dateFormat.format(currentDate);
-        String currentTimeString = timeFormat.format(currentDate);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
@@ -123,7 +117,7 @@ public class AppreciationAdminView extends AppCompatActivity {
                                 storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        ItemHelperClass loghelperclass = new ItemHelperClass(currentDateString, currentTimeString, AdminID, postType);
+                                        ItemHelperClass loghelperclass = new ItemHelperClass(timestamp, AdminID, postType);
                                         logref.child(key).setValue(loghelperclass);
                                         reference.child(key).removeValue();
                                         Toast.makeText(AppreciationAdminView.this, "Post Deleted!", Toast.LENGTH_SHORT).show();

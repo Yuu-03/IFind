@@ -99,26 +99,15 @@ public class LostItemDetails extends AppCompatActivity {
         }
 
 
-        Calendar calendar = Calendar.getInstance();
-        Date currentDate = calendar.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String timestamp = sdf.format(new Date());
 
-        // Format the date and time
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
-
-        String currentDateString = dateFormat.format(currentDate);
-        String currentTimeString = timeFormat.format(currentDate);
-
-        String datePosted = currentDateString;
-        String timePosted = currentTimeString;
-        String postType = "Verified and Approved a Lost Item";
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         String AdminID = String.valueOf(currentUser.getDisplayName());
 
         ItemHelperClass itemhelperClass = new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_);
-        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, time, AdminID,postType);
 
 
         approve_button.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +146,7 @@ public class LostItemDetails extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@androidx.annotation.NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-
+                                                    ItemHelperClass loghelperclass = new ItemHelperClass(timestamp, AdminID, "Verified and Approved an item to lost items");
 
                                                     toPath1.child(key).setValue(new ItemHelperClass(name, desc, loc, date, time, imageUrl,userID_));
                                                     logref.child(key).setValue(loghelperclass);
@@ -239,7 +228,7 @@ public class LostItemDetails extends AppCompatActivity {
 
                                             }
                                         }
-                                        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, "Deleted a Pending Lost Item");
+                                        ItemHelperClass loghelperclass = new ItemHelperClass(timestamp, AdminID, "Deleted a Pending Lost Item");
 
                                         logref.child(key).setValue(loghelperclass);
                                         reference.child(key).removeValue();

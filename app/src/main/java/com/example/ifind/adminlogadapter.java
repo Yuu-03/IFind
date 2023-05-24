@@ -44,7 +44,7 @@ public class adminlogadapter extends RecyclerView.Adapter<MyViewHolderLog> {
     public void onBindViewHolder(@NonNull MyViewHolderLog holder, int position) {
 
         LogHelperClass item = datalist.get(position);
-        String dateTime = item.getTime() + " | " + item.getDate();
+        String dateTime = item.getTimestamp();
         holder.adminlogname.setText(item.getUserID());
         holder.logdate.setText(dateTime);
         holder.activitytext.setText(item.getPostType());

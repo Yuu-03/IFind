@@ -299,15 +299,8 @@ public class SubmittingItems extends AppCompatActivity {
         databaseRef = FirebaseDatabase.getInstance().getReference("SubmitLostItem");
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        Calendar calendar = Calendar.getInstance();
-        Date currentDate = calendar.getTime();
-
-        // Format the date and time
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
-
-        String currentDateString = dateFormat.format(currentDate);
-        String currentTimeString = timeFormat.format(currentDate);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String timestamp = sdf.format(new Date());
 
         if (!item_name_condition() | !item_loc_condition() | !item_date_condition()| !item_time_condition()| !item_description_condition()) {
             return;
@@ -320,13 +313,12 @@ public class SubmittingItems extends AppCompatActivity {
         String dateFound = date_picker.getText().toString();
         String timeFound = time_picker.getText().toString();
         String userID = String.valueOf(currentUser.getDisplayName());
-        String datePosted = currentDateString;
-        String timePosted = currentTimeString;
+
         String postType = "Posted Lost Item";
 
         //call the class UserHelperClass to use and store values to the database
         ItemHelperClass ItemhelperClass = new ItemHelperClass(itemName, itemDescription, itemLocation, dateFound, timeFound, imageURL, userID);
-        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, userID, postType);
+        ItemHelperClass loghelperclass = new ItemHelperClass(timestamp, userID, postType);
         //assign an Id to add more users
         String uploadID = databaseRef.push().getKey();
 

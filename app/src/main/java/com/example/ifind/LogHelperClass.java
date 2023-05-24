@@ -1,14 +1,13 @@
 package com.example.ifind;
 
 public class LogHelperClass {
-    String date, postType, time, userID, key;
+    String postType, userID, key, timestamp;
 
     //empty constructor to avoid errors in the databas
 
     public LogHelperClass(String date, String postType, String time, String userID) {
-        this.date = date;
+        this.timestamp = timestamp;
         this.postType = postType;
-        this.time = time;
         this.userID = userID;
     }
 
@@ -16,12 +15,12 @@ public class LogHelperClass {
     //getter and setters
 
 
-    public String getDate() {
-        return date;
+    public String getTimestamp() {
+        return timestamp;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getPostType() {
@@ -30,14 +29,6 @@ public class LogHelperClass {
 
     public void setPostType(String postType) {
         this.postType = postType;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getUserID() {

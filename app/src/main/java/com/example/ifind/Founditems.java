@@ -69,22 +69,13 @@ public class Founditems extends AppCompatActivity {
             key = bundle.getString("Key");
             Picasso.get().load(bundle.getString("Image")).into(image_full);
         }
-        Calendar calendar = Calendar.getInstance();
-        Date currentDate = calendar.getTime();
-
-        // Format the date and time
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
-
-        String currentDateString = dateFormat.format(currentDate);
-        String currentTimeString = timeFormat.format(currentDate);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String timestamp = sdf.format(new Date());
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         String AdminID = String.valueOf(currentUser.getDisplayName());
 
-        String datePosted = currentDateString;
-        String timePosted = currentTimeString;
 
         del_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +112,7 @@ public class Founditems extends AppCompatActivity {
 
                                             }
                                         }
-                                        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, "Deleted a Found Item");
+                                        ItemHelperClass loghelperclass = new ItemHelperClass(timestamp, AdminID, "Deleted a Found Item");
 
                                         logref.child(key).setValue(loghelperclass);
                                         reference.child(key).removeValue();

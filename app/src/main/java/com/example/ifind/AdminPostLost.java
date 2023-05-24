@@ -312,6 +312,8 @@ public class AdminPostLost extends AppCompatActivity {
         // Format the date and time
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String timestamp = sdf.format(new Date());
 
         String currentDateString = dateFormat.format(currentDate);
         String currentTimeString = timeFormat.format(currentDate);
@@ -335,7 +337,7 @@ public class AdminPostLost extends AppCompatActivity {
 
         //call the class UserHelperClass to use and store values to the database
         ItemHelperClass ItemhelperClass = new ItemHelperClass(itemName, itemDescription, itemLocation, datePosted,timePosted, imageURL, foundName);
-        ItemHelperClass loghelperclass = new ItemHelperClass(datePosted, timePosted, AdminID, postType);
+        ItemHelperClass loghelperclass = new ItemHelperClass(timestamp, AdminID, postType);
 
         String uploadID = databaseRef.push().getKey();
 
