@@ -23,7 +23,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="39dp"
             android:padding="8dp"
             android:scaleType="centerCrop"
@@ -36,38 +36,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="17dp"
             android:layout_toEndOf="@+id/recImage"
-            android:textStyle="bold"
             android:text="Item Name:"
             android:textColor="@color/white"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textItemLoc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textItemName"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
             android:layout_toEndOf="@+id/recImage"
             android:text="Last Seen:"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textItemdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textItemLoc"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
             android:layout_toEndOf="@+id/recImage"
             android:text="Date Found:"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textItemtime"
@@ -75,13 +77,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textItemdate"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="37dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="40dp"
             android:layout_toEndOf="@+id/recImage"
             android:text="Time Posted:"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textStyle="bold"/>
 
 
     </RelativeLayout>
