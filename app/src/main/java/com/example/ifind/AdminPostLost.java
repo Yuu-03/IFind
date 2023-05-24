@@ -134,10 +134,12 @@ public class AdminPostLost extends AppCompatActivity {
         });
         date_picker.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
                 @Override
                 public void onDateSet(DatePicker view1, int year1, int month1, int dayOfMonth) {
                     month1 = month1 + 1;
-                    String date = dayOfMonth + "/" + month1 + "/" + year1;
+                    String monthString = String.format(Locale.getDefault(), "%02d", month1); // Format month as two digits
+                    String date = dayOfMonth + "/" + monthString + "/" + year1;
                     date_picker.setText(date);
                 }
             }, year, month, day);

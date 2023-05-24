@@ -38,6 +38,10 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout logEmail,logPassword;
     private static final String ADMIN1 = "s1Olp2MGwRVpuj2UiJh9zcnpu4j1";
     private static final String ADMIN2 = "gVmKG7rMShfy1iedS1HY2WdfJUs2";
+
+    private static final String ADMIN3 = "DRxd5NLR94OKtiWmpF0qmkdaovy2";
+
+    private static final String ADMIN4 = "HZAtixXc8VR40HbtQGuqiKUHEPI2";
     private boolean doubleBackToExitPressedOnce;
     private Handler mHandler = new Handler();
 
@@ -80,10 +84,16 @@ public class LoginActivity extends AppCompatActivity {
                                         if (firebaseUser.isEmailVerified()) {
 
                                             if (firebaseUser.getUid().equals(ADMIN1)) {
-                                                Toast.makeText(LoginActivity.this, "You are now logged as Admin.", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(LoginActivity.this, "You are now logged as Admin " + auth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(LoginActivity.this, pendingRequests.class));
                                             } else if (firebaseUser.getUid().equals(ADMIN2)) {
-                                                Toast.makeText(LoginActivity.this, "You are now logged as Admin.", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(LoginActivity.this, "You are now logged as Admin " + auth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(LoginActivity.this, pendingRequests.class));
+                                            } else if (firebaseUser.getUid().equals(ADMIN3)) {
+                                                Toast.makeText(LoginActivity.this, "You are now logged as Admin " + auth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(LoginActivity.this, pendingRequests.class));
+                                            } else if (firebaseUser.getUid().equals(ADMIN4)) {
+                                                Toast.makeText(LoginActivity.this, "You are now logged as Admin " + auth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(LoginActivity.this, pendingRequests.class));
                                             }else {
                                                 Toast.makeText(LoginActivity.this, "Welcome" + " " + auth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
@@ -207,7 +217,15 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(new Intent(LoginActivity.this, pendingRequests.class));
                     finish();
                 } else if (firebaseUser.getUid().equals(ADMIN2)) {
-                    Toast.makeText(LoginActivity.this, "Already logged in as Admin!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "You are now logged as Admin " + auth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, pendingRequests.class));
+                    finish();
+                } else if (firebaseUser.getUid().equals(ADMIN3)) {
+                    Toast.makeText(LoginActivity.this, "You are now logged as Admin " + auth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, pendingRequests.class));
+                    finish();
+                } else if (firebaseUser.getUid().equals(ADMIN4)) {
+                    Toast.makeText(LoginActivity.this, "You are now logged as Admin " + auth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, pendingRequests.class));
                     finish();
                 }else {

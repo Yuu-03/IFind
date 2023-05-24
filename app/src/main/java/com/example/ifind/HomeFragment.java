@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Approved");
-        eventListener = databaseReference.limitToFirst(3).addValueEventListener(new ValueEventListener() {
+        eventListener = databaseReference.limitToFirst(5).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
@@ -119,7 +119,7 @@ public class HomeFragment extends Fragment {
         recyclerView2.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Found");
-        eventListener = databaseReference.limitToFirst(3).addValueEventListener(new ValueEventListener() {
+        eventListener = databaseReference.limitToFirst(5).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList2.clear();
@@ -127,7 +127,7 @@ public class HomeFragment extends Fragment {
                     FoundImageHelperClass dataClass2 = itemSnapshot.getValue(FoundImageHelperClass.class);
                     Collections.reverse(dataList2);
                     dataList2.add(dataClass2);
-                    Collections.reverse(dataList);
+                    Collections.reverse(dataList2);
                 }
                 adapter2.notifyDataSetChanged();
             }
