@@ -15,8 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class userlogadapter extends RecyclerView.Adapter<MyViewHolderLogUser> {
     private final Context context;
@@ -41,15 +45,27 @@ public class userlogadapter extends RecyclerView.Adapter<MyViewHolderLogUser> {
         return datalist.size();
     }
 
+    @Override
     public void onBindViewHolder(@NonNull MyViewHolderLogUser holder, int position) {
-
         LogHelperClass item = datalist.get(position);
         String dateTime = item.getTimestamp();
-        holder.adminlogname.setText(item.getUserID());
-        holder.logdate.setText(dateTime);
-        holder.activitytext.setText(item.getPostType());
 
+        // Convert timestamp to 12-hour format with AM and PM
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.getDefault());
+        String formattedDateTime = "";
+        try {
+            Date date = inputFormat.parse(dateTime);
+            formattedDateTime = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        holder.adminlogname.setText(item.getUserID());
+        holder.logdate.setText(formattedDateTime);
+        holder.activitytext.setText(item.getPostType());
     }
+
 }
 class MyViewHolderLogUser extends RecyclerView.ViewHolder {
 

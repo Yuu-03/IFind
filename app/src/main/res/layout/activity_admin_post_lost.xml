@@ -84,7 +84,9 @@
                 android:id="@+id/itemname_text"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:hint="@string/enter_item_name"></com.google.android.material.textfield.TextInputEditText>
+                android:hint="@string/enter_item_name">
+
+            </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -106,10 +108,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/date_picker_text"
+
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:textColorHint="@color/black"
-            android:layout_margin="10dp"
             android:inputType="date"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -123,22 +125,20 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-
             android:id="@+id/time_picker_layout"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:textColorHint="@color/black"
-            android:inputType="time"
-            android:layout_margin="10dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/time_picker"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:hint="@string/select_time">
+                android:hint="@string/select_time"
+                android:focusable="false"
+                android:inputType="none" />
 
-            </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

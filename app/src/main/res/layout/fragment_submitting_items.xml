@@ -110,22 +110,23 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-
             android:id="@+id/time_picker_layout"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:textColorHint="@color/black"
-            android:inputType="time"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/time_picker"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:hint="@string/select_time">
+                android:hint="@string/select_time"
+                android:focusable="false"
+                android:inputType="none" />
 
-            </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/description"

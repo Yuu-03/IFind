@@ -95,44 +95,32 @@ public class SubmittingItems extends AppCompatActivity {
         submit_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //upload selected pic to database
-
-
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(SubmittingItems.this);
-
-                builder.setTitle("Confirm");
-                builder.setMessage("Are you sure?");
-
-                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (!item_name_condition() | !item_loc_condition() | !item_date_condition()| !item_time_condition()| !item_description_condition()) {
-                            return;
-                        } else {
+                if (!item_name_condition() || !item_loc_condition() || !item_date_condition() || !item_time_condition() || !item_description_condition()) {
+                    // Conditions are not met, display an error message
+                    Toast.makeText(SubmittingItems.this, "Please fill in all required fields correctly", Toast.LENGTH_SHORT).show();
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SubmittingItems.this);
+                    builder.setTitle("Confirm");
+                    builder.setMessage("Are you sure?");
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
                             uploadPicture();
-
                         }
-
-                    }
-
-                });
-
-                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        // Do nothing
-                        dialog.dismiss();
-                    }
-                });
-
-                AlertDialog alert = builder.create();
-                alert.show();
-
+                    });
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Do nothing
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
             }
         });
+
+
         date_picker.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
@@ -149,26 +137,36 @@ public class SubmittingItems extends AppCompatActivity {
 
 
         time_picker.setOnClickListener(v -> {
+            // Get current time
+            int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+            int minute = calendar.get(Calendar.MINUTE);
+
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker view12, int hourOfDay, int minute) {
-                    hour1 = hourOfDay;
-                    minute1 = minute;
-                    String time = hour1 + ":" + minute1;
-                    SimpleDateFormat twentyfour = new SimpleDateFormat("HH:mm");
-                    Date date = null;
-                    try {
-                        date = twentyfour.parse(time);
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                    SimpleDateFormat twelvehours = new SimpleDateFormat("hh:mm aa");
-                    time_picker.setText(twelvehours.format(date));
-                }
-            }, 12, 0, false);
-            timePickerDialog.updateTime(hour1, minute1);
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            hour1 = hourOfDay;
+                            minute1 = minute;
+                            String time = hour1 + ":" + minute1;
+                            SimpleDateFormat twentyfour = new SimpleDateFormat("HH:mm");
+                            Date date = null;
+                            try {
+                                date = twentyfour.parse(time);
+                            } catch (ParseException e) {
+                                throw new RuntimeException(e);
+                            }
+                            SimpleDateFormat twelvehours = new SimpleDateFormat("hh:mm aa");
+                            time_picker.setText(twelvehours.format(date));
+                        }
+                    }, hourOfDay, minute, false);
+
+            // Set current time
+            timePickerDialog.updateTime(hourOfDay, minute);
+
             timePickerDialog.show();
         });
+
+
+
     }
 
     private void openFileChooser() {
@@ -221,22 +219,80 @@ public class SubmittingItems extends AppCompatActivity {
     }
 
     private Boolean item_date_condition() {
-        String value  = date_picker.getText().toString();
+        String value = date_picker.getText().toString();
         if (value.isEmpty()) {
             date_picker.setError("Field cannot be empty");
             return false;
         }
+
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        try {
+            Date selectedDate = format.parse(value);
+
+            // Get current date
+            Calendar currentDate = Calendar.getInstance();
+            currentDate.set(Calendar.HOUR_OF_DAY, 0);
+            currentDate.set(Calendar.MINUTE, 0);
+            currentDate.set(Calendar.SECOND, 0);
+            currentDate.set(Calendar.MILLISECOND, 0);
+
+            // Set the maximum date to 6 months ago
+            Calendar minDate = Calendar.getInstance();
+            minDate.add(Calendar.MONTH, -6);
+            minDate.set(Calendar.HOUR_OF_DAY, 0);
+            minDate.set(Calendar.MINUTE, 0);
+            minDate.set(Calendar.SECOND, 0);
+            minDate.set(Calendar.MILLISECOND, 0);
+
+            // Check if the selected date is a future date or more than 6 months ago
+            Calendar selectedCalendar = Calendar.getInstance();
+            selectedCalendar.setTime(selectedDate);
+
+            if (selectedCalendar.after(currentDate) || selectedCalendar.before(minDate)) {
+                Toast.makeText(this, "Please select a date within the last 6 months", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            // Update the date picker text
+            String selectedDateStr = format.format(selectedCalendar.getTime());
+            date_picker.setText(selectedDateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+
         return true;
     }
 
+
+
+
+
     private Boolean item_time_condition() {
-        String value  = time_picker.getText().toString();
+        String value = time_picker.getText().toString();
         if (value.isEmpty()) {
             time_picker.setError("Field cannot be empty");
             return false;
         }
+
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
+        try {
+            Date selectedTime = format.parse(value);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(selectedTime);
+            int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+
+            if (hourOfDay < 6 || hourOfDay > 22) {
+                time_picker.setError("Please select a time between 6 AM and 10 PM");
+                return false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         return true;
     }
+
 
     private Boolean item_description_condition() {
         String value  = description.getEditText().getText().toString();

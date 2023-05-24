@@ -110,72 +110,72 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     //Register user
-    private void regUser(String fname,String username,String email,String phone,String pass){
-        //Oncompletelistener will execute when the user registration is successful
-        //create user profile
+    private void regUser(String fname, String username, String email, String phone, String pass) {
+        // OnCompleteListener will execute when the user registration is successful
+        // Create user profile
         auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseUser firebaseUser = auth.getCurrentUser();
 
-                    //Update Display name of user
+                    // Update Display name of user
                     UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(fname).build();
                     firebaseUser.updateProfile(profileChangeRequest);
 
+                    // Save user data in realtime database, fetch data from the database (auth)
+                    ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(fname, username, email, phone); // pass user data to get from the database
 
-
-                    //Save user data in realtime database , fetch data from the database (auth)
-                    ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails( fname, username,email,phone); //pass user data to get from the database
-
-                    // Extracts user reference from database for Users
+                    // Extract user reference from database for Users
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-                    //passes the data from helperclass in this code
+                    // Pass the data from helper class in this code
                     databaseReference.child(firebaseUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                // Send verification email to verify the email address
+                                firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> verificationTask) {
+                                        if (verificationTask.isSuccessful()) {
+                                            Toast.makeText(SignUpActivity.this, "SignUp Successful. Please verify your email", Toast.LENGTH_SHORT).show();
 
-                            if (task.isSuccessful()){
-                                //send verification email to verify the email address
-                                firebaseUser.sendEmailVerification();
-                                Toast.makeText(SignUpActivity.this, "SignUp Successful.Please verify your email", Toast.LENGTH_SHORT).show();
-
-
-                                //Open Login Activity after succesful registration
-                                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                                //to prevent user from returning back to Signup activity when pressing back button after registration
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                        | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                finish(); //closes register activity
-                            }else{
-                                //Toast.makeText(SignUpActivity.this, "SignUp Failed.Please try again.", Toast.LENGTH_SHORT).show();
-                                try {
-                                    throw task.getException();
-                                    //
-                                } catch (FirebaseAuthInvalidCredentialsException e) {
-                                    regEmail.setError("Your email is invalid or already in use. Please re-enter your email.");
-                                    regEmail.requestFocus();
-                                } catch (FirebaseAuthUserCollisionException e) {
-                                    regEmail.setError("User is already registered with this email. Use another email.");
-                                    regEmail.requestFocus();
-                                } catch (Exception e) {
-                                    Log.e(TAG, e.getMessage());
-                                    Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                                    progressBar.setVisibility(View.GONE);
-                                }
+                                            // Open Login Activity after successful registration
+                                            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                                            // To prevent user from returning back to Signup activity when pressing back button after registration
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                            finish(); // Close register activity
+                                        } else {
+                                            Toast.makeText(SignUpActivity.this, "Failed to send verification email. Please try again.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(SignUpActivity.this, "Failed to save user data. Please try again.", Toast.LENGTH_SHORT).show();
                             }
-
                         }
                     });
-
-
                 } else {
-                    Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    // Handle Firebase authentication exceptions
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                        regEmail.setError("Your email is invalid or already in use. Please re-enter your email.");
+                        regEmail.requestFocus();
+                    } catch (FirebaseAuthUserCollisionException e) {
+                        regEmail.setError("User is already registered with this email. Use another email.");
+                        regEmail.requestFocus();
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage());
+                        Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                    }
                 }
             }
         });
     }
+
     // validate fields,  if empty an error message helper will show
     private Boolean regFname() {
         String value  = regFname.getEditText().getText().toString();
