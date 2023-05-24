@@ -23,7 +23,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="39dp"
             android:padding="8dp"
@@ -51,11 +51,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/postNameAppre"
             android:layout_marginStart="14dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="18dp"
             android:layout_toEndOf="@+id/recImage1"
             android:text="@string/person_type"
             android:textColor="@color/bg_secondary"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/postDateAppre"
@@ -63,11 +64,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/postTypeAppre"
             android:layout_marginStart="14dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="18dp"
             android:layout_toEndOf="@+id/recImage1"
             android:text="@string/date_found"
             android:textColor="@color/bg_secondary"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/postTimeAppre"
@@ -76,12 +78,13 @@
             android:layout_below="@+id/postDateAppre"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="14dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="37dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="40dp"
             android:layout_toEndOf="@+id/recImage1"
             android:text="@string/time_found"
             android:textColor="@color/bg_secondary"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textStyle="bold"/>
 
 
     </RelativeLayout>

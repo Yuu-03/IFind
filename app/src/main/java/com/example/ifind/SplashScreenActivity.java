@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
     //move to main screen after splashscreen
-    private static int SPLASH_SCREEN = 6000;
+    private static int SPLASH_SCREEN = 3000;
 
     //Variables for splashscreen animation
     Animation topAnim, botAnim;

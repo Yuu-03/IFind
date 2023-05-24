@@ -29,7 +29,7 @@ public class LostImageAdapter extends RecyclerView.Adapter<MyViewHolder3> {
     @NonNull
     @Override
     public MyViewHolder3 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.imagerecyclerviewlost, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.imagerecyclerview, parent, false);
         return new MyViewHolder3(view);
     }
 

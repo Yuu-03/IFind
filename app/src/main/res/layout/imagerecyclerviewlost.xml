@@ -7,7 +7,8 @@
     android:layout_marginStart="12dp"
     android:layout_marginEnd="12dp"
     android:layout_marginHorizontal="10dp"
-    android:layout_marginVertical="10dp">
+    android:layout_marginVertical="10dp"
+    app:cardCornerRadius="20dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,13 +20,12 @@
             android:id="@+id/textItemName2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="42dp"
-            android:layout_marginEnd="91dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="47dp"
+            android:layout_toEndOf="@+id/recImage2"
             android:text="Item Name"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/recImage2"
