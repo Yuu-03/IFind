@@ -40,13 +40,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="vertical"
         android:layout_below="@+id/hed"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="120dp">
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,18 +59,19 @@
                 <Button
                     android:id="@+id/LogView"
                     android:layout_width="130dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:backgroundTint="@color/teal_700"
                     android:text="View Activity"
                     android:textColor="@color/white"
                     android:layout_margin="20dp"
                     android:layout_gravity="center_horizontal"
                     android:textStyle="bold"
-                    android:textSize="11sp"/>
+                    android:textSize="11sp"
+                    android:elevation="20dp"/>
                 <Button
                     android:id="@+id/ForgottenBox"
                     android:layout_width="130dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:backgroundTint="@color/teal_700"
                     android:text="Forgotten Box"
                     android:textColor="@color/white"
@@ -81,39 +81,42 @@
                     android:layout_marginTop="14dp"
                     android:layout_gravity="center_horizontal"
                     android:textStyle="bold"
-                    android:textSize="11sp"/>
+                    android:textSize="11sp"
+                    android:elevation="20dp"/>
 
                 <Button
                     android:id="@+id/UserDetail"
                     android:layout_width="130dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:backgroundTint="@color/teal_700"
                     android:text="User Contacts"
                     android:textColor="@color/white"
                     android:layout_margin="20dp"
                     android:layout_gravity="center_horizontal"
                     android:textStyle="bold"
-                    android:textSize="11sp"/>
-
+                    android:textSize="11sp"
+                    android:elevation="20dp"/>
+                <Button
+                    android:id="@+id/adminLogoutButt"
+                    android:layout_width="130dp"
+                    android:layout_height="60dp"
+                    android:text="@string/adminLogout"
+                    android:textStyle="bold"
+                    android:backgroundTint="#FF1B1B"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="11sp"
+                    android:elevation="20dp"/>
 
             </GridLayout>
-
-
-
-
 
         </androidx.cardview.widget.CardView>
 
 
-        <Button
-            android:id="@+id/adminLogoutButt"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/adminLogout"
-            android:textStyle="bold"
-            android:backgroundTint="#FF1B1B"
-            app:cornerRadius="15dp"
-            />
+
 
     </LinearLayout>
 

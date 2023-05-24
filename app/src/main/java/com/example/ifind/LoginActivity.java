@@ -206,7 +206,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Already logged in as Admin!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, pendingRequests.class));
                     finish();
-                } if (firebaseUser.getUid().equals(ADMIN2)) {
+                } else if (firebaseUser.getUid().equals(ADMIN2)) {
                     Toast.makeText(LoginActivity.this, "Already logged in as Admin!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, pendingRequests.class));
                     finish();

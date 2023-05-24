@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,90 +7,101 @@
     android:background="@color/bg_light"
     tools:context=".ContactFragment">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:background="@color/bg_light"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_margin="0dp"
+        android:background="@drawable/rectangle_blue"
+        android:paddingTop="3dp"
+        android:text="Contact"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
-        <TextView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        tools:ignore="MissingConstraints"
+        android:padding="0dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:paddingTop="3dp"
-            android:background="@drawable/rectangle_blue"
-            android:text="Contact"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="0dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-medium"
-            android:textAlignment="center"
-            android:layout_marginStart="10dp"
-            android:text="@string/get_in_touch"
-            android:textSize="23sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/get_in_touch"
+                android:textAlignment="center"
+                android:textSize="23sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="30dp"
-            android:justificationMode="inter_word"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/little_descrip"
-            android:textSize="15sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="sans-serif-medium"
+                android:justificationMode="inter_word"
+                android:text="@string/little_descrip"
+                android:textSize="15sp" />
 
-        <EditText
-            android:id="@+id/subject_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:hint="@string/subject"
-            android:textColorHint="@color/black"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/bg_rounded"
-            android:inputType="textPersonName"
-            android:paddingStart="10dp"  >
+            <EditText
+                android:id="@+id/subject_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/bg_rounded"
+                android:hint="@string/subject"
+                android:inputType="textPersonName"
+                android:paddingStart="10dp"
+                android:textColorHint="@color/black">
 
-        </EditText>
+            </EditText>
 
-        <EditText
-            android:id="@+id/inquiry"
-            android:layout_width="300dp"
-            android:layout_height="350dp"
-            android:layout_marginBottom="15dp"
-            android:hint="@string/type_your_inquiry_here"
-            android:textColorHint="@color/black"
-            android:inputType="textMultiLine"
-            android:lines="20"
-            android:scrollbars="vertical"
-            android:scrollHorizontally="false"
-            android:background="@drawable/bg_rounded"
-            android:paddingStart="10dp"  >
-        </EditText>
+            <EditText
+                android:id="@+id/inquiry"
+                android:layout_width="300dp"
+                android:layout_height="350dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/bg_rounded"
+                android:hint="@string/type_your_inquiry_here"
+                android:inputType="textMultiLine"
+                android:lines="20"
+                android:paddingStart="10dp"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+                android:textColorHint="@color/black"></EditText>
 
-        <Button
-            android:id="@+id/submit_inquiry"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="40dp"
-            android:backgroundTint="@color/bg_green"
-            android:elevation="@dimen/cardview_default_elevation"
-            android:text="@string/submit_lost_item"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            app:cornerRadius="30dp" />
-    </LinearLayout>
-</ScrollView>
+            <Button
+                android:id="@+id/submit_inquiry"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/bg_bttn"
+                android:elevation="@dimen/cardview_default_elevation"
+                android:text="@string/submit_lost_item"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                app:cornerRadius="30dp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
