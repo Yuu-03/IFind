@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "434672326137",
-    "project_id": "ifindproject-24c98",
-    "storage_bucket": "ifindproject-24c98.appspot.com"
+    "project_number": "629024852390",
+    "project_id": "cnsc-ifind-main",
+    "storage_bucket": "cnsc-ifind-main.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:434672326137:android:c149173041206d536cd928",
+        "mobilesdk_app_id": "1:629024852390:android:9835e6389f363e35442767",
         "android_client_info": {
           "package_name": "com.example.ifind"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1072060168921-oqvn848evkij5uhvlsn5v11stse3natu.apps.googleusercontent.com",
+          "client_id": "629024852390-ljq4b2dtsmj89n6i98j1157j3lbeb50m.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCXjUiRYZ8HkYP2Nz6CmrwZCXoADEd4nKc"
+          "current_key": "AIzaSyCb3976-32su2adWo1A9Gw4C9pLCc44gAE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1072060168921-oqvn848evkij5uhvlsn5v11stse3natu.apps.googleusercontent.com",
+              "client_id": "629024852390-ljq4b2dtsmj89n6i98j1157j3lbeb50m.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
