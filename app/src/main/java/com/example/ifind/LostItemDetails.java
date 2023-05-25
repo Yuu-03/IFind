@@ -111,8 +111,9 @@ public class LostItemDetails extends AppCompatActivity {
                 @Override
                 public void onDateSet(DatePicker view1, int year1, int month1, int dayOfMonth) {
                     month1 = month1 + 1;
-                    String monthString = String.format(Locale.getDefault(), "%02d", month1); // Format month as two digits
-                    String date = dayOfMonth + "/" + monthString + "/" + year1;
+                    String monthString = String.format(Locale.getDefault(), "%02d", month1);
+                    String dayString = String.format(Locale.getDefault(), "%02d", dayOfMonth);// Format month as two digits
+                    String date = dayString + "/" + monthString + "/" + year1;
                     item_date.setText(date);
                 }
             }, year, month, day);
