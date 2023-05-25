@@ -242,7 +242,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
     private Boolean regPassword() {
         String value = regPassword.getEditText().getText().toString();
-        String passwordVal = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
+        String passwordVal = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{4,}$";
 
         if (value.isEmpty()) {
             regPassword.setError("Field cannot be empty");
