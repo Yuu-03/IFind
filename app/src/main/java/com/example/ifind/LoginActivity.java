@@ -36,12 +36,12 @@ public class LoginActivity extends AppCompatActivity {
     ImageView logo;
     TextView signUpText;
     TextInputLayout logEmail,logPassword;
-    private static final String ADMIN1 = "s1Olp2MGwRVpuj2UiJh9zcnpu4j1";
-    private static final String ADMIN2 = "gVmKG7rMShfy1iedS1HY2WdfJUs2";
+    private static final String ADMIN1 = "WDl2ZTQR4WbK8fnX5GdUbVh1xFG3";
+    private static final String ADMIN2 = "c3Z2cDvVWMNmm7ultb3Jd3OxuiB3";
 
-    private static final String ADMIN3 = "DRxd5NLR94OKtiWmpF0qmkdaovy2";
+    private static final String ADMIN3 = "jqysm1bI4mWh6pDWQscevf8v56S2";
 
-    private static final String ADMIN4 = "HZAtixXc8VR40HbtQGuqiKUHEPI2";
+    private static final String ADMIN4 = "p6xxHXqtxlP5wZ8DbBLmKE2kHr33";
     private boolean doubleBackToExitPressedOnce;
     private Handler mHandler = new Handler();
 
