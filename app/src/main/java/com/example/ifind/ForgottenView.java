@@ -69,7 +69,7 @@ public class ForgottenView extends AppCompatActivity {
 
 
         dataList = new ArrayList<>();
-        adapter = new AdapterClass(getApplicationContext(), dataList, true, false, false, false, false);
+        adapter = new AdapterClass(getApplicationContext(), dataList, true, false, false, false, false, false);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 

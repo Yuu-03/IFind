@@ -65,7 +65,7 @@ public class FoundFragment extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         dataList = new ArrayList<>();
-        adapter = new AdapterClass(getContext(), dataList,false, false,false, true, false);
+        adapter = new AdapterClass(getContext(), dataList,false, false,false, true, false, false);
 
         searchView1 = view.findViewById(R.id.search);
         searchView1.clearFocus();

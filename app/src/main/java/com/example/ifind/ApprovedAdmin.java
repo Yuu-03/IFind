@@ -111,7 +111,7 @@ public class ApprovedAdmin extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         dataList = new ArrayList<>();
-        adapter = new AdapterClass(this, dataList, false, true, false, false, false);
+        adapter = new AdapterClass(this, dataList, false, true, false, false, false, false);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
 

@@ -97,7 +97,7 @@ public class FoundAdmin extends AppCompatActivity {
 
         dataList = new ArrayList<>();
 
-        adapter = new AdapterClass(this, dataList, false, false, false, false, true);
+        adapter = new AdapterClass(this, dataList, false, false, false, false, true, false);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {

@@ -20,6 +20,9 @@
         android:theme="@style/Theme.IFind"
         tools:targetApi="31">
         <activity
+            android:name=".LostItemEdit"
+            android:exported="false" />
+        <activity
             android:name=".UserDetailView"
             android:exported="false" />
         <activity

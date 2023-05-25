@@ -53,7 +53,7 @@ import androidx.core.app.NotificationCompat;
 public class ApprovedItemDetails extends AppCompatActivity {
     TextView item_name, item_desc, item_loc, item_date, item_time, userID;
     ImageView image_full;
-    Button del_button, approve_button;
+    Button del_button, approve_button, edit_button;
     String imageUrl = "";
     String key = "";
 
@@ -73,6 +73,7 @@ public class ApprovedItemDetails extends AppCompatActivity {
         del_button = findViewById(R.id.del_buttA);
         approve_button = findViewById(R.id.approve_buttA);
         userID = findViewById(R.id.item_foundName);
+        edit_button = findViewById(R.id.EditButton);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Approved");
         toFound = FirebaseDatabase.getInstance().getReference("Found");
@@ -269,6 +270,23 @@ public class ApprovedItemDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showImagePopup(imageUrl);
+            }
+        });
+
+        edit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ApprovedItemDetails.this, LostItemEdit.class);
+                intent.putExtra("Item Name", name);
+                intent.putExtra("Location", loc);
+                intent.putExtra("Description", desc);
+                intent.putExtra("Date", date);
+                intent.putExtra("Time", time);
+                intent.putExtra("userID_", userID_);
+                intent.putExtra("Key", key);
+                intent.putExtra("Image", imageUrl);
+                startActivity(intent);
+
             }
         });
 

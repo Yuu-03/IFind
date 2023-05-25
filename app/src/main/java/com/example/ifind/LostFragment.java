@@ -73,7 +73,7 @@ public class LostFragment extends Fragment {
 
 
         dataList = new ArrayList<>();
-        adapter = new AdapterClass(getContext(), dataList, false, false, true, false, false);
+        adapter = new AdapterClass(getContext(), dataList, false, false, true, false, false, false);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 

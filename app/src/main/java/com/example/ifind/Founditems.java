@@ -121,7 +121,7 @@ public class Founditems extends AppCompatActivity {
                                         logref.child(key).setValue(loghelperclass);
                                         reference.child(key).removeValue();
                                         Toast.makeText(Founditems.this, "Item Deleted", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(getApplicationContext(), pendingRequests.class));
+                                        startActivity(new Intent(getApplicationContext(), FoundAdmin.class));
 
                                     }
 

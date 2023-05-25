@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ApprovedItemDetails"
-    android:background="@drawable/gradient_bg" >
+    tools:context=".LostItemEdit"
+    android:background="@color/bg_green" >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,24 +41,23 @@
                 <TextView
                     android:id="@+id/shape"
                     android:layout_width="match_parent"
-                    android:layout_height="960dp"
+                    android:layout_height="800dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="355dp"
+                    android:layout_marginTop="356dp"
                     android:layout_marginEnd="0dp"
                     android:background="@drawable/shape_for_post" />
 
                 <TextView
                     android:id="@+id/shape_descrip"
                     android:layout_width="317dp"
-                    android:layout_height="600dp"
+                    android:layout_height= "550dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="43dp"
                     android:layout_marginTop="480dp"
                     android:layout_marginEnd="44dp"
-                    android:layout_marginBottom="100dp"
                     android:background="@drawable/shape_descrip"
                     android:gravity="center" />
 
@@ -67,7 +66,7 @@
                     android:layout_height="wrap_content"
                     app:constraint_referenced_ids="item_loc,item_time,item_date,item_desc,item_name" />
 
-                <TextView
+                <EditText
                     android:id="@+id/item_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,15 +74,14 @@
                     android:layout_alignStart="@+id/shape_descrip"
                     android:layout_alignEnd="@+id/shape_descrip"
                     android:layout_alignBottom="@+id/shape_descrip"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="23dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="25dp"
                     android:layout_marginBottom="130dp"
-                    android:text="@string/item_description3"
-                    android:textColor="#000000"
+                    android:hint="@string/item_description3"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/item_name"
                     android:layout_width="317dp"
                     android:layout_height="65dp"
@@ -95,12 +93,12 @@
                     android:layout_marginEnd="43dp"
                     android:background="@drawable/shape_for_detail_post"
                     android:gravity="center"
-                    android:text="@string/item_name1"
+                    android:hint="@string/item_name1"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <EditText
                     android:id="@+id/item_loc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -110,9 +108,8 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="25dp"
-                    android:text="@string/location"
-                    android:textSize="16sp"
-                    android:textColor="#000000"/>
+                    android:hint="@string/location"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/item_loc2"
@@ -124,7 +121,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:text="@string/last_seen_label"
+                    android:text="Location"
                     android:textColor="#4C54F3"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -157,7 +154,8 @@
                     android:text="@string/item_found_date_label"
                     android:textColor="#4C54F3"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    />
 
 
                 <TextView
@@ -176,51 +174,21 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/item_loc3"
+                    android:id="@+id/item_loc8"
                     android:layout_width="255dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/item_time"
                     android:layout_alignStart="@+id/shape_descrip"
                     android:layout_alignEnd="@+id/shape_descrip"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="54dp"
-                    android:text="Description"
-                    android:textColor="#4C54F3"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/item_loc7"
-                    android:layout_width="255dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/item_time"
-                    android:layout_alignStart="@+id/shape_descrip"
-                    android:layout_alignEnd="@+id/shape_descrip"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="54dp"
-                    android:text="Description"
-                    android:textColor="#4C54F3"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/item_loc9"
-                    android:layout_width="255dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/item_time"
-                    android:layout_alignStart="@+id/shape_descrip"
-                    android:layout_alignEnd="@+id/shape_descrip"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="250dp"
-                    android:layout_marginEnd="53dp"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="137dp"
+                    android:layout_marginEnd="56dp"
                     android:text="Found By"
                     android:textColor="#4C54F3"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <EditText
                     android:id="@+id/item_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -230,11 +198,10 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="25dp"
-                    android:text="Date"
-                    android:textSize="16sp"
-                    android:textColor="#000000"/>
+                    android:hint="Date"
+                    android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/item_time"
                     android:layout_width="276dp"
                     android:layout_height="wrap_content"
@@ -244,68 +211,51 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="25dp"
-                    android:text="Time:"
-                    android:textSize="16sp"
-                    android:textColor="#000000"/>
+                    android:hint="Time:"
+                    android:textSize="16sp" />
 
-
-                <TextView
-                    android:id="@+id/item_foundName"
+                <EditText
+                    android:id="@+id/pendingFoundName"
                     android:layout_width="276dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/item_loc4"
                     android:layout_alignStart="@+id/shape_descrip"
                     android:layout_alignEnd="@+id/shape_descrip"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="332dp"
-                    android:layout_marginEnd="30dp"
-                    android:text="Full Name"
-                    android:textColor="#000000"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="243dp"
+                    android:layout_marginEnd="26dp"
+                    android:hint="Name"
                     android:textSize="16sp" />
 
                 <Button
-                    android:id="@+id/approve_buttA"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/confirm_butt"
+                    android:layout_width="317dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/shape_descrip"
                     android:layout_alignStart="@+id/shape_descrip"
                     android:layout_alignEnd="@+id/shape_descrip"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="1108dp"
-                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginTop="1042dp"
+                    android:layout_marginEnd="24dp"
                     android:backgroundTint="#44FF00"
-                    android:onClick="copyRecord"
-                    android:text="CLAIMED"
+                    android:text="Confirm Changes"
                     app:icon="@drawable/approved_ic" />
 
                 <Button
-                    android:id="@+id/del_buttA"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/cancel_butt"
+                    android:layout_width="317dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/shape_descrip"
                     android:layout_alignStart="@+id/shape_descrip"
                     android:layout_alignEnd="@+id/shape_descrip"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="1162dp"
-                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginTop="1093dp"
+                    android:layout_marginEnd="24dp"
                     android:backgroundTint="#FF0000"
-                    android:text="FORGOTTEN"
-                    app:icon="@drawable/baseline_storage_24" />
-
-                <Button
-                    android:id="@+id/EditButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/shape_descrip"
-                    android:layout_alignStart="@+id/shape_descrip"
-                    android:layout_alignEnd="@+id/shape_descrip"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="1215dp"
-                    android:layout_marginEnd="-1dp"
-                    android:backgroundTint="@android:color/holo_blue_dark"
-                    android:text="EDIT"
-                    app:icon="@drawable/editlogo" />
+                    android:text="cancel"
+                    app:icon="@drawable/clear_icon" />
 
 
             </RelativeLayout>

@@ -25,8 +25,8 @@ import java.util.List;
 public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
     private Context context;
     private List<ItemHelperClass> datalist;
-    private boolean isForgotten, isApprove, isUserLostView,isFound,isFoundAdmin;
-    public AdapterClass(Context context, List<ItemHelperClass> datalist, boolean isForgotten, boolean  isApprove, boolean isUserLostView,boolean isFound, boolean isFoundAdmin) {
+    private boolean isForgotten, isApprove, isUserLostView,isFound,isFoundAdmin, isLostEdit;
+    public AdapterClass(Context context, List<ItemHelperClass> datalist, boolean isForgotten, boolean  isApprove, boolean isUserLostView,boolean isFound, boolean isFoundAdmin, boolean isLostEdit) {
         this.context = context;
         this.datalist = datalist;
         this.isForgotten = isForgotten;
@@ -34,6 +34,7 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
         this.isUserLostView = isUserLostView;
         this.isFound = isFound;
         this.isFoundAdmin = isFoundAdmin;
+        this.isLostEdit = isLostEdit;
     }
 
     @NonNull
@@ -129,6 +130,21 @@ public class AdapterClass extends RecyclerView.Adapter<MyViewHolder> {
         }else if (isFoundAdmin) {
             holder.recCard.setOnClickListener(view -> {
                 Intent intent = new Intent(context, Founditems.class);
+                intent.putExtra("Image", item.getImageURL());
+                intent.putExtra("Item Name", item.getItemName());
+                intent.putExtra("Location", item.getLocation());
+                intent.putExtra("Date", item.getDate());
+                intent.putExtra("Time", item.getTime());
+                intent.putExtra("Description", item.getDescription());
+                intent.putExtra("userID_", item.getUserID());
+
+                intent.putExtra("Key", item.getKey());
+
+                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            });
+        }else if (isLostEdit) {
+            holder.recCard.setOnClickListener(view -> {
+                Intent intent = new Intent(context, LostItemEdit.class);
                 intent.putExtra("Image", item.getImageURL());
                 intent.putExtra("Item Name", item.getItemName());
                 intent.putExtra("Location", item.getLocation());
